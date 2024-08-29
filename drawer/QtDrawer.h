@@ -10,14 +10,15 @@ class QtDrawer : public Drawer
 {
 protected:
     QGraphicsView* canvas;
+    QGraphicsScene* scene;
     QImage img;
 
 public:
     QtDrawer(QGraphicsView* canv);
 
-    virtual int getImgWidth();
-    virtual int getImgHeight();
+    virtual int getImgWidth() override;
+    virtual int getImgHeight() override;
 
-    virtual void setPixelColor(int x, int y, const Color &color);
-    virtual void setScene();
+    virtual void setPixelColor(int x, int y, const Color &color) override;
+    virtual void setScene() override;
 };

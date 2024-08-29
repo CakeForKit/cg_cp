@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <vector>
+#include "intersection_type.h"
+#include "Ray.h"
 
 class ObjectScene;
 
@@ -23,4 +25,9 @@ public:
     virtual iterator begin() const;
     virtual iterator end() const;
 
+    virtual bool intersection(const Ray &ray, intersection_t &intersect) const = 0;
+
+    virtual std::ostream& print(std::ostream &os) const noexcept = 0;
 };
+
+std::ostream& operator<<(std::ostream &os, const ObjectScene &model);

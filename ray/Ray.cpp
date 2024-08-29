@@ -5,7 +5,10 @@ std::ostream& operator<<(std::ostream &os, const Ray &ray) {
 }
 
 Ray::Ray(const Point3 &origin, const Vector3 &direction) noexcept 
-: orig(origin), dir(direction) {}
+: orig(origin), dir(direction.normalized()) {}
+
+Ray::Ray(const Point3 &&origin, const Vector3 &&direction) noexcept 
+: orig(origin), dir(direction.normalized()) {}
 
 Ray::Ray(const Ray &ray) noexcept
 : orig(ray.getOrigin()), dir(ray.getDirection()) {}
@@ -21,7 +24,7 @@ Vector3 Ray::getDirection() const noexcept {
     return dir;
 }
 
-Point3 Ray::operator()(float t) const noexcept {
+Point3 Ray::operator()(double t) const noexcept {
     return orig + dir * t;
 }
 

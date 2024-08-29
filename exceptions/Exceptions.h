@@ -12,9 +12,27 @@ public:
                   SceneException(time, filename, line, class_name, method_name, info){};
 };
 
+class NoModelsSceneException: public SceneException
+{
+public:
+    NoModelsSceneException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "There are no models left on the scene") noexcept:
+                  SceneException(time, filename, line, class_name, method_name, info){};
+};
+
 #pragma region end
 
 #pragma region Camera
+
+class NotSetPixelsCameraException: public CameraException
+{
+public:
+    NotSetPixelsCameraException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Count pixels viewport not set") noexcept:
+                  CameraException(time, filename, line, class_name, method_name, info){};
+};
 
 class CountPixelsCameraException: public CameraException
 {

@@ -13,6 +13,15 @@ protected:
 public:
     explicit VolumeModel(std::shared_ptr<VolumeModelImpl> _impl);
 
-    // virtual void accept(const Visitor& visitor);
-    // virtual Point GetCenter() const;
+    // bool addVertex(psPoint3 pv);
+    // bool addFace(std::initializer_list<psPoint3> &lst);
+    // bool addFace(std::initializer_list<psPoint3> &&lst);
+    // void setCenter(Point3 &c);
+    
+    std::unordered_set<psPoint3> getVertices() const noexcept;
+    Point3 getCenter() const noexcept;
+
+    virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;
+
+    virtual std::ostream& print(std::ostream &os) const noexcept  override;
 };

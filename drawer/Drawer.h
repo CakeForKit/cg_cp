@@ -1,11 +1,14 @@
 #pragma once
 
+#include "Vector3.h"
 #include "Color.h"
 #include <assert.h>
 
 class Drawer
 {   
 public:
+    virtual ~Drawer() = default;
+
     virtual int getImgWidth() = 0;
     virtual int getImgHeight() = 0;
 

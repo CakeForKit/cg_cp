@@ -9,31 +9,37 @@ std::ostream& Camera::print(std::ostream& os) const noexcept {
     os << "\tright=" << right << ", up=" << up << ", dir=" << dir <<std::endl;
     os << "\tcameraPos = " << cameraPos << std::endl;
     os << "\tfocalLength = " << focalLength << std::endl;
+    os << "\tviewportWidth = " << viewportWidth << std::endl;
     os << "\tviewportHeight = " << viewportHeight << std::endl;
+    os << "\tcountPixWidth = " << _countPixWidth << std::endl;
+    os << "\tcountPixHeight = " << _countPixHeight << std::endl;
     os << "\twidth_of_one_pixel = " << width_of_one_pixel << "\n\theight_of_one_pixel = " << height_of_one_pixel << std::endl;
     os << "\tupperLeftPixelCoord = " << upperLeftPixelCoord << std::endl;
     return os;
 }
 
 Camera::Camera() noexcept 
-: right(1, 0, 0), up(0, 1, 0), dir(0, 0, 1), focalLength(10), cameraPos(0, 0, focalLength), viewportHeight(100) {
-    this->setCountPixelsViewport(1000, 600);
-    updateUpperLeftPixelCoord();
+: right(1, 0, 0), up(0, 1, 0), dir(0, 0, 1), 
+focalLength(FOCAL_LENGHT), cameraPos(0, 0, focalLength), viewportHeight(VIEWPORT_HEIGHT) {
+    // this->setCountPixelsViewport(COUNT_PIXELS_WIDTH, COUNT_PIXELS_HEIGHT);
+    // updateUpperLeftPixelCoord();
 }
 
-void Camera::setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight, bool update) {
+void Camera::setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight) {
     if (countPixWidth == 0 || countPixHeight == 0) {
         time_t curTime = time(NULL);
         throw CountPixelsCameraException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
+    _countPixWidth = countPixWidth;
+    _countPixHeight = countPixHeight;
 
     viewportWidth = viewportHeight * (static_cast<float>(countPixWidth) / static_cast<float>(countPixHeight));
 
     width_of_one_pixel = viewportWidth * right / static_cast<float>(countPixWidth); // ширина одного пикселя
     height_of_one_pixel = viewportHeight * up / static_cast<float>(countPixHeight); // высота одного пикселя 
-
-    if (update)
-        updateUpperLeftPixelCoord();
+    
+    countPixelsViewportSet = true;
+    updateUpperLeftPixelCoord();
 }
 
 void Camera::setFocalLength(float focal_length, bool update) {
@@ -63,13 +69,23 @@ void Camera::setCameraPos(Point3 pos, bool update) noexcept {
 }
 
 void Camera::updateUpperLeftPixelCoord() {
+    if (!countPixelsViewportSet) {
+        time_t curTime = time(NULL);
+        throw NotSetPixelsCameraException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+
     // координаты левой верхней видимой точки
     Point3 upperLeftCoord = cameraPos - right * (viewportWidth / 2) + up * (viewportHeight / 2) - dir * focalLength;
     // координата центра пикселя (0, 0)
     upperLeftPixelCoord = upperLeftCoord + 0.5 * width_of_one_pixel - 0.5 * height_of_one_pixel;
 }
 
-Ray Camera::createRay(size_t ip, size_t jp) {
+Ray Camera::createRay(int ip, int jp) {
+    if (!countPixelsViewportSet) {
+        time_t curTime = time(NULL);
+        throw NotSetPixelsCameraException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+
     Vector3 pixelCoord = upperLeftPixelCoord + static_cast<double>(ip) * width_of_one_pixel - static_cast<double>(jp) * height_of_one_pixel;
     Vector3 rayDirection = pixelCoord - cameraPos;
     return Ray(cameraPos, rayDirection);

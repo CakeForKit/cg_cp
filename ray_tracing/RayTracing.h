@@ -13,9 +13,10 @@ protected:
 
 public:
     RayTracing(std::shared_ptr<Scene> _scene, std::shared_ptr<Camera> _camera, std::shared_ptr<Drawer> _drawer);
+    virtual ~RayTracing() = default;
 
     virtual void render() = 0;
 
 protected:
-    virtual Color castRay(Ray &ray) = 0;
+    virtual Color castRay(Ray &ray) const noexcept = 0;
 };

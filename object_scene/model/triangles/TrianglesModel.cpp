@@ -1,16 +1,20 @@
 #include "TrianglesModel.h"
 
-std::ostream& operator<<(std::ostream &os, const TrianglesModel &model) {
+std::ostream& TrianglesModel::print(std::ostream &os) const noexcept {
     os << "TrianglesModel: \n\tVertices: [ ";
-    for (psPoint3 v: model.getVertices()) {
+    for (psPoint3 v: vertices) {
         os << *v << " ";
     }
     os << "]\n\tTriangles: [ ";
-    for (psTriangle tr : model.getTriangles()) {
+    for (psTriangle tr : triangles) {
         os << *tr << " ";
     }
-    os << "]\n\tCenter: " << model.getCenter() << std::endl;
+    os << "]\n\tCenter: " << center << std::endl;
     return os;
+}
+
+std::ostream& operator<<(std::ostream &os, const TrianglesModel &model) {
+    return model.print(os);
 }
 
 TrianglesModel::TrianglesModel() 
@@ -52,6 +56,10 @@ void TrianglesModel::setCenter(Point3 &c) noexcept {
     center = c;
 }
 
+void TrianglesModel::setCenter(Point3 &&c) noexcept {
+    center = c;
+}
+
 std::unordered_set<psPoint3> TrianglesModel::getVertices() const noexcept {
     return vertices;
 }
@@ -62,4 +70,25 @@ std::unordered_set<psTriangle> TrianglesModel::getTriangles() const noexcept {
 
 Point3 TrianglesModel::getCenter() const noexcept {
     return center;
+}
+
+bool TrianglesModel::intersection(const Ray &ray, intersection_t &intersect) const {
+    double t_value, min_t_value = std::numeric_limits<double>::max();
+    psTriangle trIntersect;
+
+    for (psTriangle tr : triangles) {
+        if (tr->intersection(ray, t_value) && t_value < min_t_value) {
+            min_t_value = t_value;
+            trIntersect = tr;
+        }
+    }
+    if (fabs(std::numeric_limits<double>::max() - min_t_value) < EPS) {
+        return false;
+    }
+
+    intersect.point = ray(min_t_value);
+    intersect.distance = min_t_value;
+    intersect.normal = trIntersect->getNormal(ray);
+
+    return true;
 }

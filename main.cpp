@@ -1,6 +1,7 @@
-// #include "mainwindow.hpp"
+#include "MainWindow.h"
 
 #include <iostream>
+#include <gtest/gtest.h>
 
 #include "Vector3.h"
 
@@ -91,18 +92,23 @@ void see_work_scene() {
 
 int main(int argc, char **argv)
 {
-    (void) argc;
-    (void) argv;
     std::cout << "It works!" << std::endl;
+    // see_work_scene();
 
-    see_work_scene();
+    if (argc == 2) {
+        std::cout << "See params" << std::endl;
 
-    // QApplication app (argc, argv);
+        if (strcmp(argv[1], "-t") == 0) {
 
-    // MyMainWindow mainwindow;
-    // mainwindow.show();
+            ::testing::InitGoogleTest(&argc, argv);
 
-    // return app.exec();
+            return RUN_ALL_TESTS();
+        }
+    } else {
+        QApplication app (argc, argv);
+        MainWindow mainwindow;
+        mainwindow.show();
+        return app.exec();
+    }
 
-    return 0;
 }

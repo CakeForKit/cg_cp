@@ -1,5 +1,10 @@
 #include "ObjectScene.h"
 
+
+std::ostream& operator<<(std::ostream &os, const ObjectScene &model) {
+    return model.print(os);
+}
+
 bool ObjectScene::isComposite() const
 {
     return false;

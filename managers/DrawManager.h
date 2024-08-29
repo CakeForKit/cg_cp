@@ -7,6 +7,6 @@ class DrawManager
 protected:
     // TODO solution, change_alg(), index_in_config
 public:
-    // DrawManager();
-    void drawScene(std::shared_ptr<Scene> scene, size_t indexCamera, std::shared_ptr<Drawer> drawer);
+
+    void drawScene(std::shared_ptr<Scene> scene, std::shared_ptr<Camera> camera, std::shared_ptr<Drawer> drawer);
 };

@@ -13,15 +13,19 @@ protected:
 public:
     TrianglesModel();
 
-    virtual bool addVertex(psPoint3 pv) noexcept;
-    virtual bool addFace(std::initializer_list<psPoint3> &lst);
-    virtual bool addFace(std::initializer_list<psPoint3> &&lst);
-    // virtual bool addTriangle(psTriangle ptr) noexcept;
-    virtual void setCenter(Point3 &c) noexcept;
+    virtual bool addVertex(psPoint3 pv) noexcept override;
+    virtual bool addFace(std::initializer_list<psPoint3> &lst) override;
+    virtual bool addFace(std::initializer_list<psPoint3> &&lst) override;
+    virtual void setCenter(Point3 &c) noexcept override;
+    virtual void setCenter(Point3 &&c) noexcept override;
 
-    virtual std::unordered_set<psPoint3> getVertices() const noexcept;
+    virtual std::unordered_set<psPoint3> getVertices() const noexcept override;
     std::unordered_set<psTriangle> getTriangles() const noexcept;
-    virtual Point3 getCenter() const noexcept;
+    virtual Point3 getCenter() const noexcept override;
+
+    virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;
+
+    virtual std::ostream& print(std::ostream &os) const noexcept override;
 };
 
 std::ostream& operator<<(std::ostream &os, const TrianglesModel &model);
