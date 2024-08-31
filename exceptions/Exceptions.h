@@ -1,6 +1,69 @@
 #pragma once
 #include "BaseException.h"
 
+
+#pragma region Build
+
+class NoFacesBuilderException: public BuilderException
+{
+public:
+    NoFacesBuilderException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Can not build model with 0 faces") noexcept:
+                  BuilderException(time, filename, line, class_name, method_name, info){};
+};
+
+#pragma region end
+
+#pragma region Read
+class NoFileReadException: public ReadException
+{
+public:
+    NoFileReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Error open file") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
+class SymbolReadException: public ReadException
+{
+public:
+    SymbolReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Unexpected symbol read") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
+class FloatReadException: public ReadException
+{
+public:
+    FloatReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Expected read float") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
+class EndReadException: public ReadException
+{
+public:
+    EndReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Unexpected end of file") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
+class RegistrationCreatorReadException: public ReadException
+{
+public:
+    RegistrationCreatorReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Error registration reader creator") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
+
+#pragma region end
+
 #pragma region Scene
 
 class LastCameraSceneException: public SceneException

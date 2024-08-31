@@ -1,7 +1,7 @@
 #include "Triangle.h"
 
 std::ostream& operator<<(std::ostream &os, const Triangle &tr) {
-    return os << "(" << *(tr[0]) << " - " << *(tr[1]) << " - " << *(tr[2]) << ")";
+    return os << "(" << *(tr[0]) << "_" << *(tr[1]) << "_" << *(tr[2]) << ")";
 }
 
 void Triangle::print_debug_info() {

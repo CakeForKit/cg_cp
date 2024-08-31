@@ -53,19 +53,21 @@ void see_work_triangle() {
 #include "TrianglesModel.h"
 
 void see_work_triangles_model() {
+    std::cout << "see_work_triangles_model: \n";
+
     TrianglesModel model;
     {
-        std::shared_ptr<Point3> p1, p2, p3, p4;
+        std::shared_ptr<Point3> p1, p2, p3, p4, same_p2;
         p1 = std::make_shared<Point3>();
         p2 = std::make_shared<Point3>(1, 1, 1);
         p3 = std::make_shared<Point3>(1, 2, 3);
         p4 = std::make_shared<Point3>(3, 4, 3);
+        same_p2 = std::make_shared<Point3>(1, 1, 1);
         std::cout << "use_count p1 = " << p1.use_count() << std::endl;
         
-        for (psPoint3 p : {p1, p2, p3, p4})
-            model.addVertex(p);
         model.addFace({p1, p2, p3});
-        model.addFace({p1, p2, p4});
+        model.addFace({p1, same_p2, p4});
+        model.addFace({p2, p4, p1});
     }
 
     std::cout << model;
@@ -89,6 +91,51 @@ void see_work_scene() {
     std::cout << scene;
 }
 
+#include "TrianglesModelReader.h"
+
+void see_work_read() {
+    try {
+        TrianglesModelReader reader("/home/kathrine/cg_cp/data/test_model_1.txt");
+        reader.open();
+        reader.readData();
+    } catch (BaseException &ex) {
+        std::cout << ex.what() << "\n";
+    }
+    
+}
+
+#include "TrianglesModelDirector.h"
+// #include "TrianglesModelBuilder.h"
+#include "TrianglesModelReader.h"
+#include "ReaderSolution.h"
+
+void see_work_director() {
+    std::cout << "see_work_director:\n";
+    try {
+        std::shared_ptr<ReaderSolution> readerSolution = std::make_shared<ReaderSolution>();
+        char filename[] = "/home/kathrine/cg_cp/data/test_model_1.txt";
+        const char *f = &(filename[0]);
+
+        ReaderCreatorMaker mk;
+        // mk.createReaderCreator<>
+        bool rv = readerSolution->registrate(idReaderCreator::TRIANGLES, ReaderCreatorMaker::createReaderCreator<TrianglesModelReader, f>);
+        if (!rv) {
+            time_t curTime = time(NULL);
+            throw RegistrationCreatorReadException(ctime(&curTime), __FILE__, __LINE__, "typeid(*this).name()", __func__);
+        }
+        std::shared_ptr<ReaderCreator> readerCreator(readerSolution->create(idReaderCreator::TRIANGLES));
+
+        std::shared_ptr<VolumeModelReader> reader = std::make_shared<TrianglesModelReader>("/home/kathrine/cg_cp/data/test_model_1.txt");
+        std::shared_ptr<VolumeModelDirector> director = std::make_shared<TrianglesModelDirector>(reader);
+        std::shared_ptr<ObjectScene> model = director->get();
+
+        std::cout << *model;
+
+    } catch (BaseException &ex) {
+        std::cout << ex.what() << "\n";
+    }
+}
+
 
 int main(int argc, char **argv)
 {
@@ -103,6 +150,12 @@ int main(int argc, char **argv)
             ::testing::InitGoogleTest(&argc, argv);
 
             return RUN_ALL_TESTS();
+        } else if (strcmp(argv[1], "-s") == 0) {
+            try {
+                see_work_director();
+            } catch (BaseException &ex) {
+                std::cout << ex.what() << "\n";
+            }
         }
     } else {
         QApplication app (argc, argv);

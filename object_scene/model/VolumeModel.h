@@ -18,7 +18,7 @@ public:
     // bool addFace(std::initializer_list<psPoint3> &&lst);
     // void setCenter(Point3 &c);
     
-    std::unordered_set<psPoint3> getVertices() const noexcept;
+    container_vertices getVertices() const noexcept;
     Point3 getCenter() const noexcept;
 
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;

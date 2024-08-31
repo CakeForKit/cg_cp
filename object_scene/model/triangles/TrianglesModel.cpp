@@ -5,9 +5,9 @@ std::ostream& TrianglesModel::print(std::ostream &os) const noexcept {
     for (psPoint3 v: vertices) {
         os << *v << " ";
     }
-    os << "]\n\tTriangles: [ ";
+    os << "]\n\tTriangles: [ \n";
     for (psTriangle tr : triangles) {
-        os << *tr << " ";
+        os << "\t" << *tr << " \n";
     }
     os << "]\n\tCenter: " << center << std::endl;
     return os;
@@ -18,39 +18,84 @@ std::ostream& operator<<(std::ostream &os, const TrianglesModel &model) {
 }
 
 TrianglesModel::TrianglesModel() 
-: vertices(std::unordered_set<psPoint3>()), triangles(std::unordered_set<psTriangle>()), center(Point3()) {}
+: vertices(container_vertices()), triangles(container_triangles()), center(Point3()) {}
 
-bool TrianglesModel::addVertex(psPoint3 pv) noexcept {
-    std::pair<std::unordered_set<psPoint3>::iterator, bool> rv = vertices.insert(pv);
-    return rv.second;
+std::pair<container_vertices::iterator, bool> TrianglesModel::addVertex(psPoint3 pv) noexcept {
+
+    for (container_vertices::iterator it = vertices.begin(); it != vertices.end(); ++it) {
+        if (*(*it) == *pv) {
+            return std::pair<container_vertices::iterator, bool>(it, false);
+        }
+    }
+    vertices.push_back(pv);
+    return std::pair<container_vertices::iterator, bool>(--vertices.end(), true);
 }
 
-bool TrianglesModel::addFace(std::initializer_list<psPoint3> &lst) {
+void TrianglesModel::addFace(std::vector<psPoint3> &lst) {
     if (lst.size() != 3) {
         time_t curTime = time(NULL);
         throw SizeFaceTrianglesModelException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
     psPoint3 points[3];
     size_t i = 0;
+    bool triangle_alredy_exist = true;
     for (psPoint3 elem : lst) {
-        points[i] = elem;
+        // Если равная этой, вершина уже была упомянута, то создадим Triangle на основе ссылки на уже упомянутую вершину
+        // А если их этого массива вершины повторяются, то это ошибка будет выявлена при создании Triangle
+        std::pair<container_vertices::iterator, bool> rv = addVertex(elem);
+        /* Если хоть одна точка из triangle новая в списке, то triangle уникальный, 
+        если все точки уже существуют в списке то стоит проверить 
+        наличие такого треугольника чтобы не было повторов */
+        triangle_alredy_exist = triangle_alredy_exist && !rv.second; 
+        points[i] = *(rv.first);
         ++i;
     }
 
     psTriangle tr = std::make_shared<Triangle>(points[0], points[1], points[2]);
-    std::pair<std::unordered_set<psTriangle>::iterator, bool> rv = triangles.insert(tr);
-    return rv.second;
+    if (triangle_alredy_exist) {
+        for (psTriangle elem : triangles) {
+            if (*elem == *tr)
+                return;
+        }
+    }
+    triangles.push_back(tr);
 }
 
-bool TrianglesModel::addFace(std::initializer_list<psPoint3> &&lst) {
+void TrianglesModel::addFace(std::initializer_list<psPoint3> &lst) {
+    if (lst.size() != 3) {
+        time_t curTime = time(NULL);
+        throw SizeFaceTrianglesModelException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+    psPoint3 points[3];
+    size_t i = 0;
+    bool triangle_alredy_exist = true;
+    for (psPoint3 elem : lst) {
+        std::cout << "TrianglesModel::addFace elem - " << *elem << "\n";
+        // Если равная этой, вершина уже была упомянута, то создадим Triangle на основе ссылки на уже упомянутую вершину
+        // А если их этого массива вершины повторяются, то это ошибка будет выявлена при создании Triangle
+        std::pair<container_vertices::iterator, bool> rv = addVertex(elem);
+        /* Если хоть одна точка из triangle новая в списке, то triangle уникальный, 
+        если все точки уже существуют в списке то стоит проверить 
+        наличие такого треугольника чтобы не было повторов */
+        triangle_alredy_exist = triangle_alredy_exist && !rv.second; 
+        points[i] = *(rv.first);
+        ++i;
+    }
+
+    psTriangle tr = std::make_shared<Triangle>(points[0], points[1], points[2]);
+    if (triangle_alredy_exist) {
+        for (psTriangle elem : triangles) {
+            if (*elem == *tr)
+                return;
+        }
+    }
+    triangles.push_back(tr);
+}
+
+void TrianglesModel::addFace(std::initializer_list<psPoint3> &&lst) {
     std::initializer_list<psPoint3> _lst(lst);
-    return this->addFace(_lst);
+    this->addFace(_lst);
 }
-
-// bool TrianglesModel::addTriangle(psTriangle ptr) noexcept {
-//     std::pair<std::unordered_set<psTriangle>::iterator, bool> rv = triangles.insert(ptr);
-//     return rv.second;
-// }
 
 void TrianglesModel::setCenter(Point3 &c) noexcept {
     center = c;
@@ -60,11 +105,11 @@ void TrianglesModel::setCenter(Point3 &&c) noexcept {
     center = c;
 }
 
-std::unordered_set<psPoint3> TrianglesModel::getVertices() const noexcept {
+container_vertices TrianglesModel::getVertices() const noexcept {
     return vertices;
 }
 
-std::unordered_set<psTriangle> TrianglesModel::getTriangles() const noexcept {
+container_triangles TrianglesModel::getTriangles() const noexcept {
     return triangles;
 }
 

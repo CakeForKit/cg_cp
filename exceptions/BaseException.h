@@ -54,6 +54,24 @@ public:
                   BaseException(time, filename, line, class_name, method_name, info){};
 };
 
+class ReadException: public BaseException
+{
+public:
+    ReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "ReadException") noexcept:
+                  BaseException(time, filename, line, class_name, method_name, info){};
+};
+
+class BuilderException: public BaseException
+{
+public:
+    BuilderException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "BuilderException") noexcept:
+                  BaseException(time, filename, line, class_name, method_name, info){};
+};
+
 #pragma region end
 
 #pragma region StandartException

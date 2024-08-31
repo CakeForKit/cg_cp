@@ -13,9 +13,6 @@ FacadeScene::FacadeScene() {
     p3 = std::make_shared<Point3>(0, 20, 0);
     // std::shared_ptr<Triangle> tr1 = std::make_shared<Triangle>(p1, p2, p3);
     std::shared_ptr<VolumeModelImpl> trModel1 = std::make_shared<TrianglesModel>();
-    trModel1->addVertex(p1);
-    trModel1->addVertex(p2);
-    trModel1->addVertex(p3);
     trModel1->addFace({p1, p2, p3});
     trModel1->setCenter(Point3(0, 0, 0));
     std::shared_ptr<ObjectScene> model1 = std::make_shared<VolumeModel>(trModel1);
@@ -31,10 +28,6 @@ FacadeScene::FacadeScene() {
     // std::shared_ptr<Triangle> tr3 = std::make_shared<Triangle>(p6, p5, p7);
 
     std::shared_ptr<VolumeModelImpl> trModel2 = std::make_shared<TrianglesModel>();
-    trModel2->addVertex(p4);
-    trModel2->addVertex(p5);
-    trModel2->addVertex(p6);
-    trModel2->addVertex(p7);
     trModel2->addFace({p4, p5, p6});
     // trModel2->addFace({p6, p5, p7});
     std::shared_ptr<ObjectScene> model2 = std::make_shared<VolumeModel>(trModel2);

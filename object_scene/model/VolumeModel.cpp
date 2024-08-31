@@ -23,7 +23,7 @@ VolumeModel::VolumeModel(std::shared_ptr<VolumeModelImpl> _impl)
 //     impl->setCenter(c);
 // }
 
-std::unordered_set<psPoint3> VolumeModel::getVertices() const noexcept {
+container_vertices VolumeModel::getVertices() const noexcept {
     return impl->getVertices();
 }
 

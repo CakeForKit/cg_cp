@@ -39,6 +39,15 @@ include_directories(
     exceptions
     facade_scene
     gui
+    load
+    load/builder
+    load/builder/triangles_model_builder
+    load/director
+    load/director/volume_model_director
+    load/director/volume_model_director/triangles_model_director
+    load/reader
+    load/reader/volume_model_reader
+    load/reader/volume_model_reader/triangles_model_reader/
     managers
     object_scene
     object_scene/model
@@ -86,6 +95,26 @@ set(SRCS
     gui/mainWindow.ui
     gui/MainWindow.h
     gui/MainWindow.cpp
+
+    load/builder/VolumeModelBuilder.h
+    load/builder/VolumeModelBuilder.cpp
+    load/builder/triangles_model_builder/TrianglesModelBuilder.h
+    load/builder/triangles_model_builder/TrianglesModelBuilder.cpp
+
+    load/director/Director.h
+    load/director/Director.cpp
+    load/director/volume_model_director/VolumeModelDirector.h
+    load/director/volume_model_director/VolumeModelDirector.cpp
+    load/director/volume_model_director/triangles_model_director/TrianglesModelDirector.h
+    load/director/volume_model_director/triangles_model_director/TrianglesModelDirector.cpp
+
+    load/reader/Reader.h
+    load/reader/Reader.cpp
+    load/reader/volume_model_reader/VolumeModelReader.h
+    load/reader/volume_model_reader/VolumeModelReader.cpp
+    load/reader/volume_model_reader/triangles_model_reader/TrianglesModelReader.h
+    load/reader/volume_model_reader/triangles_model_reader/TrianglesModelReader.cpp
+
 
     managers/DrawManager.h
     managers/DrawManager.cpp
