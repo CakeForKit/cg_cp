@@ -74,6 +74,10 @@ bool Vector3::operator!=(const Vector3 &v) const noexcept {
     return !(*this == v);
 }
 
+Vector3 Vector3::operator-() const noexcept {
+    return *this * (-1);
+}
+
 double Vector3::scalarProduct(const Vector3 &v) const noexcept {
     double res = 0;
     for (size_t i = 0; i < 3; ++i)
@@ -87,6 +91,39 @@ Vector3 Vector3::vectorProduct(const Vector3 &v) const noexcept {
     res[1] = this->z() * v.x() - this->x() * v.z();
     res[2] = this->x() * v.y() - this->y() * v.x();
     return res;
+}
+
+Vector3 Vector3::reflect(Vector3 &norm) const {
+    if (!norm.isNormalized())
+        norm.normalize();
+
+    double scalProduct = this->scalarProduct(norm);
+    if (scalProduct > 0) {
+        scalProduct *= -1;
+        norm = -norm;
+    }
+    // std::cout << "\n\nscalProduct = " << scalProduct << "\n"; 
+    // std::cout << "norm = " << norm << "\n";
+    
+    Vector3 vreflect = *this - 2.0 * scalProduct * norm;
+    vreflect.normalize();
+    return vreflect;
+}
+
+Vector3 Vector3::refract(Vector3 &norm, double refrIndFrom, double refrIndexTo) const {
+    if (this->scalarProduct(norm) > 0)
+        norm = -norm;
+
+    double ratioRefrIndex = refrIndFrom / refrIndexTo;
+    double ratioRefrIndex2 = ratioRefrIndex * ratioRefrIndex;
+    double cosaL = -this->scalarProduct(norm) / this->length() / norm.length();
+    double cos2aT = 1 - ratioRefrIndex2 * (1 - cosaL * cosaL);
+    if (cos2aT < 0)
+        return Vector3(0, 0, 0);
+
+    Vector3 vrefract = ratioRefrIndex * (this->normalized()) + norm * (ratioRefrIndex * cosaL - sqrt(cos2aT));
+    vrefract.normalize();
+    return vrefract;
 }
 
 double Vector3::length()  const noexcept{
@@ -212,3 +249,4 @@ Vector3 Vector3::operator-(const Vector3 &&v) const noexcept {
     }
     return res;
 }
+

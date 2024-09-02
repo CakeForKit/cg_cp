@@ -52,16 +52,6 @@ public:
                   ReadException(time, filename, line, class_name, method_name, info){};
 };
 
-class RegistrationCreatorReadException: public ReadException
-{
-public:
-    RegistrationCreatorReadException(const char *time, const char *filename,
-                  const size_t line, const char *class_name,
-                  const char *method_name, const char *info = "Error registration reader creator") noexcept:
-                  ReadException(time, filename, line, class_name, method_name, info){};
-};
-
-
 #pragma region end
 
 #pragma region Scene

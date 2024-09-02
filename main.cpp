@@ -108,6 +108,7 @@ void see_work_read() {
 // #include "TrianglesModelBuilder.h"
 #include "TrianglesModelReader.h"
 #include "ReaderSolution.h"
+#include "DirectorSolution.h"
 
 void see_work_director() {
     std::cout << "see_work_director:\n";
@@ -116,17 +117,32 @@ void see_work_director() {
         char filename[] = "/home/kathrine/cg_cp/data/test_model_1.txt";
         const char *f = &(filename[0]);
 
-        ReaderCreatorMaker mk;
-        // mk.createReaderCreator<>
-        bool rv = readerSolution->registrate(idReaderCreator::TRIANGLES, ReaderCreatorMaker::createReaderCreator<TrianglesModelReader, f>);
-        if (!rv) {
-            time_t curTime = time(NULL);
-            throw RegistrationCreatorReadException(ctime(&curTime), __FILE__, __LINE__, "typeid(*this).name()", __func__);
-        }
-        std::shared_ptr<ReaderCreator> readerCreator(readerSolution->create(idReaderCreator::TRIANGLES));
+        // std::shared_ptr<BaseReaderCreator> creator = std::make_shared<ReaderCreator<Reader, TrianglesModelReader, const char *>>();
+        bool rv = readerSolution->registrate(idReaderCreator::TRIANGLES, std::make_shared<TrianglesModelReaderCreator_t>());
+        assert(rv);
 
-        std::shared_ptr<VolumeModelReader> reader = std::make_shared<TrianglesModelReader>("/home/kathrine/cg_cp/data/test_model_1.txt");
-        std::shared_ptr<VolumeModelDirector> director = std::make_shared<TrianglesModelDirector>(reader);
+        std::shared_ptr<BaseReaderCreator> readerCreator(readerSolution->create(idReaderCreator::TRIANGLES));
+        std::shared_ptr<TrianglesModelReaderCreator_t> trinaglesModelReaderCreator  = std::dynamic_pointer_cast<TrianglesModelReaderCreator_t>(readerCreator);
+        if (trinaglesModelReaderCreator == nullptr) {
+            std::cout << "ERRORRRRR\n\n";
+            return;
+        }
+
+        std::shared_ptr<VolumeModelReader> reader = trinaglesModelReaderCreator->createReader(f); //std::make_shared<TrianglesModelReader>("/home/kathrine/cg_cp/data/test_model_1.txt");
+        
+        
+        std::shared_ptr<DirectorSolution> directorSolution = std::make_shared<DirectorSolution>();
+        rv = directorSolution->registrate(idDirectorCreator::TRIANGLES, std::make_shared<TrianglesModelDirectorCreator_t>());
+        assert(rv);
+
+        std::shared_ptr<BaseDirectorCreator> directorCreator(directorSolution->create(idDirectorCreator::TRIANGLES));
+        std::shared_ptr<TrianglesModelDirectorCreator_t> trianglesModelDirectorCreator = std::dynamic_pointer_cast<TrianglesModelDirectorCreator_t>(directorCreator);
+        if (trianglesModelDirectorCreator == nullptr) {
+            std::cout << "ERRORRRRR\n\n";
+            return;
+        }
+        
+        std::shared_ptr<VolumeModelDirector> director = trianglesModelDirectorCreator->createDirector(reader);
         std::shared_ptr<ObjectScene> model = director->get();
 
         std::cout << *model;

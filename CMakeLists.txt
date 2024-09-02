@@ -34,6 +34,7 @@ include_directories(
     camera
     commands
     commands/draw_commands
+    commands/load_commands
     data_structs
     drawer
     exceptions
@@ -45,9 +46,11 @@ include_directories(
     load/director
     load/director/volume_model_director
     load/director/volume_model_director/triangles_model_director
+    load/director_solution
     load/reader
     load/reader/volume_model_reader
     load/reader/volume_model_reader/triangles_model_reader/
+    load/reader_solution
     managers
     object_scene
     object_scene/model
@@ -74,9 +77,14 @@ set(SRCS
     commands/draw_commands/BaseDrawCommand.cpp 
     commands/draw_commands/QtDrawCommand.h
     commands/draw_commands/QtDrawCommand.cpp
+    commands/load_commands/BaseLoadCommand.h
+    commands/load_commands/BaseLoadCommand.cpp
+    commands/load_commands/TrianglesModelLoadCommand.h
+    commands/load_commands/TrianglesModelLoadCommand.cpp
 
     data_structs/intersection_type.h
     data_structs/intersection_type.cpp
+    data_structs/concepts.h
 
     drawer/Color.h
     drawer/Color.cpp
@@ -108,6 +116,11 @@ set(SRCS
     load/director/volume_model_director/triangles_model_director/TrianglesModelDirector.h
     load/director/volume_model_director/triangles_model_director/TrianglesModelDirector.cpp
 
+    load/director_solution/DirectorCreator.h
+    load/director_solution/DirectorCreator.cpp
+    load/director_solution/DirectorSolution.h
+    load/director_solution/DirectorSolution.cpp
+
     load/reader/Reader.h
     load/reader/Reader.cpp
     load/reader/volume_model_reader/VolumeModelReader.h
@@ -115,11 +128,17 @@ set(SRCS
     load/reader/volume_model_reader/triangles_model_reader/TrianglesModelReader.h
     load/reader/volume_model_reader/triangles_model_reader/TrianglesModelReader.cpp
 
+    load/reader_solution/ReaderCreator.h
+    load/reader_solution/ReaderCreator.cpp
+    load/reader_solution/ReaderSolution.h
+    load/reader_solution/ReaderSolution.cpp
 
     managers/DrawManager.h
     managers/DrawManager.cpp
     managers/SceneManager.h
     managers/SceneManager.cpp
+    managers/LoadManager.h
+    managers/LoadManager.cpp
 
     object_scene/ObjectScene.h 
     object_scene/ObjectScene.cpp
@@ -159,6 +178,9 @@ set(TESTS
 
     tests/triangle_intersection_tests.h
     tests/triangle_intersection_tests.cpp
+
+    tests/reflect_refract_tests.h
+    tests/reflect_refract_tests.cpp
 )
 
 # # google tests

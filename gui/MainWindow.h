@@ -5,6 +5,7 @@
 #include "ui_mainWindow.h"
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
+#include "TrianglesModelLoadCommand.h"
 
 class MainWindow : public QMainWindow
 {
