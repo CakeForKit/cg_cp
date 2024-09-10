@@ -9,12 +9,12 @@ class VolumeModelBuilder
 protected:
     std::shared_ptr<VolumeModelImpl> model { nullptr };
     std::shared_ptr<VolumeModelReader> reader { nullptr };
-    // TODO material reader
+    std::shared_ptr<Material> material;
 
     size_t part = 0;
 
 public:
-    VolumeModelBuilder(std::shared_ptr<VolumeModelReader> _reader);
+    VolumeModelBuilder(std::shared_ptr<VolumeModelReader> _reader, std::shared_ptr<Material> _material);
     virtual ~VolumeModelBuilder() = 0;
 
     void readData();

@@ -11,7 +11,8 @@ LoadManager::LoadManager() {
 
 std::shared_ptr<ObjectScene> LoadManager::loadModelFromFile(idReaderCreator id_reader, 
                                                             idDirectorCreator id_director, 
-                                                            const char *filename) {
+                                                            const char *filename, 
+                                                            std::shared_ptr<Material> material) {
 
     std::shared_ptr<BaseReaderCreator> readerCreator(readerSolution.create(id_reader));
     std::shared_ptr<TrianglesModelReaderCreator_t> trinaglesModelReaderCreator  = std::dynamic_pointer_cast<TrianglesModelReaderCreator_t>(readerCreator);
@@ -24,6 +25,6 @@ std::shared_ptr<ObjectScene> LoadManager::loadModelFromFile(idReaderCreator id_r
     std::shared_ptr<TrianglesModelDirectorCreator_t> trianglesModelDirectorCreator = std::dynamic_pointer_cast<TrianglesModelDirectorCreator_t>(directorCreator);
     assert(trianglesModelDirectorCreator != nullptr);
     
-    std::shared_ptr<VolumeModelDirector> director = trianglesModelDirectorCreator->createDirector(reader);
+    std::shared_ptr<VolumeModelDirector> director = trianglesModelDirectorCreator->createDirector(reader, material);
     return director->get();
 }

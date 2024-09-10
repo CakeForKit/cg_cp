@@ -131,9 +131,10 @@ bool Triangle::intersection(const Ray &ray, double &t) const noexcept {
 
     t = te1.scalarProduct(e2) * invDet;
 
-    return true;
+    return t > 0;
 }
 
+/* Возвращает нормаль так что скалярное произведение norm * ray < 0 */
 Vector3 Triangle::getNormal(const Ray &ray) const noexcept {
     Vector3 e1 = *(points[1]) - *(points[0]);
     Vector3 e2 = *(points[2]) - *(points[0]);

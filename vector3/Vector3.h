@@ -56,9 +56,14 @@ public:
 
     Vector3 operator+(const Vector3 &v) const noexcept;
     Vector3 operator+(const Vector3 &&v) const noexcept;
+    Vector3& operator+=(const Vector3 &v) noexcept;
+    Vector3& operator+=(const Vector3 &&v) noexcept;
 
     Vector3 operator-(const Vector3 &v) const noexcept;
     Vector3 operator-(const Vector3 &&v) const noexcept;
+
+    Vector3 operator*(const Vector3 &v) const noexcept;
+    Vector3 operator*(const Vector3 &&v) const noexcept;
 
 };
 
@@ -71,3 +76,5 @@ Vector3 operator/(const double num, const Vector3& vec);
 
 using Point3 = Vector3;
 using psPoint3 = std::shared_ptr<Point3>;
+
+using Intensity = Vector3;

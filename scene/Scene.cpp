@@ -25,10 +25,15 @@ std::ostream& Scene::print(std::ostream& os) const noexcept {
 }
 
 Scene::Scene() 
-: models(std::vector<std::shared_ptr<ObjectScene>>()), cameras(std::vector<std::shared_ptr<Camera>>()) {
+: models(std::vector<std::shared_ptr<ObjectScene>>()), 
+cameras(std::vector<std::shared_ptr<Camera>>()), 
+lights(std::vector<std::shared_ptr<Light>>()) {
     std::shared_ptr<Camera> c = std::make_shared<Camera>();
     cameras.push_back(c);
     activeCamera = cameras[0];
+
+    lights.push_back(std::make_shared<PointLight>());
+    lights.push_back(std::make_shared<AmbientLight>());
 }
 
 void Scene::addModel(std::shared_ptr<ObjectScene> model) noexcept {
@@ -93,6 +98,18 @@ void Scene::setActiveCamera(size_t ind) {
 std::shared_ptr<Camera> Scene::getActiveCamera() noexcept {
     return activeCamera;
 }
+
+Scene::iteratorLight Scene::beginLight() const noexcept {
+    return lights.begin();
+}
+
+Scene::iteratorLight Scene::endLight() const noexcept {
+    return lights.end();
+}
+
+// std::shared_ptr<Light> Scene::getLight() noexcept {
+//     return light;
+// }
 
 bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
     intersection_t closest_intersect, now_intersect;

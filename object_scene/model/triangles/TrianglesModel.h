@@ -12,6 +12,7 @@ protected:
     container_vertices vertices;    // множество уникальных вершин
     container_triangles triangles;   // множество уникальных стреугольников
     Point3 center;
+
 public:
     TrianglesModel();
 

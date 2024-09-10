@@ -9,7 +9,7 @@ protected:
 
 public:
     TrianglesModelLoadCommand() = delete;
-    TrianglesModelLoadCommand(const char *_filename);
+    TrianglesModelLoadCommand(const char *_filename, std::shared_ptr<Material> _material);
 
     virtual void execute();
 };

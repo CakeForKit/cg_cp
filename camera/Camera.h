@@ -37,7 +37,11 @@ public:
     void setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight);
 
     void updateUpperLeftPixelCoord();
+
     /// @brief Создает луч направленный в пиксель (xp, yp)
+    /// @param ip коорд пикселя по X
+    /// @param jp коорд пикселя по Y
+    /// @return Нормализованный луч
     Ray createRay(int ip, int jp);
 
     std::ostream& print(std::ostream& os) const noexcept;

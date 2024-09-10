@@ -4,24 +4,8 @@ std::ostream& VolumeModel::print(std::ostream &os) const noexcept {
     return impl->print(os);
 }
 
-VolumeModel::VolumeModel(std::shared_ptr<VolumeModelImpl> _impl) 
-: impl(_impl) {}
-
-// bool VolumeModel::addVertex(psPoint3 pv) {
-//     return impl->addVertex(pv);
-// }
-
-// bool VolumeModel::addFace(std::initializer_list<psPoint3> &lst) {
-//     return impl->addFace(lst);
-// }
-
-// bool VolumeModel::addFace(std::initializer_list<psPoint3> &&lst) {
-//     return impl->addFace(lst);
-// }
-
-// void VolumeModel::setCenter(Point3 &c) {
-//     impl->setCenter(c);
-// }
+VolumeModel::VolumeModel(std::shared_ptr<VolumeModelImpl> _impl, std::shared_ptr<Material> _material) 
+: impl(_impl), material(_material) {}
 
 container_vertices VolumeModel::getVertices() const noexcept {
     return impl->getVertices();
@@ -32,5 +16,14 @@ Point3 VolumeModel::getCenter() const noexcept {
 }
 
 bool VolumeModel::intersection(const Ray &ray, intersection_t &intersect) const {
+    intersect.material = material;
     return impl->intersection(ray, intersect);
+}
+
+void VolumeModel::setMaterial(std::shared_ptr<Material> _material) noexcept {
+    material = _material;
+}
+
+std::shared_ptr<Material> VolumeModel::getMaterial() const noexcept {
+    return material;
 }

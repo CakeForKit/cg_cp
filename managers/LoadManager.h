@@ -14,5 +14,8 @@ protected:
 public:
     LoadManager();
 
-    std::shared_ptr<ObjectScene> loadModelFromFile(idReaderCreator id_reader, idDirectorCreator id_director, const char *filename);
+    std::shared_ptr<ObjectScene> loadModelFromFile(idReaderCreator id_reader, 
+                                                    idDirectorCreator id_director, 
+                                                    const char *filename, 
+                                                    std::shared_ptr<Material> material);
 };

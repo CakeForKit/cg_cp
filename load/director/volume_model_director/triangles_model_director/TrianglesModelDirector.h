@@ -6,5 +6,5 @@
 class TrianglesModelDirector : public VolumeModelDirector
 {
 public:
-    TrianglesModelDirector(std::shared_ptr<VolumeModelReader> reader);
+    TrianglesModelDirector(std::shared_ptr<VolumeModelReader> reader, std::shared_ptr<Material> material);
 };

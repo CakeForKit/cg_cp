@@ -4,19 +4,19 @@
 
 #include "BaseModel.h"
 #include "VolumeModelImpl.h"
+#include "Material.h"
 
 class VolumeModel: public Model
 {
 protected:
     std::shared_ptr<VolumeModelImpl> impl;
+    std::shared_ptr<Material> material;
 
 public:
-    explicit VolumeModel(std::shared_ptr<VolumeModelImpl> _impl);
+    explicit VolumeModel(std::shared_ptr<VolumeModelImpl> _impl, std::shared_ptr<Material> _material);
 
-    // bool addVertex(psPoint3 pv);
-    // bool addFace(std::initializer_list<psPoint3> &lst);
-    // bool addFace(std::initializer_list<psPoint3> &&lst);
-    // void setCenter(Point3 &c);
+    void setMaterial(std::shared_ptr<Material> _material) noexcept;
+    std::shared_ptr<Material> getMaterial() const noexcept;
     
     container_vertices getVertices() const noexcept;
     Point3 getCenter() const noexcept;

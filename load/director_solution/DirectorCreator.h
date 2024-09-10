@@ -21,4 +21,7 @@ public:
     } 
 };
 
-using TrianglesModelDirectorCreator_t = DirectorCreator<Director, TrianglesModelDirector, std::shared_ptr<VolumeModelReader>>;
+using TrianglesModelDirectorCreator_t = DirectorCreator<Director, 
+                                                        TrianglesModelDirector, 
+                                                        std::shared_ptr<VolumeModelReader>, 
+                                                        std::shared_ptr<Material>>;

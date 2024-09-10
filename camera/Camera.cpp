@@ -88,5 +88,6 @@ Ray Camera::createRay(int ip, int jp) {
 
     Vector3 pixelCoord = upperLeftPixelCoord + static_cast<double>(ip) * width_of_one_pixel - static_cast<double>(jp) * height_of_one_pixel;
     Vector3 rayDirection = pixelCoord - cameraPos;
+    rayDirection.normalize();
     return Ray(cameraPos, rayDirection);
 }

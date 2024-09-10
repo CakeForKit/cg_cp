@@ -18,5 +18,5 @@ public:
     virtual void render() = 0;
 
 protected:
-    virtual Color castRay(Ray &ray) const noexcept = 0;
+    virtual Intensity castRay(Ray &ray, const int depth = 0) const noexcept = 0;
 };

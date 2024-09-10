@@ -6,6 +6,7 @@
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
 #include "TrianglesModelLoadCommand.h"
+#include "MaterialSolution.h"
 
 class MainWindow : public QMainWindow
 {
@@ -17,6 +18,7 @@ public:
 private:
     Ui::MainWindow ui;
     FacadeScene facade;
+    MaterialSolution materialSolution;
 
 private slots:
     void onPushButtonClicked();

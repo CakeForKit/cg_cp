@@ -6,5 +6,5 @@
 class TrianglesModelBuilder : public VolumeModelBuilder
 {
 public:
-    TrianglesModelBuilder(std::shared_ptr<VolumeModelReader> reader);
+    TrianglesModelBuilder(std::shared_ptr<VolumeModelReader> reader, std::shared_ptr<Material> _material);
 };

@@ -234,6 +234,20 @@ Vector3 Vector3::operator+(const Vector3 &&v) const noexcept {
     return res;
 }
 
+Vector3& Vector3::operator+=(const Vector3 &v) noexcept {
+    for (size_t i = 0; i < 3; ++i) {
+        coord[i] += v[i];
+    }
+    return *this;
+}
+
+Vector3& Vector3::operator+=(const Vector3 &&v) noexcept {
+    for (size_t i = 0; i < 3; ++i) {
+        coord[i] += v[i];
+    }
+    return *this;
+}
+
 Vector3 Vector3::operator-(const Vector3 &v) const noexcept {
     Vector3 res(*this);
     for (size_t i = 0; i < 3; ++i) {
@@ -250,3 +264,18 @@ Vector3 Vector3::operator-(const Vector3 &&v) const noexcept {
     return res;
 }
 
+Vector3 Vector3::operator*(const Vector3 &v) const noexcept {
+    Vector3 res(*this);
+    for (size_t i = 0; i < 3; ++i) {
+        res[i] *= v[i];
+    }
+    return res;
+}
+
+Vector3 Vector3::operator*(const Vector3 &&v) const noexcept {
+    Vector3 res(*this);
+    for (size_t i = 0; i < 3; ++i) {
+        res[i] *= v[i];
+    }
+    return res;
+}

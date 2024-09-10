@@ -32,6 +32,7 @@ add_compile_options(
 include_directories(
     .
     camera
+    color
     commands
     commands/draw_commands
     commands/load_commands
@@ -40,6 +41,7 @@ include_directories(
     exceptions
     facade_scene
     gui
+    light
     load
     load/builder
     load/builder/triangles_model_builder
@@ -51,6 +53,7 @@ include_directories(
     load/reader/volume_model_reader
     load/reader/volume_model_reader/triangles_model_reader/
     load/reader_solution
+    material
     managers
     object_scene
     object_scene/model
@@ -71,6 +74,9 @@ set(SRCS
     camera/Camera.h
     camera/Camera.cpp
 
+    color/Color.h
+    color/Color.cpp
+
     commands/BaseCommand.h
     commands/BaseCommand.cpp
     commands/draw_commands/BaseDrawCommand.h
@@ -86,8 +92,6 @@ set(SRCS
     data_structs/intersection_type.cpp
     data_structs/concepts.h
 
-    drawer/Color.h
-    drawer/Color.cpp
     drawer/Drawer.h
     drawer/Drawer.cpp
     drawer/QtDrawer.h
@@ -103,6 +107,9 @@ set(SRCS
     gui/mainWindow.ui
     gui/MainWindow.h
     gui/MainWindow.cpp
+
+    light/Light.h
+    light/Light.cpp
 
     load/builder/VolumeModelBuilder.h
     load/builder/VolumeModelBuilder.cpp
@@ -132,6 +139,11 @@ set(SRCS
     load/reader_solution/ReaderCreator.cpp
     load/reader_solution/ReaderSolution.h
     load/reader_solution/ReaderSolution.cpp
+
+    material/Material.h
+    material/Material.cpp
+    material/MaterialSolution.h
+    material/MaterialSolution.cpp
 
     managers/DrawManager.h
     managers/DrawManager.cpp

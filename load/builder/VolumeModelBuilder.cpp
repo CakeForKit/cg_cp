@@ -2,8 +2,8 @@
 
 VolumeModelBuilder::~VolumeModelBuilder() = default;
 
-VolumeModelBuilder::VolumeModelBuilder(std::shared_ptr<VolumeModelReader> _reader)
-: reader(_reader) {}
+VolumeModelBuilder::VolumeModelBuilder(std::shared_ptr<VolumeModelReader> _reader, std::shared_ptr<Material> _material)
+: reader(_reader), material(_material) {}
 
 void VolumeModelBuilder::readData() {
     if (part != 0)
@@ -48,5 +48,5 @@ bool VolumeModelBuilder::isBuilt() const noexcept {
 }
 
 std::shared_ptr<ObjectScene> VolumeModelBuilder::getModel() {
-    return std::make_shared<VolumeModel>(model);
+    return std::make_shared<VolumeModel>(model, material);
 }
