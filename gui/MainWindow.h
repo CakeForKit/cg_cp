@@ -18,9 +18,9 @@ public:
 private:
     Ui::MainWindow ui;
     FacadeScene facade;
-    MaterialSolution materialSolution;
 
 private slots:
     void onPushButtonClicked();
+    void onMoveModelBtnClicked();
 
 };

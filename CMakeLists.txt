@@ -36,6 +36,7 @@ include_directories(
     commands
     commands/draw_commands
     commands/load_commands
+    commands/transform_commands
     data_structs
     drawer
     exceptions
@@ -55,6 +56,7 @@ include_directories(
     load/reader_solution
     material
     managers
+    matrix4
     object_scene
     object_scene/model
     object_scene/model/triangles
@@ -62,6 +64,7 @@ include_directories(
     ray_tracing
     ray_tracing/standard_ray_tracing
     scene
+    transform
     triangle
     vector3
     
@@ -87,6 +90,10 @@ set(SRCS
     commands/load_commands/BaseLoadCommand.cpp
     commands/load_commands/TrianglesModelLoadCommand.h
     commands/load_commands/TrianglesModelLoadCommand.cpp
+    commands/transform_commands/TransformCommand.h
+    commands/transform_commands/TransformCommand.cpp
+    commands/transform_commands/MoveCommand.h
+    commands/transform_commands/MoveCommand.cpp
 
     data_structs/intersection_type.h
     data_structs/intersection_type.cpp
@@ -151,6 +158,13 @@ set(SRCS
     managers/SceneManager.cpp
     managers/LoadManager.h
     managers/LoadManager.cpp
+    managers/MaterialManager.h
+    managers/MaterialManager.cpp
+    managers/TransformManager.h
+    managers/TransformManager.cpp
+
+    matrix4/Matrix4.h
+    matrix4/Matrix4.cpp
 
     object_scene/ObjectScene.h 
     object_scene/ObjectScene.cpp
@@ -176,6 +190,11 @@ set(SRCS
 
     scene/Scene.h
     scene/Scene.cpp
+
+    transform/TransformAction.h
+    transform/TransformAction.cpp
+    transform/MoveAction.h
+    transform/MoveAction.cpp
 
     triangle/Triangle.h
     triangle/Triangle.cpp

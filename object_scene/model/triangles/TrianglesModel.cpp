@@ -137,3 +137,9 @@ bool TrianglesModel::intersection(const Ray &ray, intersection_t &intersect) con
 
     return true;
 }
+
+void TrianglesModel::transform(const std::shared_ptr<TransformAction> action) {
+    for (psPoint3 elem : vertices) {
+        action->transform(elem);
+    }
+}

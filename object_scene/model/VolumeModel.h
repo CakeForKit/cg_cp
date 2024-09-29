@@ -22,6 +22,7 @@ public:
     Point3 getCenter() const noexcept;
 
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;
+    virtual void transform(const std::shared_ptr<TransformAction> action) override;
 
     virtual std::ostream& print(std::ostream &os) const noexcept  override;
 };

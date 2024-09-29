@@ -20,6 +20,10 @@ bool VolumeModel::intersection(const Ray &ray, intersection_t &intersect) const 
     return impl->intersection(ray, intersect);
 }
 
+void VolumeModel::transform(const std::shared_ptr<TransformAction> action) {
+    impl->transform(action);
+}
+
 void VolumeModel::setMaterial(std::shared_ptr<Material> _material) noexcept {
     material = _material;
 }

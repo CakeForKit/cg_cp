@@ -12,6 +12,8 @@ Vector3::Vector3() noexcept {
 }
 
 Vector3::Vector3(double x, double y, double z, double w) noexcept{
+    // if (w  0)
+    //     w = 1;
     coord[0] = x / w;
     coord[1] = y / w;
     coord[2] = z / w;

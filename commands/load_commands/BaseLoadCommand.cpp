@@ -1,7 +1,7 @@
 #include "BaseLoadCommand.h"
 
-BaseLoadCommand::BaseLoadCommand(std::shared_ptr<Material> _material)
-: material(_material) {}
+BaseLoadCommand::BaseLoadCommand(idMaterial _id_material)
+: id_material(_id_material) {}
 
 BaseLoadCommand::~BaseLoadCommand() = default;
 

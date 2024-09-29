@@ -1,25 +1,33 @@
 #include "StandardRayTracing.h"
 
-StandardRayTracing::StandardRayTracing(std::shared_ptr<Scene> _scene, std::shared_ptr<Camera> _camera, std::shared_ptr<Drawer> _drawer)
-: RayTracing(_scene, _camera, _drawer) {}
+StandardRayTracing::StandardRayTracing(std::shared_ptr<Scene> _scene, std::shared_ptr<Camera> _camera, std::shared_ptr<Drawer> _drawer,  size_t _maxDepth)
+: RayTracing(_scene, _camera, _drawer, _maxDepth) {}
 
 void StandardRayTracing::render() {
     for (int j = 0; j < drawer->getImgHeight(); ++j) {
         for (int i = 0; i < drawer->getImgWidth(); ++i) {
-            // std::cout << "(" << i << ", " << j << ")\n";
             Ray ray = camera->createRay(i, j);
             Intensity intens = castRay(ray);
-            Color color(static_cast<int>(std::round(intens.x() * 255)), 
-                        static_cast<int>(std::round(intens.y() * 255)), 
-                        static_cast<int>(std::round(intens.z() * 255)));
+            // bool problem = !(0 <= intens.x() && intens.x() <= 1 &&
+            //                 0 <= intens.y() && intens.y() <= 1 &&
+            //                 0 <= intens.z() && intens.z() <= 1);
+            // if (problem)
+            //     std::cout << intens << "\n";
+            // Color color(static_cast<int>(std::round(intens.x() * 255)), 
+            //             static_cast<int>(std::round(intens.y() * 255)), 
+            //             static_cast<int>(std::round(intens.z() * 255)));
+            Color color(intens);
+
             drawer->setPixelColor(i, j, color);
         }
     }
+
+
     drawer->setScene();
 }
 
 // TODO научится определять цвет фона из вне
-Intensity StandardRayTracing::castRay(Ray &ray, const int depth) const noexcept {
+Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth) const noexcept {
     (void) depth;
     if (!ray.getDirection().isNormalized())
         ray.getDirection().normalize();
@@ -27,12 +35,15 @@ Intensity StandardRayTracing::castRay(Ray &ray, const int depth) const noexcept 
     Intensity color(0, 0, 0);// цвет фона
 
     intersection_t intersect;
-    if (scene->intersection(ray, intersect)) {
+    if (scene->intersection(ray, intersect) && depth < maxDepth) {
         
         // Выпускаем луч отражения
         Vector3 reflectVec = ray.getDirection().reflect(intersect.normal);
         Ray reflectRay(intersect.point + 1e-3 * intersect.normal, reflectVec);
         Intensity reflectIntensity = castRay(reflectRay, depth + 1);
+        // Зеркальное отражение в глобальной модели освещения
+        color += intersect.material->getKs() * reflectIntensity;
+
 
         Point3 posLight;    // координаты ист света
         Vector3 L;          // век направленный на ист света из точки пересечения
@@ -66,18 +77,16 @@ Intensity StandardRayTracing::castRay(Ray &ray, const int depth) const noexcept 
                     color += (diff + spec) * (*it)->getIntensity() / (intersect.distance / 100 + EPS);  // TODO деление на 100 надо запихнуть в config
                 }
 
-                // Зеркальное отражение в глобальной модели освещения
-                color += intersect.material->getKs() * reflectIntensity;
-
             } else if ((*it)->getType() == typeLight::AMBIENT) {
                 color += intersect.material->getKa() * (*it)->getIntensity();
 
             } else {
                 assert(false);
             }
-            std::cout << "Color = " << Intensity(static_cast<int>(std::round(color.x() * 255)), 
-                static_cast<int>(std::round(color.y() * 255)), 
-                static_cast<int>(std::round(color.z() * 255))) << "\n";
+
+            // std::cout << "Color = " << Intensity(static_cast<int>(std::round(color.x() * 255)), 
+            //                                     static_cast<int>(std::round(color.y() * 255)), 
+            //                                     static_cast<int>(std::round(color.z() * 255))) << "\n";
         }
         
         // std::cout << "Color = " << color << "\n";

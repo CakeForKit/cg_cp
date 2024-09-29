@@ -6,6 +6,7 @@
 #include "Vector3.h"
 #include "Triangle.h"
 #include "intersection_type.h"
+#include "TransformAction.h"
 
 using container_vertices = std::vector<psPoint3>;
 
@@ -24,6 +25,7 @@ public:
     virtual Point3 getCenter() const noexcept = 0;
 
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const = 0;
+    virtual void transform(const std::shared_ptr<TransformAction> action) = 0;
 
     virtual std::ostream& print(std::ostream &os) const noexcept = 0;
 

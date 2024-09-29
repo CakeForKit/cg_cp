@@ -8,10 +8,10 @@ class BaseLoadCommand : public BaseCommand
 protected:
     idReaderCreator id_reader;
     idDirectorCreator id_director;
-    std::shared_ptr<Material> material;
+    idMaterial id_material;
 
 public:
-    BaseLoadCommand(std::shared_ptr<Material> _material);
+    BaseLoadCommand(idMaterial _id_material);
     virtual ~BaseLoadCommand() = 0;
 
     idReaderCreator getReaderId();
