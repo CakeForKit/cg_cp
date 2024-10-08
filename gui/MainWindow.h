@@ -2,11 +2,34 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QMessageBox>
+#include <QMouseEvent>
 #include "ui_mainWindow.h"
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
 #include "TrianglesModelLoadCommand.h"
+#include "MoveCommand.h"
+#include "RotateCommand.h"
 #include "MaterialSolution.h"
+
+class MyQGraphicsView : public QGraphicsView
+{
+public:
+    MyQGraphicsView(QWidget *parent = nullptr) : QGraphicsView(parent) {setMouseTracking(true);}
+
+protected:
+    void mousePressEvent(QMouseEvent  *event) override {
+        std::cout << "MousePressEvent of MyQGraphicsView: ";
+
+        // int width = viewport()->width();
+        // int height = viewport()->height();
+        // std::cout << width << "x" << height << "\n";
+        QPoint pos = event->pos();
+        std::cout << "( " << pos.x() << "," << pos.y() << ")\n";
+
+        QGraphicsView::mousePressEvent(event); // Call base class implementation
+    }
+};
 
 class MainWindow : public QMainWindow
 {
@@ -17,10 +40,16 @@ public:
 
 private:
     Ui::MainWindow ui;
+    MyQGraphicsView *graphicsView;
     FacadeScene facade;
 
 private slots:
-    void onPushButtonClicked();
+    void onLoadModelBtnClicked();
+    void onDrawBtnClicked();
     void onMoveModelBtnClicked();
+    void onRotateModelBtnClicked();
+
+private:
+    size_t getSelectedModelId() const;
 
 };

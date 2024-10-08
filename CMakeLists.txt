@@ -94,6 +94,8 @@ set(SRCS
     commands/transform_commands/TransformCommand.cpp
     commands/transform_commands/MoveCommand.h
     commands/transform_commands/MoveCommand.cpp
+    commands/transform_commands/RotateCommand.h
+    commands/transform_commands/RotateCommand.cpp
 
     data_structs/intersection_type.h
     data_structs/intersection_type.cpp
@@ -195,6 +197,8 @@ set(SRCS
     transform/TransformAction.cpp
     transform/MoveAction.h
     transform/MoveAction.cpp
+    transform/RotateAction.h
+    transform/RotateAction.cpp
 
     triangle/Triangle.h
     triangle/Triangle.cpp

@@ -29,7 +29,11 @@ public:
     Matrix4& operator*=(const Matrix4 &&m) noexcept;
 
     const glm::mat4 &getGlm() const;
+
+    std::ostream& print(std::ostream &os) const noexcept;
 };
 
 Vector3 operator*(const Matrix4 &m, const Vector3 &v);
+
+std::ostream& operator<<(std::ostream &os, const Matrix4 &m);
 

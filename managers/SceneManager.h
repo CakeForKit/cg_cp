@@ -14,7 +14,7 @@ public:
 
     void addModel(std::shared_ptr<ObjectScene> model) noexcept;
     void removeModel(size_t ind);
-    // std::shared_ptr<ObjectScene> getModel(size_t ind);
+    std::shared_ptr<ObjectScene> getModel(size_t ind);
 
     void addCamera() noexcept;
     void removeCamera(size_t ind);

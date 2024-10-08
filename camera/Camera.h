@@ -37,6 +37,7 @@ public:
     void setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight);
 
     void updateUpperLeftPixelCoord();
+    Vector3 getCameraPos() const noexcept;
 
     /// @brief Создает луч направленный в пиксель (xp, yp)
     /// @param ip коорд пикселя по X

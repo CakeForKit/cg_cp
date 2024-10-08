@@ -80,6 +80,10 @@ void Camera::updateUpperLeftPixelCoord() {
     upperLeftPixelCoord = upperLeftCoord + 0.5 * width_of_one_pixel - 0.5 * height_of_one_pixel;
 }
 
+Vector3 Camera::getCameraPos() const noexcept {
+    return cameraPos;
+}
+
 Ray Camera::createRay(int ip, int jp) {
     if (!countPixelsViewportSet) {
         time_t curTime = time(NULL);

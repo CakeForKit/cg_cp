@@ -20,5 +20,6 @@ public:
     virtual void render() = 0;
 
 protected:
-    virtual Intensity castRay(Ray &ray, const size_t depth = 0) const noexcept = 0;
+    virtual Intensity castRay(Ray &ray, const size_t depth = 0, bool printing = false) const noexcept = 0;
+    double distanceToCamera(Point3 &p) const noexcept;
 };

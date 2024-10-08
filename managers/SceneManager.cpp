@@ -14,6 +14,10 @@ void SceneManager::removeModel(size_t ind) {
     scene->removeModel(ind);
 }
 
+std::shared_ptr<ObjectScene> SceneManager::getModel(size_t ind) {
+    return scene->getModel(ind);
+}
+
 void SceneManager::addCamera() noexcept {
     scene->addCamera();
 }

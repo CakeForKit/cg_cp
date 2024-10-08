@@ -3,12 +3,13 @@
 class MoveCommand : public TransformCommand
 {
 protected:
-    PtrObjectScene model;
+    // PtrObjectScene model;
+    size_t idModel;
     double dx, dy, dz;
 
 public:
     MoveCommand() = delete;
-    MoveCommand(PtrObjectScene _model, double _dx, double _dy, double _dz);
+    MoveCommand(size_t _idModel, double _dx, double _dy, double _dz);
 
     virtual void execute();
 };

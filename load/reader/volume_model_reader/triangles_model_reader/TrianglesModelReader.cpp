@@ -40,7 +40,7 @@ void TrianglesModelReader::readVectex() {
     }
 
     vertices.push_back(std::make_shared<Point3>(x, y, z));
-    std::cout << Point3(x, y, z) << '\n';
+    std::cout << "v: " << Point3(x, y, z) << '\n';
 }
 
 void TrianglesModelReader::readTriangle() {
@@ -74,7 +74,7 @@ void TrianglesModelReader::readTriangle() {
         }
     }
 
-    std::cout << *(vertices[indexes[0]]) << " " << *(vertices[indexes[1]]) << " " << *(vertices[indexes[2]]) << "\n";
+    std::cout << "tr: " << *(vertices[indexes[0]]) << " " << *(vertices[indexes[1]]) << " " << *(vertices[indexes[2]]) << "\n";
     triangles.push_back({vertices[indexes[0]], vertices[indexes[1]], vertices[indexes[2]]});
 }
 
@@ -86,7 +86,7 @@ void TrianglesModelReader::readData() {
     while (!file.eof()) {
         file >> type;
         if (!file) {
-            std::cout << "!!!\n";
+            std::cout << "end of file;\n";
             continue;
         }
         if (type == "v") {
@@ -107,7 +107,7 @@ void TrianglesModelReader::readData() {
 
         } else if (type[0] == '#' || type == "\n" || type == "") {
             std::getline(file, type);
-            std::cout << "----\n";
+            std::cout << "--comment or empty line--\n";
 
         } else {
             std::cout << "symbol: |" << type << "|\n";

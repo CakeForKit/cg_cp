@@ -81,6 +81,15 @@ public:
 //                   BaseException(time, filename, line, class_name, method_name, info){};
 // };
 
+class GuiException: public BaseException
+{
+public:
+    GuiException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "GuiException") noexcept:
+                  BaseException(time, filename, line, class_name, method_name, info){};
+};
+
 #pragma region end
 
 #pragma region StandartException
