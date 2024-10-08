@@ -13,6 +13,7 @@ protected:
 
 public:
     Matrix4();
+    Matrix4(glm::mat4 &m);
     Matrix4(glm::mat4 &&m);
     ~Matrix4() = default;
 

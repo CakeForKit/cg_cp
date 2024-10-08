@@ -6,6 +6,15 @@ void TransformManager::moveModel(PtrObjectScene model, double dx, double dy, dou
 }
 
 void TransformManager::rotateModel(PtrObjectScene model, float angle) {
-    std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle);
+    std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
+                                                                            model->getCenter(), 
+                                                                            Axis::OY);
     model->transform(action);
+}
+
+void TransformManager::rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis) {
+    std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
+                                                                            camera->getCameraPos(), 
+                                                                            axis);
+    camera->transform(action);
 }

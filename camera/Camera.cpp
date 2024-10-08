@@ -40,6 +40,8 @@ void Camera::setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight)
     
     countPixelsViewportSet = true;
     updateUpperLeftPixelCoord();
+
+    std::cout << "Use camera:\n" << *this;
 }
 
 void Camera::setFocalLength(float focal_length, bool update) {
@@ -94,4 +96,11 @@ Ray Camera::createRay(int ip, int jp) {
     Vector3 rayDirection = pixelCoord - cameraPos;
     rayDirection.normalize();
     return Ray(cameraPos, rayDirection);
+}
+
+void Camera::transform(const std::shared_ptr<TransformAction> action) {
+    // cameraPos = action->transform(cameraPos);
+    right = action->transform(right);
+    up = action->transform(up);
+    dir = action->transform(dir);
 }

@@ -8,8 +8,9 @@
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
 #include "TrianglesModelLoadCommand.h"
-#include "MoveCommand.h"
-#include "RotateCommand.h"
+#include "MoveModelCommand.h"
+#include "RotateModelCommand.h"
+#include "RotateCameraCommand.h"
 #include "MaterialSolution.h"
 
 class MyQGraphicsView : public QGraphicsView
@@ -48,8 +49,12 @@ private slots:
     void onDrawBtnClicked();
     void onMoveModelBtnClicked();
     void onRotateModelBtnClicked();
+    void onRotateOXCameraBtnClicked();
+    void onRotateOYCameraBtnClicked();
 
 private:
     size_t getSelectedModelId() const;
+
+    void rotateCamera(Axis axis);
 
 };

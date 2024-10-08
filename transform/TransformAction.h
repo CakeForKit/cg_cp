@@ -12,6 +12,7 @@ public:
     TransformAction();
 
     void transform(psPoint3 p) const;
+    Point3 transform(Point3 p) const;
 
     void addAction(std::shared_ptr<TransformAction> action);
 

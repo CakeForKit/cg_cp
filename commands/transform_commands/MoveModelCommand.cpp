@@ -1,9 +1,9 @@
-#include "MoveCommand.h"
+#include "MoveModelCommand.h"
 
-MoveCommand::MoveCommand(size_t _idModel, double _dx, double _dy, double _dz)
+MoveModelCommand::MoveModelCommand(size_t _idModel, double _dx, double _dy, double _dz)
 : idModel(_idModel), dx(_dx), dy(_dy), dz(_dz) {}
 
-void MoveCommand::execute() {
+void MoveModelCommand::execute() {
     PtrObjectScene model = sceneManager->getModel(idModel);
     transformManager->moveModel(model, dx, dy, dz);
 

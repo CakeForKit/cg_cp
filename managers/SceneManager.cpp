@@ -25,3 +25,7 @@ void SceneManager::addCamera() noexcept {
 void SceneManager::removeCamera(size_t ind) {
     scene->removeCamera(ind);
 }
+
+std::shared_ptr<Camera> SceneManager::getActiveCamera() {
+    return scene->getActiveCamera();
+}

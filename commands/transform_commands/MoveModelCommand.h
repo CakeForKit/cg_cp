@@ -1,6 +1,6 @@
 #include "TransformCommand.h"
 
-class MoveCommand : public TransformCommand
+class MoveModelCommand : public TransformCommand
 {
 protected:
     // PtrObjectScene model;
@@ -8,8 +8,8 @@ protected:
     double dx, dy, dz;
 
 public:
-    MoveCommand() = delete;
-    MoveCommand(size_t _idModel, double _dx, double _dy, double _dz);
+    MoveModelCommand() = delete;
+    MoveModelCommand(size_t _idModel, double _dx, double _dy, double _dz);
 
     virtual void execute();
 };

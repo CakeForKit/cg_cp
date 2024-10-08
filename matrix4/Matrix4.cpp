@@ -17,6 +17,8 @@ std::ostream& operator<<(std::ostream &os, const Matrix4 &m) {
 
 Matrix4::Matrix4() : mat(glm::mat4(1.0f)) {}
 
+Matrix4::Matrix4(glm::mat4 &m) : mat(m) {}
+
 Matrix4::Matrix4(glm::mat4 &&m) : mat(m) {}
 
 

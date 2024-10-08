@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     connect(ui.drawBtn, &QPushButton::clicked, this, &MainWindow::onDrawBtnClicked);
     connect(ui.moveModelBtn, &QPushButton::clicked, this, &MainWindow::onMoveModelBtnClicked);
     connect(ui.rotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
+    connect(ui.rotateOXCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOXCameraBtnClicked);
+    connect(ui.rotateOYCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOYCameraBtnClicked);
 }
 
 void MainWindow::onLoadModelBtnClicked() {
@@ -58,7 +60,7 @@ void MainWindow::onMoveModelBtnClicked() {
         double dy = ui.dy_dsp->value();
         double dz = ui.dz_dsp->value();
 
-        MoveCommand command(id, dx, dy, dz);
+        MoveModelCommand command(id, dx, dy, dz);
         facade.execute(command);
     } catch (NoSelectedModelException &ex) {
         QMessageBox::critical(nullptr, "Ошибка", "Нужно выбрать модель.");
@@ -81,7 +83,7 @@ void MainWindow::onRotateModelBtnClicked() {
 
         float angle_grad = static_cast<float>(ui.angle_dsp->value());
 
-        RotateCommand command(id, angle_grad);
+        RotateModelCommand command(id, angle_grad);
         facade.execute(command);
     } catch (NoSelectedModelException &ex) {
         QMessageBox::critical(nullptr, "Ошибка", "Нужно выбрать модель.");
@@ -92,6 +94,34 @@ void MainWindow::onRotateModelBtnClicked() {
     }
 
     std::cout << "end RotateModelBtnClicked ---------" <<std::endl;
+
+    onDrawBtnClicked();
+}
+
+void MainWindow::rotateCamera(Axis axis) {
+    try {
+        float angle_grad = static_cast<float>(ui.angle_dsp->value());
+
+        RotateCameraCommand command(angle_grad, axis);
+        facade.execute(command);
+    } catch (BaseException &ex) {
+        std::cout << ex.what() << "\n";
+        exit(EXIT_FAILURE);
+    }
+}
+
+void MainWindow::onRotateOXCameraBtnClicked() {
+    std::cout << "onRotateOXCameraBtnClicked: ------------" <<std::endl;
+    rotateCamera(Axis::OX);
+    std::cout << "end onRotateOXCameraBtnClicked ---------" <<std::endl;
+
+    onDrawBtnClicked();
+}
+
+void MainWindow::onRotateOYCameraBtnClicked() {
+    std::cout << "onRotateOYCameraBtnClicked: ------------" <<std::endl;
+    rotateCamera(Axis::OY);
+    std::cout << "end onRotateOYCameraBtnClicked ---------" <<std::endl;
 
     onDrawBtnClicked();
 }

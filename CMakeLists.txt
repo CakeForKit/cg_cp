@@ -92,10 +92,12 @@ set(SRCS
     commands/load_commands/TrianglesModelLoadCommand.cpp
     commands/transform_commands/TransformCommand.h
     commands/transform_commands/TransformCommand.cpp
-    commands/transform_commands/MoveCommand.h
-    commands/transform_commands/MoveCommand.cpp
-    commands/transform_commands/RotateCommand.h
-    commands/transform_commands/RotateCommand.cpp
+    commands/transform_commands/MoveModelCommand.h
+    commands/transform_commands/MoveModelCommand.cpp
+    commands/transform_commands/RotateModelCommand.h
+    commands/transform_commands/RotateModelCommand.cpp
+    commands/transform_commands/RotateCameraCommand.h
+    commands/transform_commands/RotateCameraCommand.cpp
 
     data_structs/intersection_type.h
     data_structs/intersection_type.cpp

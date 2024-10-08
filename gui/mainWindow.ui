@@ -214,6 +214,20 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="rotateOXCameraBtn">
+            <property name="text">
+             <string>Вращать камеру OX</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="rotateOYCameraBtn">
+            <property name="text">
+             <string>Вращать камеру OY</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

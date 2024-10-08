@@ -45,6 +45,8 @@ public:
     /// @return Нормализованный луч
     Ray createRay(int ip, int jp);
 
+    void transform(const std::shared_ptr<TransformAction> action);
+
     std::ostream& print(std::ostream& os) const noexcept;
 };
 

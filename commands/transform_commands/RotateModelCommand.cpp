@@ -1,9 +1,9 @@
-#include "RotateCommand.h"
+#include "RotateModelCommand.h"
 
-RotateCommand::RotateCommand(size_t _idModel, float _angle_grad)
+RotateModelCommand::RotateModelCommand(size_t _idModel, float _angle_grad)
 : idModel(_idModel), angle_grad(_angle_grad) {}
 
-void RotateCommand::execute() {
+void RotateModelCommand::execute() {
     PtrObjectScene model = sceneManager->getModel(idModel);
     transformManager->rotateModel(model, angle_grad);
 

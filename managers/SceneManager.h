@@ -18,5 +18,5 @@ public:
 
     void addCamera() noexcept;
     void removeCamera(size_t ind);
-    // std::shared_ptr<Camera> getCamera(size_t ind);
+    std::shared_ptr<Camera> getActiveCamera();
 };

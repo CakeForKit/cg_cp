@@ -24,6 +24,10 @@ void VolumeModel::transform(const std::shared_ptr<TransformAction> action) {
     impl->transform(action);
 }
 
+Point3 VolumeModel::getCenter() noexcept {
+    return impl->getCenter();
+}
+
 void VolumeModel::setMaterial(std::shared_ptr<Material> _material) noexcept {
     material = _material;
 }
