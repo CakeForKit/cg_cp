@@ -15,8 +15,8 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
 void MainWindow::onLoadModelBtnClicked() {
     std::cout << "onLoadModelBtnClicked: ------------" <<std::endl;
 
-    char filename[] = "/home/kathrine/cg_cp/data/test_model_3.txt";
-    char filename2[] = "/home/kathrine/cg_cp/data/test_model_4.txt";
+    char filename[] = "/home/kathrine/cg_cp/data/test_model_4.txt";
+    char filename2[] = "/home/kathrine/cg_cp/data/test_model_5_volRevol.txt";
     const char *f2 = &(filename2[0]);
     const char *f = &(filename[0]);
 

@@ -6,6 +6,8 @@
 
 #include <fstream>
 #include <assert.h>
+#include <cmath>
+#define _USE_MATH_DEFINES
 
 class TrianglesModelReader : public VolumeModelReader
 {
@@ -13,12 +15,16 @@ protected:
     const char *filename;
     std::ifstream file;
 
+    size_t stepOfRevolving;
+    double alphaStep;
+
     std::vector<psPoint3> vertices;
     std::vector<std::vector<psPoint3>> triangles;
+    std::vector<std::vector<psPoint3>> revolvElems;
     Point3 center;
 
 public:
-    TrianglesModelReader(const char *fname);
+    TrianglesModelReader(const char *fname, size_t _stepOfRevolving = 10);
     ~TrianglesModelReader();
 
     virtual void open() override;
@@ -32,5 +38,7 @@ public:
 
 protected:
     void readVectex();
+    void readRadVertex();
     void readTriangle();
+    void readCirclesConnect();
 };
