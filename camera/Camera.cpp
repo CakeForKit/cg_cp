@@ -99,7 +99,7 @@ Ray Camera::createRay(int ip, int jp) {
 }
 
 void Camera::transform(const std::shared_ptr<TransformAction> action) {
-    // cameraPos = action->transform(cameraPos);
+    cameraPos = action->transform(cameraPos);
     right = action->transform(right);
     up = action->transform(up);
     dir = action->transform(dir);
