@@ -20,5 +20,6 @@ public:
     virtual int getImgHeight() override;
 
     virtual void setPixelColor(int x, int y, const Color &color) override;
+    virtual void setPixelColor(int x, int y, const Color &&color) override;
     virtual void setScene() override;
 };

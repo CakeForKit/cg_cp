@@ -28,3 +28,15 @@ Point3 Ray::operator()(double t) const noexcept {
     return orig + dir * t;
 }
 
+Ray& Ray::operator=(const Ray &r) noexcept {
+    orig = r.getOrigin();
+    dir = r.getDirection();
+    return *this;
+}
+
+Ray& Ray::operator=(Ray &&r) noexcept {
+    orig = r.getOrigin();
+    dir = r.getDirection();
+    return *this;
+}
+

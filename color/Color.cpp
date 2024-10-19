@@ -27,6 +27,7 @@ Color::Color(Intensity &intens) {
         else
             rgb[i] = c;
     }
+    // std::cout << "Color() = " << rgb[0] << ", " << rgb[1] << ", " << rgb[2] << "\n";
 }
 
 

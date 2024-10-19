@@ -17,6 +17,9 @@ public:
     Point3 getOrigin() const noexcept;
     Vector3 getDirection() const noexcept;
     Point3 operator()(double t) const noexcept;
+
+    Ray& operator=(const Ray &r) noexcept;
+    Ray& operator=(Ray &&r) noexcept;
 };
 
 std::ostream& operator<<(std::ostream &os, const Ray &ray);

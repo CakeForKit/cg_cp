@@ -18,6 +18,10 @@ void QtDrawer::setPixelColor(int x, int y, const Color &color) {
     img.setPixelColor(x, y, color.getQColor());
 }
 
+void QtDrawer::setPixelColor(int x, int y, const Color &&color) {
+    img.setPixelColor(x, y, color.getQColor());
+}
+
 void QtDrawer::setScene() {
     // QGraphicsScene* scene = new QGraphicsScene();
     scene->addPixmap(QPixmap::fromImage(img));

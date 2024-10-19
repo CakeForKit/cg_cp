@@ -3,25 +3,68 @@
 StandardRayTracing::StandardRayTracing(std::shared_ptr<Scene> _scene, std::shared_ptr<Camera> _camera, std::shared_ptr<Drawer> _drawer,  size_t _maxDepth)
 : RayTracing(_scene, _camera, _drawer, _maxDepth) {}
 
-void StandardRayTracing::render() {
+void StandardRayTracing::render(size_t countThreads) {
+    assert(countThreads != 0);
+
+    if (countThreads == 1) {
+        renderOneThread();
+    } else {
+        renderParallel(countThreads);
+    }
+}
+
+// void castRayForParallel(threadData_t *data)
+void *castRayForParallel(void *prlData) {
+    threadData_t *data = static_cast<threadData_t*>(prlData);
+    data->intens = data->alg->castRay(data->ray);
+    return NULL;
+}
+
+void StandardRayTracing::renderParallel(size_t countThreads) {
+    //выделяем память под массив идентификаторов потоков
+	pthread_t* threads = static_cast<pthread_t*>(malloc(countThreads * sizeof(pthread_t)));
+    //сколько потоков - столько и структур с потоковых данных
+	threadData_t* prlData = static_cast<threadData_t*>(malloc(countThreads * sizeof(threadData_t)));
+
+    int h = drawer->getImgHeight();
+    int w = drawer->getImgWidth();
+    int cntThr = static_cast<int>(countThreads);
+    for (int i = 0; i < h * w; i += cntThr) {
+        // Инициализируем данные для функции castRayForParallel и запускаем потоки 
+        for (int k = 0; k < cntThr; ++k) {
+            (void) k;
+            prlData[k].alg = this;
+            prlData[k].ray = camera->createRay((i+k) / h, (i+k) % h);
+            // std::cout << w << "x" << h << " i = " << i << "(" << (i+k)/h << ", " << (i+k)%h << ")\n";
+            pthread_create(&(threads[k]), NULL, &castRayForParallel, &(prlData[k]));
+        }
+        //ожидаем выполнение всех потоков
+        for(int k = 0; k < cntThr; ++k)
+            pthread_join(threads[k], NULL);
+        // переносим полученные данные
+        for(int k = 0; k < cntThr; ++k) {
+            // std::cout << "setPixelColor: i/w=" << i / h << " i%w=" << i % h << " I=" << prlData[k].intens << "\n\n";
+            drawer->setPixelColor((i+k) / h, (i+k) % h, Color(prlData[k].intens));
+        }
+    }
+    drawer->setScene();
+}
+
+void StandardRayTracing::renderOneThread() {
     for (int j = 0; j < drawer->getImgHeight(); ++j) {
         for (int i = 0; i < drawer->getImgWidth(); ++i) {
             Ray ray = camera->createRay(i, j);
             
-            Intensity intens;
-            if (i == 117 && j == 283) {
-                intens = castRay(ray, 0, true);
-            } else {
-                intens = castRay(ray);
-            }
-            // Intensity intens = castRay(ray);
-            Color color(intens);
-
-            drawer->setPixelColor(i, j, color);
+            // Intensity intens;
+            // if (i == 117 && j == 283) {
+            //     intens = castRay(ray, 0, true);
+            // } else {
+            //     intens = castRay(ray);
+            // }
+            Intensity intens = castRay(ray);
+            drawer->setPixelColor(i, j, Color(intens));
         }
     }
-
-
     drawer->setScene();
 }
 
@@ -143,3 +186,4 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
     
     return color;
 }
+
