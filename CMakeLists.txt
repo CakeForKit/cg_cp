@@ -221,6 +221,9 @@ set(TESTS
 
     tests/reflect_refract_tests.h
     tests/reflect_refract_tests.cpp
+
+    tests/std_ray_tracing_test.h
+    tests/std_ray_tracing_test.cpp
 )
 
 # # google tests

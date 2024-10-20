@@ -1,3 +1,4 @@
+#pragma once
 #include "TransformCommand.h"
 
 class RotateModelCommand : public TransformCommand
