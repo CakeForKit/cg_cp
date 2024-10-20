@@ -17,5 +17,5 @@ public:
 
     void execute(BaseCommand &cmd);
 
-    
+    size_t getCountFacesOnScene();    
 };

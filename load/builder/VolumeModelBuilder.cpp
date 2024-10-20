@@ -30,7 +30,6 @@ void VolumeModelBuilder::buildFaces() {
     for (std::vector<psPoint3> elem : faces) {
         model->addFace(elem);       
     }
-
     ++part;
 }
 

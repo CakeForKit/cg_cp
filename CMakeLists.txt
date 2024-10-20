@@ -37,6 +37,7 @@ include_directories(
     commands/draw_commands
     commands/load_commands
     commands/transform_commands
+    commands/time_commands
     data_structs
     drawer
     exceptions
@@ -98,6 +99,8 @@ set(SRCS
     commands/transform_commands/RotateModelCommand.cpp
     commands/transform_commands/RotateCameraCommand.h
     commands/transform_commands/RotateCameraCommand.cpp
+    commands/time_commands/DrawTimeCommand.h
+    commands/time_commands/DrawTimeCommand.cpp
 
     data_structs/intersection_type.h
     data_structs/intersection_type.cpp

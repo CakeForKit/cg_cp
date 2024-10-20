@@ -143,3 +143,7 @@ void TrianglesModel::transform(const std::shared_ptr<TransformAction> action) {
         action->transform(elem);
     }
 }
+
+size_t TrianglesModel::getCountFaces() const noexcept {
+    return triangles.size();
+}

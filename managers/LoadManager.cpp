@@ -12,13 +12,14 @@ LoadManager::LoadManager() {
 std::shared_ptr<ObjectScene> LoadManager::loadModelFromFile(idReaderCreator id_reader, 
                                                             idDirectorCreator id_director, 
                                                             const char *filename, 
+                                                            size_t stepOfRevolving,
                                                             std::shared_ptr<Material> material) {
 
     std::shared_ptr<BaseReaderCreator> readerCreator(readerSolution.create(id_reader));
     std::shared_ptr<TrianglesModelReaderCreator_t> trinaglesModelReaderCreator  = std::dynamic_pointer_cast<TrianglesModelReaderCreator_t>(readerCreator);
     assert(trinaglesModelReaderCreator != nullptr);
 
-    std::shared_ptr<VolumeModelReader> reader = trinaglesModelReaderCreator->createReader(filename); //std::make_shared<TrianglesModelReader>("/home/kathrine/cg_cp/data/test_model_1.txt");
+    std::shared_ptr<VolumeModelReader> reader = trinaglesModelReaderCreator->createReader(filename, stepOfRevolving); //std::make_shared<TrianglesModelReader>("/home/kathrine/cg_cp/data/test_model_1.txt");
     
 
     std::shared_ptr<BaseDirectorCreator> directorCreator(directorSolution.create(id_director));

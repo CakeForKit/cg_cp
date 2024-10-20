@@ -35,7 +35,7 @@ public:
     bool intersection(const Ray &ray, intersection_t &intersect) const;
 
     // TODO clearScene()
-
+    size_t getCountAllFaces() const noexcept;
     std::ostream& print(std::ostream& os) const noexcept;
 };
 

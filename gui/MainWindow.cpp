@@ -17,16 +17,29 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
 void MainWindow::onLoadModelBtnClicked() {
     std::cout << "onLoadModelBtnClicked: ------------" <<std::endl;
 
-    char filename[] = "/home/kathrine/cg_cp/data/test_model_4.txt";
+    // char filename[] = "/home/kathrine/cg_cp/data/test_model_4.txt";
+    // const char *f = &(filename[0]);
     char filename2[] = "/home/kathrine/cg_cp/data/pawn.txt";
     const char *f2 = &(filename2[0]);
-    const char *f = &(filename[0]);
+    
+    // TrianglesModelLoadCommand load_command(f, STEP_OF_REVOLVING, idMaterial::BLUE);
+    // facade.execute(load_command);
 
-    TrianglesModelLoadCommand load_command(f, idMaterial::BLUE);
-    facade.execute(load_command);
+    // TrianglesModelLoadCommand load_command2(f2, STEP_OF_REVOLVING, idMaterial::RED);
+    // facade.execute(load_command2);
 
-    TrianglesModelLoadCommand load_command2(f2, idMaterial::RED);
-    facade.execute(load_command2);
+
+    std::vector<TrianglesModelLoadCommand> cmdArr;
+    std::vector<size_t> arrSteps = {4, 5, 6, 7, 8, 9, 10};
+    for (size_t i = 0; i < arrSteps.size(); ++i) {
+        TrianglesModelLoadCommand load_command(f2, arrSteps[i], idMaterial::RED);
+        facade.execute(load_command);
+
+        std::cout << "CountAllFaces = " << facade.getCountFacesOnScene() << "\n";
+    }
+
+    MoveModelCommand command(0, -50, 0, 0);
+    facade.execute(command);
 
     std::cout << "endonLoadModelBtnClicked: ---------" <<std::endl;
 }
@@ -124,4 +137,18 @@ void MainWindow::onRotateOYCameraBtnClicked() {
     std::cout << "end onRotateOYCameraBtnClicked ---------" <<std::endl;
 
     onDrawBtnClicked();
+}
+
+void MainWindow::measureRenderTime() {
+    char filename[] = "/home/kathrine/cg_cp/data/pawn.txt";
+
+    size_t stepOfRevolving = 6;
+    TrianglesModelLoadCommand load_command1(&(filename[0]), stepOfRevolving, idMaterial::RED);
+    facade.execute(load_command1);
+    std::cout << "CountAllFaces = " << facade.getCountFacesOnScene() << "\n";
+
+    DrawTimeCommand time_draw_command(graphicsView);
+    facade.execute(time_draw_command);
+    
+    exit(EXIT_SUCCESS);
 }

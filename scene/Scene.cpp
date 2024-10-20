@@ -133,3 +133,11 @@ bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
     
     return true;
 }
+
+size_t Scene::getCountAllFaces() const noexcept {
+    size_t count = 0;
+    for (std::shared_ptr<ObjectScene> m: models) {
+        count += m->getCountFaces();
+    }
+    return count;
+}

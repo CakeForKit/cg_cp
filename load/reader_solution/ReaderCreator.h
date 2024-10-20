@@ -19,4 +19,4 @@ public:
     }
 };
 
-using TrianglesModelReaderCreator_t = ReaderCreator<Reader, TrianglesModelReader, const char *>;
+using TrianglesModelReaderCreator_t = ReaderCreator<Reader, TrianglesModelReader, const char *, size_t>;

@@ -11,6 +11,7 @@ public:
     SceneManager();
 
     std::shared_ptr<Scene> getScene() noexcept;
+    size_t getCountAllFaces() const noexcept;
 
     void addModel(std::shared_ptr<ObjectScene> model) noexcept;
     void removeModel(size_t ind);

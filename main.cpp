@@ -104,56 +104,6 @@ void see_work_read() {
     
 }
 
-#include "TrianglesModelDirector.h"
-// #include "TrianglesModelBuilder.h"
-#include "TrianglesModelReader.h"
-#include "ReaderSolution.h"
-#include "DirectorSolution.h"
-
-// void see_work_director() {
-//     std::cout << "see_work_director:\n";
-//     try {
-//         std::shared_ptr<ReaderSolution> readerSolution = std::make_shared<ReaderSolution>();
-//         char filename[] = "/home/kathrine/cg_cp/data/test_model_1.txt";
-//         const char *f = &(filename[0]);
-
-//         // std::shared_ptr<BaseReaderCreator> creator = std::make_shared<ReaderCreator<Reader, TrianglesModelReader, const char *>>();
-//         bool rv = readerSolution->registrate(idReaderCreator::TRIANGLES, std::make_shared<TrianglesModelReaderCreator_t>());
-//         assert(rv);
-
-//         std::shared_ptr<BaseReaderCreator> readerCreator(readerSolution->create(idReaderCreator::TRIANGLES));
-//         std::shared_ptr<TrianglesModelReaderCreator_t> trinaglesModelReaderCreator  = std::dynamic_pointer_cast<TrianglesModelReaderCreator_t>(readerCreator);
-//         if (trinaglesModelReaderCreator == nullptr) {
-//             std::cout << "ERRORRRRR\n\n";
-//             return;
-//         }
-
-//         std::shared_ptr<VolumeModelReader> reader = trinaglesModelReaderCreator->createReader(f); //std::make_shared<TrianglesModelReader>("/home/kathrine/cg_cp/data/test_model_1.txt");
-        
-        
-//         std::shared_ptr<DirectorSolution> directorSolution = std::make_shared<DirectorSolution>();
-//         rv = directorSolution->registrate(idDirectorCreator::TRIANGLES, std::make_shared<TrianglesModelDirectorCreator_t>());
-//         assert(rv);
-
-//         std::shared_ptr<BaseDirectorCreator> directorCreator(directorSolution->create(idDirectorCreator::TRIANGLES));
-//         std::shared_ptr<TrianglesModelDirectorCreator_t> trianglesModelDirectorCreator = std::dynamic_pointer_cast<TrianglesModelDirectorCreator_t>(directorCreator);
-//         if (trianglesModelDirectorCreator == nullptr) {
-//             std::cout << "ERRORRRRR\n\n";
-//             return;
-//         }
-        
-//         // std::shared_ptr<Material>
-//         std::shared_ptr<VolumeModelDirector> director = trianglesModelDirectorCreator->createDirector(reader);
-//         std::shared_ptr<ObjectScene> model = director->get();
-
-//         std::cout << *model;
-
-//     } catch (BaseException &ex) {
-//         std::cout << ex.what() << "\n";
-//     }
-// }
-
-
 int main(int argc, char **argv)
 {
     std::cout << "It works!" << std::endl;
@@ -162,7 +112,7 @@ int main(int argc, char **argv)
     if (argc == 2) {
         std::cout << "See params" << std::endl;
 
-        if (strcmp(argv[1], "-t") == 0) {
+        if (strcmp(argv[1], "-test") == 0) {
 
             ::testing::InitGoogleTest(&argc, argv);
 
@@ -173,6 +123,13 @@ int main(int argc, char **argv)
             } catch (BaseException &ex) {
                 std::cout << ex.what() << "\n";
             }
+        } else if (strcmp(argv[1], "-time") == 0) {
+            QApplication app (argc, argv);
+            MainWindow mainwindow;
+            mainwindow.show();
+            mainwindow.hide();
+            mainwindow.measureRenderTime();
+            return app.exec();
         }
     } else {
         QApplication app (argc, argv);

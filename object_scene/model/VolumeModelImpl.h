@@ -27,6 +27,7 @@ public:
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const = 0;
     virtual void transform(const std::shared_ptr<TransformAction> action) = 0;
 
+    virtual size_t getCountFaces() const noexcept = 0;
     virtual std::ostream& print(std::ostream &os) const noexcept = 0;
 
 protected:

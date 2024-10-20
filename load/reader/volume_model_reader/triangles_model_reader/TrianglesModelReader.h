@@ -23,6 +23,8 @@ protected:
     std::vector<std::vector<psPoint3>> revolvElems;
     Point3 center;
 
+    bool printing = 0;
+
 public:
     TrianglesModelReader(const char *fname, size_t _stepOfRevolving = 10);
     ~TrianglesModelReader();

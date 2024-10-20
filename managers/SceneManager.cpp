@@ -6,6 +6,10 @@ std::shared_ptr<Scene> SceneManager::getScene() noexcept {
     return scene;
 }
 
+size_t SceneManager::getCountAllFaces() const noexcept {
+    return scene->getCountAllFaces();
+}
+
 void SceneManager::addModel(std::shared_ptr<ObjectScene> model) noexcept {
     scene->addModel(model);
 }

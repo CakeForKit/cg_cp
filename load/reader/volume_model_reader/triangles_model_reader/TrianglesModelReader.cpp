@@ -1,7 +1,6 @@
 #include "TrianglesModelReader.h"
 
 
-
 TrianglesModelReader::TrianglesModelReader(const char *fname, size_t _stepOfRevolving) 
 : filename(fname), stepOfRevolving(_stepOfRevolving), 
 vertices(std::vector<psPoint3>()), triangles(std::vector<std::vector<psPoint3>>()), center(Point3()) {
@@ -43,7 +42,8 @@ void TrianglesModelReader::readVectex() {
     }
 
     vertices.push_back(std::make_shared<Point3>(x, y, z));
-    std::cout << "v: " << Point3(x, y, z) << '\n';
+    if (printing)
+        std::cout << "v: " << Point3(x, y, z) << '\n';
 }
 
 void TrianglesModelReader::readRadVertex() {
@@ -70,7 +70,8 @@ void TrianglesModelReader::readRadVertex() {
     for (psPoint3 elem : circle) {
         vertices.push_back(elem);
     }
-    std::cout << "r: " << Point3(x, y, 0) << '\n';
+    if (printing)
+        std::cout << "r: " << Point3(x, y, 0) << '\n';
 }
 
 void TrianglesModelReader::readCirclesConnect() {
@@ -98,7 +99,8 @@ void TrianglesModelReader::readCirclesConnect() {
             }
         }
         if (symblor_error) {
-            std::cout << "ch = |" << ch << "|\n";
+            if (printing)
+                std::cout << "ch = |" << ch << "|\n";
             time_t curTime = time(NULL);
             throw SymbolReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
         }
@@ -138,7 +140,8 @@ void TrianglesModelReader::readCirclesConnect() {
                                 revolvElems[indexes[1]][0]});
     }
 
-    std::cout << "l(links): " << "\n";
+    if (printing)
+        std::cout << "l(links): " << "\n";
 }
 
 void TrianglesModelReader::readTriangle() {
@@ -166,13 +169,15 @@ void TrianglesModelReader::readTriangle() {
             }
         }
         if (symblor_error) {
+            if (printing)
             std::cout << "ch = |" << ch << "|\n";
             time_t curTime = time(NULL);
             throw SymbolReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
         }
     }
 
-    std::cout << "tr: " << *(vertices[indexes[0]]) << " " << *(vertices[indexes[1]]) << " " << *(vertices[indexes[2]]) << "\n";
+    if (printing)
+        std::cout << "tr: " << *(vertices[indexes[0]]) << " " << *(vertices[indexes[1]]) << " " << *(vertices[indexes[2]]) << "\n";
     triangles.push_back({vertices[indexes[0]], vertices[indexes[1]], vertices[indexes[2]]});
 }
 
@@ -184,7 +189,8 @@ void TrianglesModelReader::readData() {
     while (!file.eof()) {
         file >> type;
         if (!file) {
-            std::cout << "end of file;\n";
+            if (printing)
+                std::cout << "end of file;\n";
             continue;
         }
         if (type == "v") {
@@ -204,14 +210,17 @@ void TrianglesModelReader::readData() {
                 throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
             }
             center = Point3(x, y, z);
-            std::cout << "center = " << center << "\n";
+            if (printing)
+                std::cout << "center = " << center << "\n";
 
         } else if (type[0] == '#' || type == "\n" || type == "") {
             std::getline(file, type);
-            std::cout << "--comment or empty line--\n";
+            if (printing)
+                std::cout << "--comment or empty line--\n";
 
         } else {
-            std::cout << "symbol: |" << type << "|\n";
+            if (printing)
+                std::cout << "symbol: |" << type << "|\n";
             time_t curTime = time(NULL);
             throw SymbolReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
         }

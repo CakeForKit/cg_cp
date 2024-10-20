@@ -14,3 +14,7 @@ void FacadeScene::execute(BaseCommand &cmd) {
     cmd.setManagers(drawManager, sceneManager, loadManager, materialManager, transformManager);
     cmd.execute();
 }
+
+size_t FacadeScene::getCountFacesOnScene() {
+    return sceneManager->getCountAllFaces();
+}

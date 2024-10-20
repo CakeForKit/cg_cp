@@ -35,3 +35,7 @@ void VolumeModel::setMaterial(std::shared_ptr<Material> _material) noexcept {
 std::shared_ptr<Material> VolumeModel::getMaterial() const noexcept {
     return material;
 }
+
+size_t VolumeModel::getCountFaces() const noexcept {
+    return impl->getCountFaces();
+}

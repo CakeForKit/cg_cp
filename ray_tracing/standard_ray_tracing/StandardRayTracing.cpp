@@ -4,12 +4,10 @@ StandardRayTracing::StandardRayTracing(std::shared_ptr<Scene> _scene, std::share
 : RayTracing(_scene, _camera, _drawer, _maxDepth) {}
 
 void StandardRayTracing::render(size_t countThreads) {
-    assert(countThreads != 0);
-
-    if (countThreads == 1) {
+    if (countThreads == 0) {
         renderOneThread();
     } else {
-        renderParallel(countThreads);
+        renderParallel(countThreads + 1);
     }
 }
 
@@ -21,32 +19,54 @@ void *castRayForParallel(void *prlData) {
 }
 
 void StandardRayTracing::renderParallel(size_t countThreads) {
+    int rc;
     //выделяем память под массив идентификаторов потоков
 	pthread_t* threads = static_cast<pthread_t*>(malloc(countThreads * sizeof(pthread_t)));
+    assert(threads != NULL);
     //сколько потоков - столько и структур с потоковых данных
 	threadData_t* prlData = static_cast<threadData_t*>(malloc(countThreads * sizeof(threadData_t)));
+    assert(prlData != NULL);
 
     int h = drawer->getImgHeight();
     int w = drawer->getImgWidth();
     int cntThr = static_cast<int>(countThreads);
-    for (int i = 0; i < h * w; i += cntThr) {
+    int i = 0;
+    for (i = 0; i + cntThr <= h * w; i += cntThr) {
         // Инициализируем данные для функции castRayForParallel и запускаем потоки 
         for (int k = 0; k < cntThr; ++k) {
             (void) k;
             prlData[k].alg = this;
             prlData[k].ray = camera->createRay((i+k) / h, (i+k) % h);
             // std::cout << w << "x" << h << " i = " << i << "(" << (i+k)/h << ", " << (i+k)%h << ")\n";
-            pthread_create(&(threads[k]), NULL, &castRayForParallel, &(prlData[k]));
+            rc = pthread_create(&(threads[k]), NULL, &castRayForParallel, &(prlData[k]));
+            if (rc != 0)
+                assert(false); // TODO
         }
         //ожидаем выполнение всех потоков
-        for(int k = 0; k < cntThr; ++k)
-            pthread_join(threads[k], NULL);
-        // переносим полученные данные
         for(int k = 0; k < cntThr; ++k) {
-            // std::cout << "setPixelColor: i/w=" << i / h << " i%w=" << i % h << " I=" << prlData[k].intens << "\n\n";
+            pthread_join(threads[k], NULL);
             drawer->setPixelColor((i+k) / h, (i+k) % h, Color(prlData[k].intens));
         }
     }
+    // std::cout << "i = " << i << " HxW = " << h * w << "\n";
+    if (i < h * w) {
+        int partThr = h * w - i;
+        for (int k = 0; k < partThr; ++k) {
+            (void) k;
+            prlData[k].alg = this;
+            prlData[k].ray = camera->createRay((i+k) / h, (i+k) % h);
+            rc = pthread_create(&(threads[k]), NULL, &castRayForParallel, &(prlData[k]));
+            if (rc != 0)
+                assert(false); // TODO
+        }
+        for(int k = 0; k < partThr; ++k) {
+            pthread_join(threads[k], NULL);
+            drawer->setPixelColor((i+k) / h, (i+k) % h, Color(prlData[k].intens));
+        }
+    }
+    free(threads);
+    free(prlData);
+
     drawer->setScene();
 }
 

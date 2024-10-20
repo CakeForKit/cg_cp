@@ -17,5 +17,6 @@ public:
     std::shared_ptr<ObjectScene> loadModelFromFile(idReaderCreator id_reader, 
                                                     idDirectorCreator id_director, 
                                                     const char *filename, 
+                                                    size_t stepOfRevolving,
                                                     std::shared_ptr<Material> material);
 };

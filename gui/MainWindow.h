@@ -12,6 +12,7 @@
 #include "RotateModelCommand.h"
 #include "RotateCameraCommand.h"
 #include "MaterialSolution.h"
+#include "DrawTimeCommand.h"
 
 class MyQGraphicsView : public QGraphicsView
 {
@@ -56,5 +57,8 @@ private:
     size_t getSelectedModelId() const;
 
     void rotateCamera(Axis axis);
+
+public:
+    void measureRenderTime();
 
 };

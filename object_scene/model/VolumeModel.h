@@ -25,5 +25,6 @@ public:
     virtual void transform(const std::shared_ptr<TransformAction> action) override;
     virtual Point3 getCenter() noexcept override;
 
+    virtual size_t getCountFaces() const noexcept override;
     virtual std::ostream& print(std::ostream &os) const noexcept  override;
 };

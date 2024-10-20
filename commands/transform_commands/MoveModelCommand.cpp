@@ -7,5 +7,5 @@ void MoveModelCommand::execute() {
     PtrObjectScene model = sceneManager->getModel(idModel);
     transformManager->moveModel(model, dx, dy, dz);
 
-    std::cout << "Moved model:\n" << *model;
+    // std::cout << "Moved model:\n" << *model;
 }

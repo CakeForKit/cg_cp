@@ -41,7 +41,7 @@ void Camera::setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight)
     countPixelsViewportSet = true;
     updateUpperLeftPixelCoord();
 
-    std::cout << "Use camera:\n" << *this;
+    // std::cout << "Use camera:\n" << *this;
 }
 
 void Camera::setFocalLength(float focal_length, bool update) {
