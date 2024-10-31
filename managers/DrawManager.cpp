@@ -42,7 +42,7 @@ void DrawManager::collectTimeDataDrawScene(char *filename, std::shared_ptr<Scene
     struct timeval t_beg, t_end;
     std::vector<std::vector<long int>> timedata;
     // long int timedata[7];
-    std::vector<size_t> countThreads = {0, 1, 2, 4, 8, 16, 32};
+    std::vector<size_t> countThreads = {10000}; //, 0, 1, 2, 4, 8, 16, 32};
 
     for (size_t i = 0; i < countThreads.size(); ++i) {
         std::cout << "threads = " << countThreads[i] << ":\n";

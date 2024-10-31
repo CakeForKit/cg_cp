@@ -143,7 +143,6 @@ void MainWindow::measureRenderTime() {
     char filename[] = "/home/kathrine/cg_cp/data/pawn.txt";
     char datafilename[] = "../data_time/dataTime.txt";
 
-
     size_t stepOfRevolving = 6;
     std::vector<MoveModelCommand> moveCmds;
     moveCmds.push_back(MoveModelCommand(0, 0, 0, 0));
@@ -151,12 +150,7 @@ void MainWindow::measureRenderTime() {
     moveCmds.push_back(MoveModelCommand(2, 50, 0, 0));
     moveCmds.push_back(MoveModelCommand(3, 0, 50, 0));
     moveCmds.push_back(MoveModelCommand(4, 0, -50, 0));
-    for (size_t i = 0; i < 2; ++i) {
-        TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, idMaterial::RED);
-        facade.execute(load_command);
-        facade.execute(moveCmds[i]);
-    }
-    for (size_t i = 2; i < 3; ++i) {
+    for (size_t i = 0; i < 5; ++i) {
         TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, idMaterial::RED);
         facade.execute(load_command);
         facade.execute(moveCmds[i]);
@@ -170,46 +164,6 @@ void MainWindow::measureRenderTime() {
         DrawTimeCommand time_draw_command(graphicsView, &(datafilename[0]));
         facade.execute(time_draw_command);
     }
-    for (size_t i = 3; i < 4; ++i) {
-        TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, idMaterial::RED);
-        facade.execute(load_command);
-        facade.execute(moveCmds[i]);
-    }
-    size_t i = 4;
-    TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, idMaterial::RED);
-    facade.execute(load_command);
-    facade.execute(moveCmds[i]);
-    std::cout << "CountAllFaces = " << facade.getCountFacesOnScene() << "\n";
-    std::ofstream f(datafilename, std::ios::app);
-    if (f.is_open()) {
-        f << facade.getCountFacesOnScene() << "\t";
-    } else 
-        std::cout << "Error: " << strerror(errno) << "\n";
-    f.close(); 
-    DrawTimeCommand time_draw_command(graphicsView, &(datafilename[0]));
-    facade.execute(time_draw_command);
-
-    // size_t stepOfRevolving = 6;
-    // std::vector<MoveModelCommand> moveCmds;
-    // moveCmds.push_back(MoveModelCommand(0, 0, 0, 0));
-    // moveCmds.push_back(MoveModelCommand(1, -50, 0, 0));
-    // moveCmds.push_back(MoveModelCommand(2, 50, 0, 0));
-    // moveCmds.push_back(MoveModelCommand(3, 0, 50, 0));
-    // moveCmds.push_back(MoveModelCommand(4, 0, -50, 0));
-    // for (size_t i = 0; i < 5; ++i) {
-    //     TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, idMaterial::RED);
-    //     facade.execute(load_command);
-    //     facade.execute(moveCmds[i]);
-    //     std::cout << "CountAllFaces = " << facade.getCountFacesOnScene() << "\n";
-    //     std::ofstream f(datafilename, std::ios::app);
-    //     if (f.is_open()) {
-    //         f << facade.getCountFacesOnScene() << "\t";
-    //     } else 
-    //         std::cout << "Error: " << strerror(errno) << "\n";
-    //     f.close(); 
-    //     DrawTimeCommand time_draw_command(graphicsView, &(datafilename[0]));
-    //     facade.execute(time_draw_command);
-    // }
     
     exit(EXIT_SUCCESS);
 }
