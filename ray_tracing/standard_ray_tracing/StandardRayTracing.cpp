@@ -157,12 +157,12 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
                     }
 
                     
-                    color += (diff + spec) * (*it)->getIntensity() / (dist_to_camera / 100 + EPS);  // TODO деление на 100 надо запихнуть в config
+                    color += (diff + spec) * (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS);  
 
                     if (printing) {
                         std::cout << "diff + spec: \n";
                         std::cout << "I_l = " << (*it)->getIntensity() << ", dist_to_camera = " << dist_to_camera << "\n";
-                        std::cout << "+color = " << (diff + spec) * (*it)->getIntensity() / (dist_to_camera / 100 + EPS) << "\n\n";
+                        std::cout << "+color = " << (diff + spec) * (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS) << "\n\n";
                     }
                 }
 
@@ -200,7 +200,7 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
     }
     else {
         // color = Intensity(0.5, 0.5, 0.5);
-        color = Intensity(0, 0, 0);
+        color = Intensity(0.93, 0.678, 0.678);
     }
     
     

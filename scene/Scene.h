@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ObjectScene.h"
+#include "Model.h"
 #include "Camera.h"
 #include "Light.h"
 
@@ -10,7 +10,7 @@ public:
     using iteratorLight = std::vector<std::shared_ptr<Light>>::const_iterator;
 
 protected:
-    std::vector<std::shared_ptr<ObjectScene>> models;
+    std::vector<std::shared_ptr<Model>> models;
     std::vector<std::shared_ptr<Camera>> cameras;
     std::shared_ptr<Camera> activeCamera; // указатель на камеру через которую сейчас смотрим. Один из элементов cameras
     std::vector<std::shared_ptr<Light>> lights;
@@ -18,9 +18,9 @@ protected:
 public:
     Scene();
 
-    void addModel(std::shared_ptr<ObjectScene> model) noexcept;
+    void addModel(std::shared_ptr<Model> model) noexcept;
     void removeModel(size_t ind);
-    std::shared_ptr<ObjectScene> getModel(size_t ind);
+    std::shared_ptr<Model> getModel(size_t ind);
 
     void addCamera() noexcept;
     void removeCamera(size_t ind);

@@ -8,6 +8,7 @@
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
 #include "TrianglesModelLoadCommand.h"
+#include "TrianglesChessboardLoadCommand.h"
 #include "MoveModelCommand.h"
 #include "RotateModelCommand.h"
 #include "RotateCameraCommand.h"

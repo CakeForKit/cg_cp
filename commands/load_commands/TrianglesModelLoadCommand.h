@@ -7,6 +7,7 @@ class TrianglesModelLoadCommand : public BaseLoadCommand
 protected:
     const char *filename;
     size_t stepOfRevolving;
+    idMaterial id_material;
 
 public:
     TrianglesModelLoadCommand() = delete;

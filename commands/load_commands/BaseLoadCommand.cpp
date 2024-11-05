@@ -1,7 +1,7 @@
 #include "BaseLoadCommand.h"
 
-BaseLoadCommand::BaseLoadCommand(idMaterial _id_material)
-: id_material(_id_material) {}
+// BaseLoadCommand::BaseLoadCommand(idMaterial _id_material)
+// : id_material(_id_material) {}
 
 BaseLoadCommand::~BaseLoadCommand() = default;
 

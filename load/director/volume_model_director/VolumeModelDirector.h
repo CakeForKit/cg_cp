@@ -12,7 +12,7 @@ public:
     VolumeModelDirector(std::shared_ptr<VolumeModelReader> reader);
     virtual ~VolumeModelDirector() = 0;
 
-    virtual std::shared_ptr<ObjectScene> get();
+    virtual std::shared_ptr<Model> get();
 
 protected:
     virtual void create();

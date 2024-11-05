@@ -4,7 +4,7 @@
 class MoveModelCommand : public TransformCommand
 {
 protected:
-    // PtrObjectScene model;
+    // PtrModel model;
     size_t idModel;
     double dx, dy, dz;
 

@@ -4,7 +4,7 @@ VolumeModelDirector::VolumeModelDirector(std::shared_ptr<VolumeModelReader> read
 
 VolumeModelDirector::~VolumeModelDirector() = default;
 
-std::shared_ptr<ObjectScene> VolumeModelDirector::get() {
+std::shared_ptr<Model> VolumeModelDirector::get() {
     if (!builder->isBuilt()) {
         create();
     }

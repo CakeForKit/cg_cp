@@ -13,9 +13,9 @@ public:
     std::shared_ptr<Scene> getScene() noexcept;
     size_t getCountAllFaces() const noexcept;
 
-    void addModel(std::shared_ptr<ObjectScene> model) noexcept;
+    void addModel(std::shared_ptr<Model> model) noexcept;
     void removeModel(size_t ind);
-    std::shared_ptr<ObjectScene> getModel(size_t ind);
+    std::shared_ptr<Model> getModel(size_t ind);
 
     void addCamera() noexcept;
     void removeCamera(size_t ind);

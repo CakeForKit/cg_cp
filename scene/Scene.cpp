@@ -15,7 +15,7 @@ std::ostream& Scene::print(std::ostream& os) const noexcept {
     os << "-------------------\n";
     os << "Models: ----------\n";
     i = 0;
-    for (std::shared_ptr<ObjectScene> elem : models) {
+    for (std::shared_ptr<Model> elem : models) {
         os << i << ") " << *elem;
         ++i;
     }
@@ -25,7 +25,7 @@ std::ostream& Scene::print(std::ostream& os) const noexcept {
 }
 
 Scene::Scene() 
-: models(std::vector<std::shared_ptr<ObjectScene>>()), 
+: models(std::vector<std::shared_ptr<Model>>()), 
 cameras(std::vector<std::shared_ptr<Camera>>()), 
 lights(std::vector<std::shared_ptr<Light>>()) {
     std::shared_ptr<Camera> c = std::make_shared<Camera>();
@@ -36,7 +36,7 @@ lights(std::vector<std::shared_ptr<Light>>()) {
     lights.push_back(std::make_shared<AmbientLight>());
 }
 
-void Scene::addModel(std::shared_ptr<ObjectScene> model) noexcept {
+void Scene::addModel(std::shared_ptr<Model> model) noexcept {
     models.push_back(model);
 }
 
@@ -53,7 +53,7 @@ void Scene::removeModel(size_t ind) {
     models.erase(models.begin() + static_cast<long int>(ind));
 }
 
-std::shared_ptr<ObjectScene> Scene::getModel(size_t ind) {
+std::shared_ptr<Model> Scene::getModel(size_t ind) {
     size_t count_models = models.size();
     if (count_models == 0) {
         time_t curTime = time(NULL);
@@ -115,7 +115,7 @@ bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
     intersection_t closest_intersect, now_intersect;
     closest_intersect.distance = std::numeric_limits<double>::max();
 
-    for (std::shared_ptr<ObjectScene> model : models) {
+    for (std::shared_ptr<Model> model : models) {
         if (model->intersection(ray, now_intersect) && now_intersect.distance < closest_intersect.distance) {
             closest_intersect = now_intersect;
         }
@@ -136,7 +136,7 @@ bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
 
 size_t Scene::getCountAllFaces() const noexcept {
     size_t count = 0;
-    for (std::shared_ptr<ObjectScene> m: models) {
+    for (std::shared_ptr<Model> m: models) {
         count += m->getCountFaces();
     }
     return count;

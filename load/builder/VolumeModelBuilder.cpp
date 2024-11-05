@@ -46,6 +46,6 @@ bool VolumeModelBuilder::isBuilt() const noexcept {
     return part == 3;
 }
 
-std::shared_ptr<ObjectScene> VolumeModelBuilder::getModel() {
+std::shared_ptr<Model> VolumeModelBuilder::getModel() {
     return std::make_shared<VolumeModel>(model, material);
 }

@@ -22,7 +22,7 @@ bool AmbientLight::getPos(Point3 &p) const noexcept {
 
 
 PointLight::PointLight()
-: Light(Intensity(1, 1, 1)), pos(Point3(100, 0, 100)) {
+: Light(Intensity(1, 1, 1)), pos(Point3(100, 100, 100)) {
     type = typeLight::POINT;
 }
 

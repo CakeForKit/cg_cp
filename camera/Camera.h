@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ObjectScene.h"
+#include "Model.h"
 #include "Exceptions.h"
 #include "Ray.h"
 #include "Vector3.h"

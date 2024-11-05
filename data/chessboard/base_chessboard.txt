@@ -1,0 +1,9 @@
+# base of chessboard
+# r = 9 (of chess), delta = 1
+c 0 0 0
+v -80 -10 -80		# 1
+v -80 -10 80		# 2
+v 80 -10 -80		# 3
+v 80 -10 80		# 4
+f v1 v2 v3
+f v4 v2 v3

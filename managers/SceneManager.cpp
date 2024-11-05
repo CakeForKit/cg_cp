@@ -10,7 +10,7 @@ size_t SceneManager::getCountAllFaces() const noexcept {
     return scene->getCountAllFaces();
 }
 
-void SceneManager::addModel(std::shared_ptr<ObjectScene> model) noexcept {
+void SceneManager::addModel(std::shared_ptr<Model> model) noexcept {
     scene->addModel(model);
 }
 
@@ -18,7 +18,7 @@ void SceneManager::removeModel(size_t ind) {
     scene->removeModel(ind);
 }
 
-std::shared_ptr<ObjectScene> SceneManager::getModel(size_t ind) {
+std::shared_ptr<Model> SceneManager::getModel(size_t ind) {
     return scene->getModel(ind);
 }
 

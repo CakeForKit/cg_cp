@@ -10,7 +10,7 @@ void DrawManager::drawScene(std::shared_ptr<Scene> scene, std::shared_ptr<Camera
     //  TODO сделать CreateSolution для RayTracing
     std::shared_ptr<RayTracing> rayTracing = std::make_shared<StandardRayTracing>(scene, camera, drawer);
 
-    // std::cout << "DrawManager::drawScene    scene\n" << *scene << std::endl;
+    std::cout << "DrawManager::drawScene    scene\n" << *scene << std::endl;
     std::cout << "WxH = " << pixelsWidth << "x" << pixelsHeight << std::endl;
     rayTracing->render();
 }

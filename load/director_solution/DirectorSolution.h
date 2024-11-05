@@ -4,7 +4,8 @@
 #include <map>
 
 enum class idDirectorCreator {
-    TRIANGLES
+    TRIANGLES,
+    CHESSBOARD
 };
 
 class DirectorSolution

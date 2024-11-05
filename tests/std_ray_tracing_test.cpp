@@ -36,13 +36,13 @@ protected:
         {
             char filename[] = "/home/kathrine/cg_cp/tests/data_for_tests/test_model_4.txt";
             std::shared_ptr<Material> material = materialManager->getMaterial(idMaterial::BLUE);
-            PtrObjectScene model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
+            PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
             sceneManager->addModel(model);
         }
         {
             char filename[] = "/home/kathrine/cg_cp/tests/data_for_tests/pawn.txt";
             std::shared_ptr<Material> material = materialManager->getMaterial(idMaterial::RED);
-            PtrObjectScene model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
+            PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
             sceneManager->addModel(model);
         }
         

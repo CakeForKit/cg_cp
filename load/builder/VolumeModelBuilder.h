@@ -24,5 +24,5 @@ public:
 
     bool isBuilt() const noexcept;
 
-    std::shared_ptr<ObjectScene> getModel();
+    std::shared_ptr<Model> getModel();
 };

@@ -32,6 +32,7 @@ add_compile_options(
 include_directories(
     .
     camera
+    chessboard
     color
     commands
     commands/draw_commands
@@ -50,6 +51,7 @@ include_directories(
     load/director
     load/director/volume_model_director
     load/director/volume_model_director/triangles_model_director
+    load/director/chessboard_director
     load/director_solution
     load/reader
     load/reader/volume_model_reader
@@ -58,9 +60,9 @@ include_directories(
     material
     managers
     matrix4
-    object_scene
-    object_scene/model
-    object_scene/model/triangles
+    model
+    model/volume_model
+    model/volume_model/triangles
     ray
     ray_tracing
     ray_tracing/standard_ray_tracing
@@ -78,6 +80,9 @@ set(SRCS
     camera/Camera.h
     camera/Camera.cpp
 
+    chessboard/Chessboard.h
+    chessboard/Chessboard.cpp
+
     color/Color.h
     color/Color.cpp
 
@@ -91,6 +96,8 @@ set(SRCS
     commands/load_commands/BaseLoadCommand.cpp
     commands/load_commands/TrianglesModelLoadCommand.h
     commands/load_commands/TrianglesModelLoadCommand.cpp
+    commands/load_commands/TrianglesChessboardLoadCommand.h
+    commands/load_commands/TrianglesChessboardLoadCommand.cpp
     commands/transform_commands/TransformCommand.h
     commands/transform_commands/TransformCommand.cpp
     commands/transform_commands/MoveModelCommand.h
@@ -136,6 +143,8 @@ set(SRCS
     load/director/volume_model_director/VolumeModelDirector.cpp
     load/director/volume_model_director/triangles_model_director/TrianglesModelDirector.h
     load/director/volume_model_director/triangles_model_director/TrianglesModelDirector.cpp
+    load/director/chessboard_director/ChessboardDirector.cpp
+    load/director/chessboard_director/ChessboardDirector.h
 
     load/director_solution/DirectorCreator.h
     load/director_solution/DirectorCreator.cpp
@@ -173,19 +182,15 @@ set(SRCS
     matrix4/Matrix4.h
     matrix4/Matrix4.cpp
 
-    object_scene/ObjectScene.h 
-    object_scene/ObjectScene.cpp
-    object_scene/CompositeObjectScene.h
-    object_scene/CompositeObjectScene.cpp
+    model/Model.h 
+    model/Model.cpp
 
-    object_scene/model/BaseModel.h
-    object_scene/model/BaseModel.cpp
-    object_scene/model/VolumeModel.h
-    object_scene/model/VolumeModel.cpp
-    object_scene/model/VolumeModelImpl.h
-    object_scene/model/VolumeModelImpl.cpp
-    object_scene/model/triangles/TrianglesModel.h
-    object_scene/model/triangles/TrianglesModel.cpp
+    model/volume_model/VolumeModel.h
+    model/volume_model/VolumeModel.cpp
+    model/volume_model/VolumeModelImpl.h
+    model/volume_model/VolumeModelImpl.cpp
+    model/volume_model/triangles/TrianglesModel.h
+    model/volume_model/triangles/TrianglesModel.cpp
 
     ray/Ray.h
     ray/Ray.cpp

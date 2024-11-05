@@ -7,7 +7,15 @@
 
 enum class idMaterial {
     RED,
-    BLUE
+    BLUE,
+
+    GLOSSY_WHITE,
+    MATTE_WHITE,
+
+    GLOSSY_BLACK,
+    MATTE_BLACK,
+
+    WOOD
 };
 
 class MaterialSolution
