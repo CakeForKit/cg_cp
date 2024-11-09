@@ -11,7 +11,7 @@ const Intensity Light::getIntensity() const noexcept {
 
 
 AmbientLight::AmbientLight()
-: Light(Intensity(0.1, 0.1, 0.1)) {
+: Light(Intensity(1, 1, 1)) {
     type = typeLight::AMBIENT;
 }
 

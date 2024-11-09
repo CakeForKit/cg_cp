@@ -11,20 +11,24 @@ MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
                                                                             Intensity(0, 0, 0),
                                                                             5));
     materialSolution.registrate(idMaterial::GLOSSY_WHITE, 
-                                std::make_shared<Material>( Intensity(0.05, 0.05, 0.05),   // ka
-                                                            Intensity(0.55, 0.55, 0.55),   // kd
-                                                            Intensity(0.2, 0.2, 0.2),   // ks
-                                                            5)); 
+                                std::make_shared<Material>( Intensity(0.15, 0.15, 0.15),   // ka
+                                                            Intensity(0.5, 0.5, 0.5),   // kd
+                                                            Intensity(0.3, 0.3, 0.3),   // ks
+                                                            1)); 
     materialSolution.registrate(idMaterial::GLOSSY_BLACK, 
-                                std::make_shared<Material>( Intensity(0.05, 0.05, 0.05),   // ka
+                                std::make_shared<Material>( Intensity(0, 0, 0),   // ka
                                                             Intensity(0, 0, 0),   // kd
                                                             Intensity(0.2, 0.2, 0.2),   // ks
                                                             5));    
     materialSolution.registrate(idMaterial::WOOD, 
-                                std::make_shared<Material>( Intensity(0.05, 0.05, 0.05),   // ka
-                                                            Intensity(0.42, 0.24, 0.18),   // kd
+                                std::make_shared<Material>( Intensity(0.132, 0.096, 0.068),   // ka
+                                                            Intensity(0.66, 0.48, 0.34),   // kd
                                                             Intensity(0, 0, 0),   // ks
-                                                            3));   
+                                                            1));   
+                                                            // ( Intensity(0.07, 0.001, 0),   // ka
+                                                            // Intensity(0.18, 0.003, 0),   // kd
+                                                            // Intensity(0, 0, 0),   // ks
+                                                            // 1));   
                                                                                                                                                                 
 }
 

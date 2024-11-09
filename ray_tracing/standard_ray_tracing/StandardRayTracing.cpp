@@ -199,8 +199,9 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
         }
     }
     else {
-        // color = Intensity(0.5, 0.5, 0.5);
-        color = Intensity(0.93, 0.678, 0.678);
+        // color = Intensity(0, 0, 0);
+        color = Intensity(0.3, 0.3, 0.3);
+        // color = Intensity(0.93, 0.678, 0.678);
     }
     
     
