@@ -71,17 +71,18 @@ void StandardRayTracing::renderParallel(size_t countThreads) {
 }
 
 void StandardRayTracing::renderOneThread() {
+    std::cout << "\n\nStandardRayTracing::renderOneThread()\n\n";
     for (int j = 0; j < drawer->getImgHeight(); ++j) {
         for (int i = 0; i < drawer->getImgWidth(); ++i) {
             Ray ray = camera->createRay(i, j);
             
-            // Intensity intens;
-            // if (i == 117 && j == 283) {
-            //     intens = castRay(ray, 0, true);
-            // } else {
-            //     intens = castRay(ray);
-            // }
-            Intensity intens = castRay(ray);
+            Intensity intens;
+            if (i == 210 && j == 306) {
+                intens = castRay(ray, 0, true);
+            } else {
+                intens = castRay(ray);
+            }
+            // Intensity intens = castRay(ray);
             drawer->setPixelColor(i, j, Color(intens));
         }
     }
@@ -102,14 +103,9 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
 
     intersection_t intersect;
     if (scene->intersection(ray, intersect) && depth < maxDepth) {
-        
-        // // Выпускаем луч отражения
-        // Vector3 reflectVec = ray.getDirection().reflect(intersect.normal);
-        // Ray reflectRay(intersect.point + 1e-3 * intersect.normal, reflectVec);
-        // Intensity reflectIntensity = castRay(reflectRay, depth + 1);
-        // // Зеркальное отражение в глобальной модели освещения
-        // color += intersect.material->getKs() * reflectIntensity;
-
+        if (printing) {
+            std::cout << intersect << "\n";
+        }
 
         Point3 posLight;    // координаты ист света
         Vector3 L;          // век направленный на ист света из точки пересечения
@@ -117,13 +113,16 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
         Vector3 diff, spec;
         double dist_to_camera = distanceToCamera(intersect.point);
         for (Scene::iteratorLight it = scene->beginLight(); it != scene->endLight(); ++it) {
-
             if ((*it)->getType() == typeLight::POINT) {
                 // Диффузное отражение: kd * Il * (n*L)
-                
+
                 assert((*it)->getPos(posLight));
                 L = (posLight - intersect.point).normalized();  
 
+                if (fabs(intersect.normal.length()) < EPS) {
+                    std::cout << "inters = " << intersect << "\n";
+                    return Intensity(1, 0, 0);
+                }
                 if (!intersect.normal.isNormalized())
                     intersect.normal.normalize();
                 double nL = L.scalarProduct(intersect.normal);  // (n * L)

@@ -18,18 +18,18 @@ INSTANTIATE_TEST_SUITE_P(
 
 
 
-class TestRefract : public testing::TestWithParam<refract_data_t> {};
+// class TestRefract : public testing::TestWithParam<refract_data_t> {};
 
-TEST_P(TestRefract, Refract) {
-    refract_data_t tdata = GetParam();
+// TEST_P(TestRefract, Refract) {
+//     refract_data_t tdata = GetParam();
 
-    Vector3 vout = tdata.vin.refract(tdata.norm, tdata.refrIndFrom, tdata.refrIndTo);
-    // std::cout << "Vout = " << vout << "\n";
-    EXPECT_TRUE(vout == tdata.vout);
-}
+//     Vector3 vout = tdata.vin.refract(tdata.norm, tdata.refrIndFrom, tdata.refrIndTo);
+//     // std::cout << "Vout = " << vout << "\n";
+//     EXPECT_TRUE(vout == tdata.vout);
+// }
 
-INSTANTIATE_TEST_SUITE_P(
-    RefractTestSuite,
-    TestRefract,
-    testing::Values(refract_data[0], refract_data[1], refract_data[2])
-);
+// INSTANTIATE_TEST_SUITE_P(
+//     RefractTestSuite,
+//     TestRefract,
+//     testing::Values(refract_data[0], refract_data[1], refract_data[2])
+// );

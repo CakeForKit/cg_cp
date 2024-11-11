@@ -11,9 +11,9 @@ MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
                                                                             Intensity(0, 0, 0),
                                                                             5));
     materialSolution.registrate(idMaterial::GLOSSY_WHITE, 
-                                std::make_shared<Material>( Intensity(0.15, 0.15, 0.15),   // ka
-                                                            Intensity(0.5, 0.5, 0.5),   // kd
-                                                            Intensity(0.3, 0.3, 0.3),   // ks
+                                std::make_shared<Material>( Intensity(0.15, 0.15, 0.15),    // ka
+                                                            Intensity(0.6, 0.6, 0.6),       // kd
+                                                            Intensity(0.2, 0.2, 0.2),       // ks
                                                             1)); 
     materialSolution.registrate(idMaterial::GLOSSY_BLACK, 
                                 std::make_shared<Material>( Intensity(0, 0, 0),   // ka
@@ -21,8 +21,8 @@ MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
                                                             Intensity(0.2, 0.2, 0.2),   // ks
                                                             5));    
     materialSolution.registrate(idMaterial::WOOD, 
-                                std::make_shared<Material>( Intensity(0.132, 0.096, 0.068),   // ka
-                                                            Intensity(0.66, 0.48, 0.34),   // kd
+                                std::make_shared<Material>( Intensity(0.066, 0.048, 0.034),   // ka
+                                                            Intensity(0.66, 0.48, 0.34),   // (0.66, 0.48, 0.34) // kd
                                                             Intensity(0, 0, 0),   // ks
                                                             1));   
                                                             // ( Intensity(0.07, 0.001, 0),   // ka

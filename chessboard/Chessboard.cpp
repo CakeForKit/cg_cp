@@ -10,12 +10,30 @@ Chessboard::Chessboard(std::shared_ptr<Model> _black_cells,
 }
 
 bool Chessboard::intersection(const Ray &ray, intersection_t &intersect) const {
-    if (base->intersection(ray, intersect) || 
-        black_cells->intersection(ray, intersect) || 
-        white_cells->intersection(ray, intersect)) {
-        return true;
-    } 
-    return false;
+    intersection_t ibase, iblack, iwhite, iout; 
+    bool find = false;
+    if (base->intersection(ray, ibase)) {
+        iout = ibase;
+        find = true;
+    }
+    if (black_cells->intersection(ray, iblack)) {
+        if (!find || (find && iblack.distance < iout.distance)) {
+            iout = iblack;
+            find = true;
+        }
+    }
+    if (white_cells->intersection(ray, iwhite)) {
+        if (!find || (find && iwhite.distance < iout.distance)) {
+            iout = iblack;
+            find = true;
+        }
+    }
+    
+    if (find) {
+        intersect = iout;
+        std::cout << intersect << "\n";
+    }
+    return find;
 }
 
 void Chessboard::transform(const std::shared_ptr<TransformAction> action) {

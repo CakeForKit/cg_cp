@@ -112,21 +112,21 @@ Vector3 Vector3::reflect(Vector3 &norm) const {
     return vreflect;
 }
 
-Vector3 Vector3::refract(Vector3 &norm, double refrIndFrom, double refrIndexTo) const {
-    if (this->scalarProduct(norm) > 0)
-        norm = -norm;
+// Vector3 Vector3::refract(Vector3 &norm, double refrIndFrom, double refrIndexTo) const {
+//     if (this->scalarProduct(norm) > 0)
+//         norm = -norm;
 
-    double ratioRefrIndex = refrIndFrom / refrIndexTo;
-    double ratioRefrIndex2 = ratioRefrIndex * ratioRefrIndex;
-    double cosaL = -this->scalarProduct(norm) / this->length() / norm.length();
-    double cos2aT = 1 - ratioRefrIndex2 * (1 - cosaL * cosaL);
-    if (cos2aT < 0)
-        return Vector3(0, 0, 0);
+//     double ratioRefrIndex = refrIndFrom / refrIndexTo;
+//     double ratioRefrIndex2 = ratioRefrIndex * ratioRefrIndex;
+//     double cosaL = -this->scalarProduct(norm) / this->length() / norm.length();
+//     double cos2aT = 1 - ratioRefrIndex2 * (1 - cosaL * cosaL);
+//     if (cos2aT < 0)
+//         return Vector3(0, 0, 0);
 
-    Vector3 vrefract = ratioRefrIndex * (this->normalized()) + norm * (ratioRefrIndex * cosaL - sqrt(cos2aT));
-    vrefract.normalize();
-    return vrefract;
-}
+//     Vector3 vrefract = ratioRefrIndex * (this->normalized()) + norm * (ratioRefrIndex * cosaL - sqrt(cos2aT));
+//     vrefract.normalize();
+//     return vrefract;
+// }
 
 double Vector3::length()  const noexcept{
     return static_cast<double>(sqrt(coord[0] * coord[0] + coord[1] * coord[1] + coord[2] * coord[2]));

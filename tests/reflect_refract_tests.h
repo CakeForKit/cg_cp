@@ -37,35 +37,35 @@ const reflect_data_t reflect_data[] {
     }
 };
 
-struct refract_data_t {
-    Vector3 vin;
-    Vector3 norm;
-    Vector3 vout;
-    double refrIndFrom;
-    double refrIndTo;
-};
+// struct refract_data_t {
+//     Vector3 vin;
+//     Vector3 norm;
+//     Vector3 vout;
+//     double refrIndFrom;
+//     double refrIndTo;
+// };
 
-const refract_data_t refract_data[] {
-    {   // угол in == 30, угол out == 60, scalProduct(L, n) < 0
-        Vector3(10, 10 * sqrt(3), 0),
-        Vector3(0, 1, 0),
-        Vector3(10, 10 / sqrt(3), 0).normalized(),
-        sqrt(3),
-        1
-    },
-    {   // угол in == 30, угол out == 60, scalProduct(L, n) > 0
-        Vector3(10, 10 * sqrt(3), 0),
-        -Vector3(0, 1, 0),
-        Vector3(10, 10 / sqrt(3), 0).normalized(),
-        sqrt(3),
-        1
-    },
-    {   // угол in == 30, угол out == 90, scalProduct(L, n) < 0
-        Vector3(10, 10 * sqrt(3), 0),
-        Vector3(0, 1, 0),
-        Vector3(0, 0, 0),
-        1,
-        0.5
-    }
-};
+// const refract_data_t refract_data[] {
+//     {   // угол in == 30, угол out == 60, scalProduct(L, n) < 0
+//         Vector3(10, 10 * sqrt(3), 0),
+//         Vector3(0, 1, 0),
+//         Vector3(10, 10 / sqrt(3), 0).normalized(),
+//         sqrt(3),
+//         1
+//     },
+//     {   // угол in == 30, угол out == 60, scalProduct(L, n) > 0
+//         Vector3(10, 10 * sqrt(3), 0),
+//         -Vector3(0, 1, 0),
+//         Vector3(10, 10 / sqrt(3), 0).normalized(),
+//         sqrt(3),
+//         1
+//     },
+//     {   // угол in == 30, угол out == 90, scalProduct(L, n) < 0
+//         Vector3(10, 10 * sqrt(3), 0),
+//         Vector3(0, 1, 0),
+//         Vector3(0, 0, 0),
+//         1,
+//         0.5
+//     }
+// };
 

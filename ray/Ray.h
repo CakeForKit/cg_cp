@@ -20,6 +20,8 @@ public:
 
     Ray& operator=(const Ray &r) noexcept;
     Ray& operator=(Ray &&r) noexcept;
+
+    bool operator==(const Ray &r) const noexcept;
 };
 
 std::ostream& operator<<(std::ostream &os, const Ray &ray);

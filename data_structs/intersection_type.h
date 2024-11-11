@@ -8,6 +8,9 @@ struct intersection_t {
     double distance;    // Расстояние от начала луча до точки пересечения
     Vector3 normal;     // Нормаль к пересекаемой плоскости
     std::shared_ptr<Material> material;
+
+    intersection_t& operator=(const intersection_t &v) noexcept;
+    intersection_t& operator=(intersection_t &&v) noexcept;
 };
 
 std::ostream& operator<<(std::ostream &os, const intersection_t &interset);

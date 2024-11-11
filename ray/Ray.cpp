@@ -40,3 +40,6 @@ Ray& Ray::operator=(Ray &&r) noexcept {
     return *this;
 }
 
+bool Ray::operator==(const Ray &r) const noexcept {
+    return r.getDirection() == dir && r.getOrigin() == orig;
+}

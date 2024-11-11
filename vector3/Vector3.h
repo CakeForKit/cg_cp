@@ -37,7 +37,7 @@ public:
     Vector3 vectorProduct(const Vector3 &v) const noexcept;
 
     Vector3 reflect(Vector3 &norm) const;   // отражение
-    Vector3 refract(Vector3 &norm, double refrIndFrom, double refrIndexTo) const;   // преломление
+    // Vector3 refract(Vector3 &norm, double refrIndFrom, double refrIndexTo) const;   // преломление
     
     double length() const noexcept;
     void normalize();
