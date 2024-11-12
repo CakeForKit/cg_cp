@@ -1,12 +1,21 @@
 #pragma once
 
+#include "Exceptions.h"
+#include <fstream>
+#include <assert.h>
+
 class Reader 
 {
+protected:
+    const char *filename;
+    std::ifstream file;
 public:
-    virtual ~Reader() = 0;
+    Reader(const char *fname);
+    virtual ~Reader();
 
-    virtual void open() = 0;
-    virtual void close() = 0;
+    virtual void open();
+    virtual void close();
+    virtual bool isOpen();
 
-    virtual bool isOpen() = 0;
+    virtual void readData() = 0;
 };

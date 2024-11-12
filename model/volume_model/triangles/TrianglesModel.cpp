@@ -134,7 +134,6 @@ bool TrianglesModel::intersection(const Ray &ray, intersection_t &intersect) con
     intersect.point = ray(min_t_value);
     intersect.distance = min_t_value;
     intersect.normal = trIntersect->getNormal(ray);
-
     return true;
 }
 

@@ -12,7 +12,7 @@ void DrawManager::drawScene(std::shared_ptr<Scene> scene, std::shared_ptr<Camera
 
     // std::cout << "DrawManager::drawScene    scene\n" << *scene << std::endl;
     // std::cout << "WxH = " << pixelsWidth << "x" << pixelsHeight << std::endl;
-    rayTracing->render(0);
+    rayTracing->render();
 }
 
 // вычисляет разность времени в микросекундах

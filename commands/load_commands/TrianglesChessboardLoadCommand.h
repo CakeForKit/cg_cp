@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseLoadCommand.h"
+#include "Chessboard.h"
 
 class TrianglesChessboardLoadCommand : public BaseLoadCommand
 {

@@ -7,6 +7,8 @@ std::ostream& VolumeModel::print(std::ostream &os) const noexcept {
 VolumeModel::VolumeModel(std::shared_ptr<VolumeModelImpl> _impl, std::shared_ptr<Material> _material) 
 : impl(_impl), material(_material) {}
 
+bool VolumeModel::isComposite() const { return false; }
+
 container_vertices VolumeModel::getVertices() const noexcept {
     return impl->getVertices();
 }

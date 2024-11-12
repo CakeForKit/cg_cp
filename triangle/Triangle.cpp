@@ -139,11 +139,6 @@ Vector3 Triangle::getNormal(const Ray &ray) const noexcept {
     Vector3 e1 = *(points[1]) - *(points[0]);
     Vector3 e2 = *(points[2]) - *(points[0]);
     Vector3 normal = e1.vectorProduct(e2);
-    // if (fabs(normal.length()) < EPS) {
-    //     std::cout << "e1 = " << e1 << "\n";
-    //     std::cout << "e2 = " << e2 << "\n";
-    //     std::cout << "norm = " << normal << "\n";
-    // }
     normal.normalize();
 
     if (normal.scalarProduct(ray.getDirection()) > 0) {

@@ -107,6 +107,11 @@ Scene::iteratorLight Scene::endLight() const noexcept {
     return lights.end();
 }
 
+void Scene::setChessboard(std::shared_ptr<Chessboard> model) noexcept {
+    chessboard = model;
+    chessborad_set = true;
+}
+
 // std::shared_ptr<Light> Scene::getLight() noexcept {
 //     return light;
 // }
@@ -115,6 +120,8 @@ bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
     intersection_t closest_intersect, now_intersect;
     closest_intersect.distance = std::numeric_limits<double>::max();
 
+    if (chessborad_set)
+        chessboard->intersection(ray, closest_intersect);
     for (std::shared_ptr<Model> model : models) {
         if (model->intersection(ray, now_intersect) && now_intersect.distance < closest_intersect.distance) {
             closest_intersect = now_intersect;
@@ -132,6 +139,10 @@ bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
     // std::cout << "\t" << intersect << std::endl;
     
     return true;
+}
+
+void Scene::deleteAllModels() noexcept {
+    models.clear();
 }
 
 size_t Scene::getCountAllFaces() const noexcept {

@@ -7,11 +7,12 @@
 class VolumeModelReader : public Reader
 {
 public:
+    VolumeModelReader(const char *fname);
     virtual ~VolumeModelReader() = 0;
 
-    virtual void open() = 0;
-    virtual void close() = 0;
-    virtual bool isOpen() = 0;
+    // virtual void open() = 0;
+    // virtual void close() = 0;
+    // virtual bool isOpen() = 0;
 
     virtual void readData() = 0;
     // virtual std::vector<psPoint3> getVertices() = 0;

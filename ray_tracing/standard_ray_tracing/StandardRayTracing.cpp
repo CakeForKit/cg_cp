@@ -76,13 +76,13 @@ void StandardRayTracing::renderOneThread() {
         for (int i = 0; i < drawer->getImgWidth(); ++i) {
             Ray ray = camera->createRay(i, j);
             
-            Intensity intens;
-            if (i == 210 && j == 306) {
-                intens = castRay(ray, 0, true);
-            } else {
-                intens = castRay(ray);
-            }
-            // Intensity intens = castRay(ray);
+            // Intensity intens;
+            // if (i == 210 && j == 306) {
+            //     intens = castRay(ray, 0, true);
+            // } else {
+            //     intens = castRay(ray);
+            // }
+            Intensity intens = castRay(ray);
             drawer->setPixelColor(i, j, Color(intens));
         }
     }
@@ -120,7 +120,7 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
                 L = (posLight - intersect.point).normalized();  
 
                 if (fabs(intersect.normal.length()) < EPS) {
-                    std::cout << "inters = " << intersect << "\n";
+                    // std::cout << "inters = " << intersect << "\n";
                     return Intensity(1, 0, 0);
                 }
                 if (!intersect.normal.isNormalized())

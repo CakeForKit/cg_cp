@@ -1,5 +1,6 @@
 # base of chessboard
-# r = 9 (of chess), delta = 1
+# r = 9 (of chess), delta_r = 1
+# board_plus = 10, height_chessboard = 20
 c 0 0 0
 v -80 0 -80		# 1
 v -80 0 80		# 2

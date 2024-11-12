@@ -9,6 +9,8 @@ Chessboard::Chessboard(std::shared_ptr<Model> _black_cells,
     base = _base;
 }
 
+bool Chessboard::isComposite() const { return true; }
+
 bool Chessboard::intersection(const Ray &ray, intersection_t &intersect) const {
     intersection_t ibase, iblack, iwhite, iout; 
     bool find = false;
@@ -24,14 +26,13 @@ bool Chessboard::intersection(const Ray &ray, intersection_t &intersect) const {
     }
     if (white_cells->intersection(ray, iwhite)) {
         if (!find || (find && iwhite.distance < iout.distance)) {
-            iout = iblack;
+            iout = iwhite;
             find = true;
         }
     }
     
     if (find) {
         intersect = iout;
-        std::cout << intersect << "\n";
     }
     return find;
 }

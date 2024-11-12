@@ -12,6 +12,15 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     connect(ui.rotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
     connect(ui.rotateOXCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOXCameraBtnClicked);
     connect(ui.rotateOYCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOYCameraBtnClicked);
+
+    // загрузка шахматной доски
+    char fnB[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
+    char fnW[] = "/home/kathrine/cg_cp/data/chessboard/white_cells_chessboard.txt";
+    char fnBase[] = "/home/kathrine/cg_cp/data/chessboard/base_chessboard.txt";
+    TrianglesChessboardLoadCommand chessboard_load_command(&(fnB[0]), idMaterial::GLOSSY_BLACK,
+                                                            &(fnW[0]), idMaterial::GLOSSY_WHITE,
+                                                            &(fnBase[0]), idMaterial::WOOD);
+    facade.execute(chessboard_load_command);
 }
 
 void MainWindow::onLoadModelBtnClicked() {
@@ -23,23 +32,7 @@ void MainWindow::onLoadModelBtnClicked() {
 
     // char filename[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
     // TrianglesModelLoadCommand load_command(&(filename[0]), STEP_OF_REVOLVING, idMaterial::GLOSSY_WHITE);
-    // facade.execute(load_command);
-
-    char fnB[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
-    char fnW[] = "/home/kathrine/cg_cp/data/chessboard/white_cells_chessboard.txt";
-    char fnBase[] = "/home/kathrine/cg_cp/data/chessboard/base_chessboard.txt";
-
-    // TrianglesModelLoadCommand load_command2(&(fnB[0]), STEP_OF_REVOLVING, idMaterial::GLOSSY_WHITE);
-    // facade.execute(load_command2);
-    // TrianglesModelLoadCommand load_command3(&(fnW[0]), STEP_OF_REVOLVING, idMaterial::GLOSSY_BLACK);
-    // facade.execute(load_command3);
-    // TrianglesModelLoadCommand load_command4(&(fnBase[0]), STEP_OF_REVOLVING, idMaterial::WOOD);
-    // facade.execute(load_command4);
-
-    TrianglesChessboardLoadCommand chessboard_load_command(&(fnB[0]), idMaterial::GLOSSY_BLACK,
-                                                            &(fnW[0]), idMaterial::GLOSSY_WHITE,
-                                                            &(fnBase[0]), idMaterial::WOOD);
-    facade.execute(chessboard_load_command);
+    // facade.execute(load_command);    
 
     // size_t stepOfRevolving = 6;
     // std::vector<MoveModelCommand> moveCmds;

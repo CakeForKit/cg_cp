@@ -2,36 +2,32 @@
 
 
 TrianglesModelReader::TrianglesModelReader(const char *fname, size_t _stepOfRevolving) 
-: filename(fname), stepOfRevolving(_stepOfRevolving), 
+: VolumeModelReader(fname), stepOfRevolving(_stepOfRevolving), 
 vertices(std::vector<psPoint3>()), triangles(std::vector<std::vector<psPoint3>>()), center(Point3()) {
     assert(stepOfRevolving >= 3);
     alphaStep = 2 * M_PI / static_cast<int>(stepOfRevolving);
 }
 
-TrianglesModelReader::~TrianglesModelReader() {
-    if (isOpen()) {
-        close();
-    }
-}
+TrianglesModelReader::~TrianglesModelReader() {}
 
-void TrianglesModelReader::open() {
-    if (isOpen()) {
-        return;
-    }
-    file.open(filename);
-    if (!file) {
-        time_t curTime = time(NULL);
-        throw NoFileReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
-    }
-}
+// void TrianglesModelReader::open() {
+//     if (isOpen()) {
+//         return;
+//     }
+//     file.open(filename);
+//     if (!file) {
+//         time_t curTime = time(NULL);
+//         throw NoFileReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+//     }
+// }
 
-void TrianglesModelReader::close() {
-    if (!isOpen())
-        return;
-    file.close();
-}
+// void TrianglesModelReader::close() {
+//     if (!isOpen())
+//         return;
+//     file.close();
+// }
 
-bool TrianglesModelReader::isOpen() { return file.is_open(); }
+// bool TrianglesModelReader::isOpen() { return file.is_open(); }
 
 void TrianglesModelReader::readVectex() {
     float x, y, z;

@@ -138,9 +138,11 @@ void Vector3::normalize() {
         time_t curTime = time(NULL);
         throw NormalizeDivZeroException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
-
-    for (size_t i = 0; i < 3; ++i) 
-        coord[i] /= len;
+    if (fabs(len - 1) < EPS)
+        return;
+    else
+        for (size_t i = 0; i < 3; ++i) 
+            coord[i] /= len;
 }
 
 bool Vector3::isNormalized() const noexcept {

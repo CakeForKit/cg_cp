@@ -16,10 +16,10 @@ void TrianglesChessboardLoadCommand::execute() {
     std::shared_ptr<Material> matBlackCells = materialManager->getMaterial(id_matBlackCells);
     std::shared_ptr<Material> matWhiteCells = materialManager->getMaterial(id_matWhiteCells);
     std::shared_ptr<Material> matBase = materialManager->getMaterial(id_matBase);
-    PtrModel model = loadManager->loadChessboardFromFile(id_reader, id_director, 
+    std::shared_ptr<Model> model = loadManager->loadChessboardFromFile(id_reader, id_director, 
                                                         fnBlackCells, matBlackCells,
                                                         fnWhiteCells, matWhiteCells, 
                                                         fnBase, matBase);
-
-    sceneManager->addModel(model);
+    std::shared_ptr<Chessboard> chessboard = std::dynamic_pointer_cast<Chessboard>(model);
+    sceneManager->setChessboard(chessboard);
 }

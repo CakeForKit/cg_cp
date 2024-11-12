@@ -1,0 +1,2 @@
+r_chess 9
+delta_r 1

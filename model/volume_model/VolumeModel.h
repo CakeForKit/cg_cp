@@ -15,6 +15,8 @@ protected:
 public:
     explicit VolumeModel(std::shared_ptr<VolumeModelImpl> _impl, std::shared_ptr<Material> _material);
 
+    virtual bool isComposite() const override;
+
     void setMaterial(std::shared_ptr<Material> _material) noexcept;
     std::shared_ptr<Material> getMaterial() const noexcept;
     

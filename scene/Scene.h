@@ -3,6 +3,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "Light.h"
+#include "Chessboard.h"
 
 class Scene
 {
@@ -11,6 +12,8 @@ public:
 
 protected:
     std::vector<std::shared_ptr<Model>> models;
+    std::shared_ptr<Chessboard> chessboard;
+    bool chessborad_set = false;
     std::vector<std::shared_ptr<Camera>> cameras;
     std::shared_ptr<Camera> activeCamera; // указатель на камеру через которую сейчас смотрим. Один из элементов cameras
     std::vector<std::shared_ptr<Light>> lights;
@@ -20,6 +23,7 @@ public:
 
     void addModel(std::shared_ptr<Model> model) noexcept;
     void removeModel(size_t ind);
+    void deleteAllModels() noexcept;
     std::shared_ptr<Model> getModel(size_t ind);
 
     void addCamera() noexcept;
@@ -32,9 +36,10 @@ public:
     iteratorLight endLight() const noexcept;
     // std::shared_ptr<Light> getLight() noexcept;
 
+    void setChessboard(std::shared_ptr<Chessboard> model) noexcept;
+
     bool intersection(const Ray &ray, intersection_t &intersect) const;
 
-    // TODO clearScene()
     size_t getCountAllFaces() const noexcept;
     std::ostream& print(std::ostream& os) const noexcept;
 };

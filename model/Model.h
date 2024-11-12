@@ -20,7 +20,7 @@ public:
     using const_iterator = VectorPtrModel::const_iterator;
 
     virtual ~Model() = default;
-    // virtual bool isComposite() const;
+    virtual bool isComposite() const = 0;
     // virtual bool add(std::initializer_list<PtrModel> comp);
     // virtual bool remove(const iterator& it);
     // virtual iterator begin() const;

@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseException.h"
 
-#pragma region Build
+#pragma region Gui
 
 class NoSelectedModelException: public GuiException
 {
@@ -62,6 +62,15 @@ public:
     EndReadException(const char *time, const char *filename,
                   const size_t line, const char *class_name,
                   const char *method_name, const char *info = "Unexpected end of file") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
+class DataNotFullReadException: public ReadException
+{
+public:
+    DataNotFullReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Can read not enough data") noexcept:
                   ReadException(time, filename, line, class_name, method_name, info){};
 };
 

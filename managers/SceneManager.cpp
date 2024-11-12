@@ -33,3 +33,7 @@ void SceneManager::removeCamera(size_t ind) {
 std::shared_ptr<Camera> SceneManager::getActiveCamera() {
     return scene->getActiveCamera();
 }
+
+void SceneManager::setChessboard(std::shared_ptr<Chessboard> model) noexcept {
+    scene->setChessboard(model);
+}
