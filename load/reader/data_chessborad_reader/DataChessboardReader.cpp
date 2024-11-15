@@ -45,5 +45,9 @@ void DataChessboardReader::readData() {
 }
 
 Point3 DataChessboardReader::getCenterOfCell00() {
-
+    double wcell = (r_chess + delta_r) * 2;
+    double x, z;
+    x = wcell / 2 - wcell * 4;
+    z = x;
+    return Point3(x, 0, z);
 }
