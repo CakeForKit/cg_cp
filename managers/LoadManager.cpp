@@ -39,7 +39,8 @@ std::shared_ptr<Model> LoadManager::loadChessboardFromFile(idReaderCreator id_re
                                                     const char *fnWhiteCells,
                                                     std::shared_ptr<Material> matWhiteCells, 
                                                     const char *fnBase,
-                                                    std::shared_ptr<Material> matBase) {
+                                                    std::shared_ptr<Material> matBase,
+                                                    const char *fnDataCellsReader) {
     std::shared_ptr<BaseReaderCreator> readerCreator(readerSolution.create(id_reader));
     std::shared_ptr<TrianglesModelReaderCreator_t> trinaglesModelReaderCreator  = std::dynamic_pointer_cast<TrianglesModelReaderCreator_t>(readerCreator);
     assert(trinaglesModelReaderCreator != nullptr);
@@ -60,6 +61,6 @@ std::shared_ptr<Model> LoadManager::loadChessboardFromFile(idReaderCreator id_re
     std::shared_ptr<ChessboardDirectorCreator_t> chessboardDirectorCreator = std::dynamic_pointer_cast<ChessboardDirectorCreator_t>(cbDirectorCreator);
     assert(chessboardDirectorCreator != nullptr);
 
-    std::shared_ptr<ChessboardDirector> chessboard_director = chessboardDirectorCreator->createDirector(bc_director, wc_director, b_director);
+    std::shared_ptr<ChessboardDirector> chessboard_director = chessboardDirectorCreator->createDirector(bc_director, wc_director, b_director, fnDataCellsReader);
     return chessboard_director->get();
 }

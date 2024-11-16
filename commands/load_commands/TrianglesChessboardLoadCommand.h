@@ -6,7 +6,7 @@
 class TrianglesChessboardLoadCommand : public BaseLoadCommand
 {
 protected:
-    const char *fnBlackCells, *fnWhiteCells, *fnBase;
+    const char *fnBlackCells, *fnWhiteCells, *fnBase, *fnDataCellsReader;
     idMaterial id_matBlackCells, id_matWhiteCells, id_matBase;
 
 public:
@@ -16,7 +16,8 @@ public:
                             const char *_fnWhiteCells,
                             idMaterial _id_matWhiteCells, 
                             const char *_fnBase,
-                            idMaterial _id_matBase);
+                            idMaterial _id_matBase,
+                            const char *_fnDataCellsReader);
 
     virtual void execute();
 };

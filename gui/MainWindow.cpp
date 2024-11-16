@@ -17,9 +17,11 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     char fnB[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
     char fnW[] = "/home/kathrine/cg_cp/data/chessboard/white_cells_chessboard.txt";
     char fnBase[] = "/home/kathrine/cg_cp/data/chessboard/base_chessboard.txt";
+    char fnDataCells[] = "/home/kathrine/cg_cp/data/chessboard/positions_cells.txt";
     TrianglesChessboardLoadCommand chessboard_load_command(&(fnB[0]), idMaterial::GLOSSY_BLACK,
                                                             &(fnW[0]), idMaterial::GLOSSY_WHITE,
-                                                            &(fnBase[0]), idMaterial::WOOD);
+                                                            &(fnBase[0]), idMaterial::WOOD,
+                                                            fnDataCells);
     facade.execute(chessboard_load_command);
 }
 

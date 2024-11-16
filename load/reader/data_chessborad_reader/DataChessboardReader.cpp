@@ -7,6 +7,7 @@ void DataChessboardReader::readData() {
     assert(isOpen());
     file.seekg(0, std::ios::beg);   // переместить курсор на начало файла
 
+    std::cout << "DataChessboardReader::readData:\n";
     int count_data_read = 0;
     std::string type;
     while (!file.eof()) {
@@ -18,6 +19,7 @@ void DataChessboardReader::readData() {
         }
         if (type == "r_chess") {
             file >> r_chess;
+            std::cout << "r_chess = " << r_chess << "\n";
             if (!file) {
                 time_t curTime = time(NULL);
                 throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
@@ -25,6 +27,7 @@ void DataChessboardReader::readData() {
             ++count_data_read;
         } else if (type == "delta_r") {
             file >> delta_r;
+            std::cout << "delta_r = " << delta_r << "\n";
             if (!file) {
                 time_t curTime = time(NULL);
                 throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
@@ -42,12 +45,13 @@ void DataChessboardReader::readData() {
         time_t curTime = time(NULL);
         throw DataNotFullReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
+    dataRead = true;
 }
 
-Point3 DataChessboardReader::getCenterOfCell00() {
-    double wcell = (r_chess + delta_r) * 2;
-    double x, z;
-    x = wcell / 2 - wcell * 4;
-    z = x;
-    return Point3(x, 0, z);
+double DataChessboardReader::getCellWidth() {
+    if (!dataRead) {
+        time_t curTime = time(NULL);
+        throw DataNotReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+    return (r_chess + delta_r) * 2;
 }

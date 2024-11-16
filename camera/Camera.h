@@ -5,9 +5,10 @@
 #include "Ray.h"
 #include "Vector3.h"
 
-const size_t VIEWPORT_HEIGHT = 300;
-const size_t FOCAL_LENGHT = 300;
-const double light_dist_to_camera = 200;
+const size_t VIEWPORT_HEIGHT = 600;
+const size_t FOCAL_LENGHT = 600;
+const double light_dist_to_camera = 500;
+// (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS)
 
 class Camera
 {

@@ -31,4 +31,5 @@ using ChessboardDirectorCreator_t = DirectorCreator<Director,
                                                     ChessboardDirector, 
                                                     std::shared_ptr<VolumeModelDirector>,
                                                     std::shared_ptr<VolumeModelDirector>,
-                                                    std::shared_ptr<VolumeModelDirector>>;
+                                                    std::shared_ptr<VolumeModelDirector>,
+                                                    const char *>;

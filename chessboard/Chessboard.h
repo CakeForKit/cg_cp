@@ -13,13 +13,15 @@ private:
 public:
     Chessboard(std::shared_ptr<Model> _black_cells, 
                 std::shared_ptr<Model> _white_cells, 
-                std::shared_ptr<Model> _base);
+                std::shared_ptr<Model> _base,
+                double cell_width);
 
     virtual bool isComposite() const;
 
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;
     virtual void transform(const std::shared_ptr<TransformAction> action) override;
     virtual Point3 getCenter() noexcept override;
+    Point3 getPosCell(size_t i, size_t j) const;
 
     virtual size_t getCountFaces() const noexcept override;
     virtual std::ostream& print(std::ostream &os) const noexcept override;

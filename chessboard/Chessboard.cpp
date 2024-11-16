@@ -3,10 +3,23 @@
 
 Chessboard::Chessboard(std::shared_ptr<Model> _black_cells, 
                         std::shared_ptr<Model> _white_cells, 
-                        std::shared_ptr<Model> _base) {
+                        std::shared_ptr<Model> _base,
+                        double cell_width) {
     black_cells = _black_cells;
     white_cells = _white_cells;
     base = _base;
+
+    double cw2 = cell_width / 2; // 16
+    double x0, z0;
+    x0 = z0 = - 4 * cell_width;
+    for (int i = 0; i < 8; ++i)
+        for (int j = 0; j < 8; ++j) {
+            posCells[i][j] = Point3(x0 + cw2 * (i + 1), 0, z0 + cw2 * (j + 1));
+        }
+    
+    // std::cout << "Chessboard \n";
+    // std::cout << "cw = " << cell_width << "\n";
+    // std::cout << posCells[0][0] << " " << posCells[0][1] << "\n\n\n";
 }
 
 bool Chessboard::isComposite() const { return true; }
@@ -43,6 +56,14 @@ void Chessboard::transform(const std::shared_ptr<TransformAction> action) {
 
 Point3 Chessboard::getCenter() noexcept {
     return Point3(0, 0, 0);
+}
+
+Point3 Chessboard::getPosCell(size_t i, size_t j) const {
+    if (i >= 8 || j >= 8) {
+        time_t curTime = time(NULL);
+        throw IndexException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+    return posCells[i][j];
 }
 
 size_t Chessboard::getCountFaces() const noexcept {

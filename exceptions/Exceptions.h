@@ -74,6 +74,15 @@ public:
                   ReadException(time, filename, line, class_name, method_name, info){};
 };
 
+class DataNotReadException: public ReadException
+{
+public:
+    DataNotReadException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Data was not read") noexcept:
+                  ReadException(time, filename, line, class_name, method_name, info){};
+};
+
 #pragma region end
 
 #pragma region Scene

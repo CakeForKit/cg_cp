@@ -26,5 +26,6 @@ public:
                                                     const char *fnWhiteCells,
                                                     std::shared_ptr<Material> matWhiteCells, 
                                                     const char *fnBase,
-                                                    std::shared_ptr<Material> matBase);
+                                                    std::shared_ptr<Material> matBase,
+                                                    const char *fnDataCellsReader);
 };

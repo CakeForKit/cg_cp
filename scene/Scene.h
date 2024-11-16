@@ -37,6 +37,7 @@ public:
     // std::shared_ptr<Light> getLight() noexcept;
 
     void setChessboard(std::shared_ptr<Chessboard> model) noexcept;
+    Point3 getPosCell(size_t i, size_t j) const;
 
     bool intersection(const Ray &ray, intersection_t &intersect) const;
 

@@ -56,6 +56,7 @@ include_directories(
     load/reader
     load/reader/volume_model_reader
     load/reader/volume_model_reader/triangles_model_reader/
+    load/reader/data_chessborad_reader
     load/reader_solution
     material
     managers
@@ -157,6 +158,8 @@ set(SRCS
     load/reader/volume_model_reader/VolumeModelReader.cpp
     load/reader/volume_model_reader/triangles_model_reader/TrianglesModelReader.h
     load/reader/volume_model_reader/triangles_model_reader/TrianglesModelReader.cpp
+    load/reader/data_chessborad_reader/DataChessboardReader.h
+    load/reader/data_chessborad_reader/DataChessboardReader.cpp
 
     load/reader_solution/ReaderCreator.h
     load/reader_solution/ReaderCreator.cpp
