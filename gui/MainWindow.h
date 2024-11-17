@@ -10,6 +10,7 @@
 #include "TrianglesModelLoadCommand.h"
 #include "TrianglesChessboardLoadCommand.h"
 #include "MoveModelCommand.h"
+#include "MoveCellModelCommand.h"
 #include "RotateModelCommand.h"
 #include "RotateCameraCommand.h"
 #include "MaterialSolution.h"

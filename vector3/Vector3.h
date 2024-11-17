@@ -5,7 +5,9 @@
 #include "BaseException.h"
 #include "config.h"
 
-
+enum class Axis {
+    OX, OY, OZ
+};
 
 class Vector3
 {

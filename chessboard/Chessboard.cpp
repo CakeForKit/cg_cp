@@ -11,10 +11,11 @@ Chessboard::Chessboard(std::shared_ptr<Model> _black_cells,
 
     double cw2 = cell_width / 2; // 16
     double x0, z0;
-    x0 = z0 = - 4 * cell_width;
+    x0 = - 4 * cell_width + cw2;
+    z0 = 4 * cell_width - cw2;
     for (int i = 0; i < 8; ++i)
         for (int j = 0; j < 8; ++j) {
-            posCells[i][j] = Point3(x0 + cw2 * (i + 1), 0, z0 + cw2 * (j + 1));
+            posCells[i][j] = Point3(x0 + cell_width * i, 0, z0 - cell_width * j);
         }
     
     // std::cout << "Chessboard \n";

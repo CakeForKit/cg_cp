@@ -5,12 +5,6 @@ void TransformManager::moveModel(PtrModel model, double dx, double dy, double dz
     model->transform(action);
 }
 
-void TransformManager::moveModel(PtrModel model, size_t i, size_t j) {
-    if (i >= 8 || j >= 8) {
-        time_t curTime = time(NULL);
-        throw IndexException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
-    }
-}
 
 void TransformManager::rotateModel(PtrModel model, float angle) {
     std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
@@ -20,8 +14,10 @@ void TransformManager::rotateModel(PtrModel model, float angle) {
 }
 
 void TransformManager::rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis) {
+    // Vector3 axisVec = camera->getAxis(axis);
     std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
                                                                             camera->getCameraPos(), 
                                                                             axis);
     camera->transform(action);
+    std::cout << "TransformManager::rotateCamera\n" << *camera << "\n"; 
 }

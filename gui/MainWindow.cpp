@@ -8,10 +8,10 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
 
     connect(ui.loadModelBtn, &QPushButton::clicked, this, &MainWindow::onLoadModelBtnClicked);
     connect(ui.drawBtn, &QPushButton::clicked, this, &MainWindow::onDrawBtnClicked);
-    connect(ui.moveModelBtn, &QPushButton::clicked, this, &MainWindow::onMoveModelBtnClicked);
-    connect(ui.rotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
-    connect(ui.rotateOXCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOXCameraBtnClicked);
-    connect(ui.rotateOYCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOYCameraBtnClicked);
+    // connect(ui.moveModelBtn, &QPushButton::clicked, this, &MainWindow::onMoveModelBtnClicked);
+    // connect(ui.rotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
+    // connect(ui.rotateOXCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOXCameraBtnClicked);
+    // connect(ui.rotateOYCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOYCameraBtnClicked);
 
     // загрузка шахматной доски
     char fnB[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
@@ -28,9 +28,18 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
 void MainWindow::onLoadModelBtnClicked() {
     std::cout << "onLoadModelBtnClicked: ------------" <<std::endl;
 
-    char filename1[] = "/home/kathrine/cg_cp/data/test_model_4.txt";
-    TrianglesModelLoadCommand load_command1(&(filename1[0]), STEP_OF_REVOLVING, idMaterial::BLUE);
+    char filename1[] = "/home/kathrine/cg_cp/data/pawn.txt";
+    TrianglesModelLoadCommand load_command1(&(filename1[0]), STEP_OF_REVOLVING, idMaterial::MATTE_WHITE);
     facade.execute(load_command1);
+    MoveCellModelCommand move_cmd(0, 3, 3);
+    facade.execute(move_cmd);
+
+    char filename2[] = "/home/kathrine/cg_cp/data/rook.txt";
+    TrianglesModelLoadCommand load_command2(&(filename2[0]), STEP_OF_REVOLVING, idMaterial::MATTE_WHITE);
+    facade.execute(load_command2);
+    MoveCellModelCommand move_cmd2(1, 4, 3);
+    facade.execute(move_cmd2);
+    
 
     // char filename[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
     // TrianglesModelLoadCommand load_command(&(filename[0]), STEP_OF_REVOLVING, idMaterial::GLOSSY_WHITE);
@@ -78,11 +87,11 @@ void MainWindow::onMoveModelBtnClicked() {
     try {
         size_t id = getSelectedModelId();
 
-        double dx = ui.dx_dsp->value();
-        double dy = ui.dy_dsp->value();
-        double dz = ui.dz_dsp->value();
+        // double dx = ui.dx_dsp->value();
+        // double dy = ui.dy_dsp->value();
+        // double dz = ui.dz_dsp->value();
 
-        MoveModelCommand command(id, dx, dy, dz);
+        MoveModelCommand command(id, 10, 10, 10);
         facade.execute(command);
     } catch (NoSelectedModelException &ex) {
         QMessageBox::critical(nullptr, "Ошибка", "Нужно выбрать модель.");
@@ -103,7 +112,7 @@ void MainWindow::onRotateModelBtnClicked() {
     try {
         size_t id = getSelectedModelId();
 
-        float angle_grad = static_cast<float>(ui.angle_dsp->value());
+        float angle_grad = static_cast<float>(30);
 
         RotateModelCommand command(id, angle_grad);
         facade.execute(command);
@@ -122,7 +131,7 @@ void MainWindow::onRotateModelBtnClicked() {
 
 void MainWindow::rotateCamera(Axis axis) {
     try {
-        float angle_grad = static_cast<float>(ui.angle_dsp->value());
+        float angle_grad = static_cast<float>(30);
 
         RotateCameraCommand command(angle_grad, axis);
         facade.execute(command);

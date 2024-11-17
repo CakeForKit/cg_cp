@@ -35,6 +35,7 @@ include_directories(
     chessboard
     color
     commands
+    commands/camera_commands
     commands/draw_commands
     commands/load_commands
     commands/transform_commands
@@ -60,6 +61,7 @@ include_directories(
     load/reader_solution
     material
     managers
+    maps
     matrix4
     model
     model/volume_model
@@ -89,6 +91,8 @@ set(SRCS
 
     commands/BaseCommand.h
     commands/BaseCommand.cpp
+    commands/camera_commands/RotateCameraCommand.h
+    commands/camera_commands/RotateCameraCommand.cpp
     commands/draw_commands/BaseDrawCommand.h
     commands/draw_commands/BaseDrawCommand.cpp 
     commands/draw_commands/QtDrawCommand.h
@@ -99,14 +103,14 @@ set(SRCS
     commands/load_commands/TrianglesModelLoadCommand.cpp
     commands/load_commands/TrianglesChessboardLoadCommand.h
     commands/load_commands/TrianglesChessboardLoadCommand.cpp
+    commands/transform_commands/MoveCellModelCommand.cpp
+    commands/transform_commands/MoveCellModelCommand.h
     commands/transform_commands/TransformCommand.h
     commands/transform_commands/TransformCommand.cpp
     commands/transform_commands/MoveModelCommand.h
     commands/transform_commands/MoveModelCommand.cpp
     commands/transform_commands/RotateModelCommand.h
     commands/transform_commands/RotateModelCommand.cpp
-    commands/transform_commands/RotateCameraCommand.h
-    commands/transform_commands/RotateCameraCommand.cpp
     commands/time_commands/DrawTimeCommand.h
     commands/time_commands/DrawTimeCommand.cpp
 
@@ -181,6 +185,9 @@ set(SRCS
     managers/MaterialManager.cpp
     managers/TransformManager.h
     managers/TransformManager.cpp
+
+    maps/dataMaps.h
+    maps/dataMaps.cpp
 
     matrix4/Matrix4.h
     matrix4/Matrix4.cpp

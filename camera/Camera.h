@@ -6,8 +6,8 @@
 #include "Vector3.h"
 
 const size_t VIEWPORT_HEIGHT = 600;
-const size_t FOCAL_LENGHT = 600;
-const double light_dist_to_camera = 500;
+const size_t FOCAL_LENGHT = 500;
+const double light_dist_to_camera = FOCAL_LENGHT * 0.9;
 // (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS)
 
 class Camera
@@ -43,6 +43,7 @@ public:
 
     void updateUpperLeftPixelCoord();
     Vector3 getCameraPos() const noexcept;
+    Vector3 getAxis(Axis axis) const noexcept;
 
     /// @brief Создает луч направленный в пиксель (xp, yp)
     /// @param ip коорд пикселя по X

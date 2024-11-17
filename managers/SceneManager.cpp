@@ -37,3 +37,7 @@ std::shared_ptr<Camera> SceneManager::getActiveCamera() {
 void SceneManager::setChessboard(std::shared_ptr<Chessboard> model) noexcept {
     scene->setChessboard(model);
 }
+
+Point3 SceneManager::getPosCell(size_t i, size_t j) const {
+    return scene->getPosCell(i, j);
+}

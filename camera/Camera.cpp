@@ -8,21 +8,20 @@ std::ostream& Camera::print(std::ostream& os) const noexcept {
     os << "Camera: \n";
     os << "\tright=" << right << ", up=" << up << ", dir=" << dir <<std::endl;
     os << "\tcameraPos = " << cameraPos << std::endl;
-    os << "\tfocalLength = " << focalLength << std::endl;
-    os << "\tviewportWidth = " << viewportWidth << std::endl;
-    os << "\tviewportHeight = " << viewportHeight << std::endl;
-    os << "\tcountPixWidth = " << _countPixWidth << std::endl;
-    os << "\tcountPixHeight = " << _countPixHeight << std::endl;
-    os << "\twidth_of_one_pixel = " << width_of_one_pixel << "\n\theight_of_one_pixel = " << height_of_one_pixel << std::endl;
-    os << "\tupperLeftPixelCoord = " << upperLeftPixelCoord << std::endl;
+    // os << "\tfocalLength = " << focalLength << std::endl;
+    // os << "\tviewportWidth = " << viewportWidth << std::endl;
+    // os << "\tviewportHeight = " << viewportHeight << std::endl;
+    // os << "\tcountPixWidth = " << _countPixWidth << std::endl;
+    // os << "\tcountPixHeight = " << _countPixHeight << std::endl;
+    // os << "\twidth_of_one_pixel = " << width_of_one_pixel << "\n\theight_of_one_pixel = " << height_of_one_pixel << std::endl;
+    // os << "\tupperLeftPixelCoord = " << upperLeftPixelCoord << std::endl;
     return os;
 }
 
 Camera::Camera() noexcept 
 : right(1, 0, 0), up(0, 1, 0), dir(0, 0, 1), 
 focalLength(FOCAL_LENGHT), cameraPos(0, 0, focalLength), viewportHeight(VIEWPORT_HEIGHT) {
-    // this->setCountPixelsViewport(COUNT_PIXELS_WIDTH, COUNT_PIXELS_HEIGHT);
-    // updateUpperLeftPixelCoord();
+    std::cout << "Camera()" << *this << "\n";
 }
 
 void Camera::setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight) {
@@ -86,6 +85,18 @@ Vector3 Camera::getCameraPos() const noexcept {
     return cameraPos;
 }
 
+Vector3 Camera::getAxis(Axis axis) const noexcept {
+    if (axis == Axis::OY) {
+        return up;
+    } else if (axis == Axis::OX) {
+        return right;
+    } else if (axis == Axis::OZ) {
+        return dir;
+    } else {
+        assert(false);
+    }
+}
+
 Ray Camera::createRay(int ip, int jp) {
     if (!countPixelsViewportSet) {
         time_t curTime = time(NULL);
@@ -100,7 +111,13 @@ Ray Camera::createRay(int ip, int jp) {
 
 void Camera::transform(const std::shared_ptr<TransformAction> action) {
     cameraPos = action->transform(cameraPos);
-    right = action->transform(right);
-    up = action->transform(up);
-    dir = action->transform(dir);
+    dir = cameraPos - Vector3(0, 0, 0);
+    dir.normalize();
+    right = -dir.vectorProduct(Vector3(0, 1, 0));
+    right.normalize();
+    up = dir.vectorProduct(right);
+    up.normalize();
+    // right = action->transform(right);
+    // up = action->transform(up);
+    // dir = action->transform(dir);
 }

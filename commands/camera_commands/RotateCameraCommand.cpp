@@ -5,10 +5,7 @@ RotateCameraCommand::RotateCameraCommand(float _angle_grad, Axis _axis)
 
 void RotateCameraCommand::execute() {
     std::shared_ptr<Camera> camera = sceneManager->getActiveCamera();
-
-    std::cout << "\nBefore camera:\n" << *camera;
-
+    // std::cout << "\nBefore camera:\n" << *camera;
     transformManager->rotateCamera(camera, angle_grad, axis);
-
     // std::cout << "Rotated camera:\n" << *camera;
 }

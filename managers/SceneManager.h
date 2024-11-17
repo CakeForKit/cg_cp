@@ -22,4 +22,5 @@ public:
     std::shared_ptr<Camera> getActiveCamera();
 
     void setChessboard(std::shared_ptr<Chessboard> model) noexcept;
+    Point3 getPosCell(size_t i, size_t j) const;
 };

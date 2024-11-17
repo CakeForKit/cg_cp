@@ -1,8 +1,8 @@
 #pragma once
 
-#include "TransformCommand.h"
+#include "BaseCommand.h"
 
-class RotateCameraCommand : public TransformCommand
+class RotateCameraCommand : public BaseCommand
 {
 protected:
     float angle_grad;

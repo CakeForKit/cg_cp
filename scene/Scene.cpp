@@ -112,6 +112,10 @@ void Scene::setChessboard(std::shared_ptr<Chessboard> model) noexcept {
     chessborad_set = true;
 }
 
+Point3 Scene::getPosCell(size_t i, size_t j) const {
+    return chessboard->getPosCell(i, j);
+}
+
 // std::shared_ptr<Light> Scene::getLight() noexcept {
 //     return light;
 // }

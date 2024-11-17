@@ -1,6 +1,6 @@
 #include "TransformAction.h"
 
-TransformAction::TransformAction() : mat(Matrix4()) {}
+TransformAction::TransformAction() : mat(Matrix4(glm::mat4(1.0f))) {}
 
 void TransformAction::transform(psPoint3 p) const {
     *p = mat * (*p); 
