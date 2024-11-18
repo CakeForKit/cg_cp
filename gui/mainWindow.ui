@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>478</width>
-    <height>549</height>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,16 +90,33 @@
                <widget class="QComboBox" name="ModelsComboBox"/>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
-                 <widget class="QLabel" name="label_2">
+                 <widget class="QLabel" name="label_3">
                   <property name="text">
-                   <string>Цвет</string>
+                   <string>Позиция</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="ColorsComboBox_3"/>
+                 <widget class="QComboBox" name="iPosComboBox"/>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="jPosComboBox"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>Сторона</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="ColorsComboBox"/>
                 </item>
                </layout>
               </item>
@@ -125,15 +142,15 @@
               <item>
                <widget class="QLabel" name="label_21">
                 <property name="text">
-                 <string>Цветовой набор</string>
+                 <string>Изменение цветового набора</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="MaterialsComboBox_2"/>
+               <widget class="QComboBox" name="MaterialsPairsComboBox"/>
               </item>
               <item>
-               <widget class="QPushButton" name="ChangeColorBtn_2">
+               <widget class="QPushButton" name="ChangeMaterialBtn">
                 <property name="text">
                  <string>Изменить</string>
                 </property>
@@ -359,7 +376,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QDoubleSpinBox" name="angle_dsp_6">
+                    <widget class="QDoubleSpinBox" name="AngleCameraDSB">
                      <property name="font">
                       <font>
                        <pointsize>12</pointsize>
@@ -390,7 +407,7 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_18">
                    <item>
-                    <widget class="QPushButton" name="pushButton_12">
+                    <widget class="QPushButton" name="LeftCameraBtn">
                      <property name="text">
                       <string>Влево</string>
                      </property>
@@ -399,14 +416,14 @@
                    <item>
                     <layout class="QVBoxLayout" name="verticalLayout_24">
                      <item>
-                      <widget class="QPushButton" name="pushButton_13">
+                      <widget class="QPushButton" name="UpCameraBtn">
                        <property name="text">
                         <string>Вверх</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QPushButton" name="pushButton_14">
+                      <widget class="QPushButton" name="DownCameraBtn">
                        <property name="text">
                         <string>Вниз</string>
                        </property>
@@ -415,7 +432,7 @@
                     </layout>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_15">
+                    <widget class="QPushButton" name="RightCameraBtn">
                      <property name="text">
                       <string>Вправо</string>
                      </property>
@@ -490,6 +507,24 @@
         </widget>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_33">
+           <property name="text">
+            <string>Цветовой набор:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="PairMaterialLabel">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QLabel" name="label_32">
          <property name="text">
           <string>Фигуры на сцене</string>
@@ -497,7 +532,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableView" name="tableView_2"/>
+        <widget class="QTableWidget" name="TableWidget">
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="drawBtn">

@@ -1,8 +1,15 @@
 #include "Model.h"
 
-
 std::ostream& operator<<(std::ostream &os, const Model &model) {
     return model.print(os);
+}
+
+void Model::setTypeChess(typeChess t) noexcept {
+    type = t;
+}
+
+typeChess Model::getTypeChess() const noexcept {
+    return type;
 }
 
 // bool Model::isComposite() const

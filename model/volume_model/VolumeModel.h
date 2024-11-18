@@ -21,11 +21,11 @@ public:
     std::shared_ptr<Material> getMaterial() const noexcept;
     
     container_vertices getVertices() const noexcept;
-    Point3 getCenter() const noexcept;
 
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;
     virtual void transform(const std::shared_ptr<TransformAction> action) override;
     virtual Point3 getCenter() noexcept override;
+    virtual Color getColor() const override;
 
     virtual size_t getCountFaces() const noexcept override;
     virtual std::ostream& print(std::ostream &os) const noexcept  override;

@@ -1,6 +1,6 @@
 #include "ReaderSolution.h"
 
-bool ReaderSolution::registrate(idReaderCreator id, std::shared_ptr<BaseReaderCreator> creator) {
+bool ReaderSolution::registrateMaterial(idReaderCreator id, std::shared_ptr<BaseReaderCreator> creator) {
     return map.insert(mapCreators::value_type(id, creator)).second;
 }
 

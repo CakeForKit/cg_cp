@@ -38,6 +38,8 @@ include_directories(
     commands/camera_commands
     commands/draw_commands
     commands/load_commands
+    commands/material_commands
+    commands/scene_commands
     commands/transform_commands
     commands/time_commands
     data_structs
@@ -103,6 +105,10 @@ set(SRCS
     commands/load_commands/TrianglesModelLoadCommand.cpp
     commands/load_commands/TrianglesChessboardLoadCommand.h
     commands/load_commands/TrianglesChessboardLoadCommand.cpp
+    commands/material_commands/SetActiveMaterialCommand.h
+    commands/material_commands/SetActiveMaterialCommand.cpp
+    commands/scene_commands/FillModelsTableCommand.h
+    commands/scene_commands/FillModelsTableCommand.cpp
     commands/transform_commands/MoveCellModelCommand.cpp
     commands/transform_commands/MoveCellModelCommand.h
     commands/transform_commands/TransformCommand.h

@@ -21,6 +21,7 @@ public:
     virtual bool intersection(const Ray &ray, intersection_t &intersect) const override;
     virtual void transform(const std::shared_ptr<TransformAction> action) override;
     virtual Point3 getCenter() noexcept override;
+    virtual Color getColor() const override;
     Point3 getPosCell(size_t i, size_t j) const;
 
     virtual size_t getCountFaces() const noexcept override;

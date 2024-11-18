@@ -1,14 +1,24 @@
 #include "TrianglesModelLoadCommand.h"
 
-TrianglesModelLoadCommand::TrianglesModelLoadCommand(const char *_filename, size_t _stepOfRevolving, idMaterial _id_material) 
-: filename(_filename), stepOfRevolving(_stepOfRevolving), id_material(_id_material) { 
+// TrianglesModelLoadCommand::TrianglesModelLoadCommand(const char *_filename, size_t _stepOfRevolving, idMaterial _id_material) 
+// : filename(_filename), stepOfRevolving(_stepOfRevolving), id_material(_id_material) { 
+//     id_director = idDirectorCreator::TRIANGLES; 
+//     id_reader = idReaderCreator::TRIANGLES;
+// }
+
+TrianglesModelLoadCommand::TrianglesModelLoadCommand(const char *_filename, 
+                                                    size_t _stepOfRevolving, 
+                                                    indPair _indPairMaterial,
+                                                    typeChess _type) 
+: filename(_filename), stepOfRevolving(_stepOfRevolving), indPairMaterial(_indPairMaterial), type(_type) { 
     id_director = idDirectorCreator::TRIANGLES; 
     id_reader = idReaderCreator::TRIANGLES;
 }
     
 void TrianglesModelLoadCommand::execute() {
-    std::shared_ptr<Material> material = materialManager->getMaterial(id_material);
+    // std::shared_ptr<Material> material = materialManager->getMaterial(id_material);
+    std::shared_ptr<Material> material = materialManager->getActiveMaterial(indPairMaterial);
     PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
-
+    model->setTypeChess(type);
     sceneManager->addModel(model);
 }

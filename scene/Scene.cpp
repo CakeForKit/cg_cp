@@ -34,10 +34,26 @@ lights(std::vector<std::shared_ptr<Light>>()) {
 
     lights.push_back(std::make_shared<PointLight>());
     lights.push_back(std::make_shared<AmbientLight>());
+
+    for (size_t i = 0; i < 8; ++i)
+        for (size_t j = 0; j < 8; ++j)
+            posModels[i][j] = -1;
 }
 
-void Scene::addModel(std::shared_ptr<Model> model) noexcept {
+void Scene::addModel(std::shared_ptr<Model> model) {
     models.push_back(model);
+    bool find_pos = false;
+    for (size_t i = 0; !find_pos && i < 8; ++i)
+        for (size_t j = 0; !find_pos && j < 8; ++j) {
+            if (posModels[i][j] < 0) {
+                posModels[i][j] = static_cast<int>(models.size() - 1);
+                find_pos = true;
+            }
+        }
+    if (!find_pos) {
+        time_t curTime = time(NULL);
+        throw NoPlaceSceneException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
 }
 
 void Scene::removeModel(size_t ind) {
@@ -64,6 +80,10 @@ std::shared_ptr<Model> Scene::getModel(size_t ind) {
         throw IndexException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
     return models[ind];
+}
+
+size_t Scene::countModels() const noexcept {
+    return models.size();
 }
 
 void Scene::addCamera() noexcept {
@@ -112,8 +132,38 @@ void Scene::setChessboard(std::shared_ptr<Chessboard> model) noexcept {
     chessborad_set = true;
 }
 
+Point3 Scene::changeModelPos(size_t idModel, size_t i, size_t j) {
+    int id = static_cast<int>(idModel);
+    if (posModels[i][j] == id)
+        return Point3(0, 0, 0);
+
+    if (posModels[i][j] >= 0) {
+        time_t curTime = time(NULL);
+        throw BusyPosSceneException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+    PtrModel model = getModel(idModel);
+    posModels[i][j] = id;
+
+    Point3 newposCell, oldposCell, diff;
+    newposCell = getPosCell(i, j);
+    oldposCell  = model->getCenter();
+    diff = newposCell - oldposCell;
+    return diff;
+}
+
 Point3 Scene::getPosCell(size_t i, size_t j) const {
     return chessboard->getPosCell(i, j);
+}
+
+bool Scene::getPosModel(size_t idModel, size_t &ni, size_t &nj) {
+    for (size_t i = 0; i < 8; ++i)
+        for (size_t j = 0; j < 8; ++j)
+            if (posModels[i][j] == static_cast<int>(idModel)) {
+                ni = i;
+                nj = j;
+                return true;
+            }
+    return false;
 }
 
 // std::shared_ptr<Light> Scene::getLight() noexcept {

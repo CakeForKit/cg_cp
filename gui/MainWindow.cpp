@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     ui.layoutForGraphicsView->addWidget(graphicsView);
 
     connect(ui.loadModelBtn, &QPushButton::clicked, this, &MainWindow::onLoadModelBtnClicked);
+    connect(ui.ChangeMaterialBtn, &QPushButton::clicked, this, &MainWindow::onChangeMaterialBtnClicked);
     connect(ui.drawBtn, &QPushButton::clicked, this, &MainWindow::onDrawBtnClicked);
     // connect(ui.moveModelBtn, &QPushButton::clicked, this, &MainWindow::onMoveModelBtnClicked);
     // connect(ui.rotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
@@ -23,22 +24,47 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
                                                             &(fnBase[0]), idMaterial::WOOD,
                                                             fnDataCells);
     facade.execute(chessboard_load_command);
+
+    // загрузка данных о фигурах 
+    dataMaps.fillModelsComboBox(ui.ModelsComboBox);
+    // загрузка позиций
+    dataMaps.fill_iPosComboBox(ui.iPosComboBox);
+    dataMaps.fill_jPosComboBox(ui.jPosComboBox);
+    // загрузка данный о наборах материалов
+    dataMaps.fill_MaterialsComboBox(ui.MaterialsPairsComboBox);
+    dataMaps.fill_ColorsComboBox(ui.ColorsComboBox);
+
+    onChangeMaterialBtnClicked();
+    updateModelsTable();
+}
+
+void MainWindow::updateModelsTable() {
+    FillModelsTableCommand cmd(ui.TableWidget);
+    facade.execute(cmd);
 }
 
 void MainWindow::onLoadModelBtnClicked() {
     std::cout << "onLoadModelBtnClicked: ------------" <<std::endl;
 
-    char filename1[] = "/home/kathrine/cg_cp/data/pawn.txt";
-    TrianglesModelLoadCommand load_command1(&(filename1[0]), STEP_OF_REVOLVING, idMaterial::MATTE_WHITE);
+    typeChess type = static_cast<typeChess>(ui.ModelsComboBox->currentIndex());
+    const char *filename = dataMaps.getFilename(type);
+    indPair p = static_cast<indPair>(ui.ColorsComboBox->currentIndex());
+    TrianglesModelLoadCommand load_command1(filename, STEP_OF_REVOLVING, p, type);
     facade.execute(load_command1);
-    MoveCellModelCommand move_cmd(0, 3, 3);
+
+    size_t i, j;
+    i = static_cast<size_t>(ui.iPosComboBox->currentIndex());
+    j = static_cast<size_t>(ui.jPosComboBox->currentIndex());
+    MoveCellModelCommand move_cmd(0, i, j);
     facade.execute(move_cmd);
 
-    char filename2[] = "/home/kathrine/cg_cp/data/rook.txt";
-    TrianglesModelLoadCommand load_command2(&(filename2[0]), STEP_OF_REVOLVING, idMaterial::MATTE_WHITE);
-    facade.execute(load_command2);
-    MoveCellModelCommand move_cmd2(1, 4, 3);
-    facade.execute(move_cmd2);
+    updateModelsTable();
+
+    // char filename2[] = "/home/kathrine/cg_cp/data/rook.txt";
+    // TrianglesModelLoadCommand load_command2(&(filename2[0]), STEP_OF_REVOLVING, idMaterial::MATTE_WHITE);
+    // facade.execute(load_command2);
+    // MoveCellModelCommand move_cmd2(1, 4, 3);
+    // facade.execute(move_cmd2);
     
 
     // char filename[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
@@ -60,6 +86,19 @@ void MainWindow::onLoadModelBtnClicked() {
     // }
 
     std::cout << "endonLoadModelBtnClicked: ---------" <<std::endl;
+}
+
+void MainWindow::onChangeMaterialBtnClicked() {
+    std::cout << "onChangeMaterialBtnClicked: ------------" <<std::endl;
+
+    idPairMaterial idPair = static_cast<idPairMaterial>(ui.MaterialsPairsComboBox->currentIndex());
+    SetActiveMaterialCommand change_material_cmd(idPair);
+    facade.execute(change_material_cmd);
+
+    ui.PairMaterialLabel->setText(ui.MaterialsPairsComboBox->currentText());
+
+    updateModelsTable();
+    std::cout << "endChangeMaterialBtnClicked: ------------" <<std::endl;
 }
 
 void MainWindow::onDrawBtnClicked() {
@@ -101,6 +140,7 @@ void MainWindow::onMoveModelBtnClicked() {
         exit(EXIT_FAILURE);
     }
 
+    updateModelsTable();
     std::cout << "end MoveModelBtnClicked ---------" <<std::endl;
 
     onDrawBtnClicked();
@@ -124,6 +164,7 @@ void MainWindow::onRotateModelBtnClicked() {
         exit(EXIT_FAILURE);
     }
 
+    updateModelsTable();
     std::cout << "end RotateModelBtnClicked ---------" <<std::endl;
 
     onDrawBtnClicked();
@@ -169,7 +210,7 @@ void MainWindow::measureRenderTime() {
     moveCmds.push_back(MoveModelCommand(3, 0, 50, 0));
     moveCmds.push_back(MoveModelCommand(4, 0, -50, 0));
     for (size_t i = 0; i < 5; ++i) {
-        TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, idMaterial::RED);
+        TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, indPair::WHITE, typeChess::PAWN);
         facade.execute(load_command);
         facade.execute(moveCmds[i]);
         std::cout << "CountAllFaces = " << facade.getCountFacesOnScene() << "\n";

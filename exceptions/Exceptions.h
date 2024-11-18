@@ -1,6 +1,10 @@
 #pragma once
 #include "BaseException.h"
 
+// time_t curTime = time(NULL);
+// throw NormalizeDivZeroException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+
+
 #pragma region Gui
 
 class NoSelectedModelException: public GuiException
@@ -102,6 +106,24 @@ public:
     NoModelsSceneException(const char *time, const char *filename,
                   const size_t line, const char *class_name,
                   const char *method_name, const char *info = "There are no models left on the scene") noexcept:
+                  SceneException(time, filename, line, class_name, method_name, info){};
+};
+
+class NoPlaceSceneException: public SceneException
+{
+public:
+    NoPlaceSceneException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "There are to many models on the scene") noexcept:
+                  SceneException(time, filename, line, class_name, method_name, info){};
+};
+
+class BusyPosSceneException: public SceneException
+{
+public:
+    BusyPosSceneException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "There is already a figure in this place") noexcept:
                   SceneException(time, filename, line, class_name, method_name, info){};
 };
 

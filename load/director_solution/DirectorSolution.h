@@ -16,7 +16,7 @@ private:
     mapCreators map;
 
 public:
-    bool registrate(idDirectorCreator id, std::shared_ptr<BaseDirectorCreator> creator);
+    bool registrateMaterial(idDirectorCreator id, std::shared_ptr<BaseDirectorCreator> creator);
     bool checkId(idDirectorCreator id) const noexcept;
 
     std::shared_ptr<BaseDirectorCreator> create(idDirectorCreator id);

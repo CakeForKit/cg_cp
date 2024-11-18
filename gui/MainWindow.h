@@ -15,6 +15,9 @@
 #include "RotateCameraCommand.h"
 #include "MaterialSolution.h"
 #include "DrawTimeCommand.h"
+#include "SetActiveMaterialCommand.h"
+#include "FillModelsTableCommand.h"
+#include "dataMaps.h"
 
 class MyQGraphicsView : public QGraphicsView
 {
@@ -46,9 +49,11 @@ private:
     Ui::MainWindow ui;
     MyQGraphicsView *graphicsView;
     FacadeScene facade;
+    DataMaps dataMaps;
 
 private slots:
     void onLoadModelBtnClicked();
+    void onChangeMaterialBtnClicked();
     void onDrawBtnClicked();
     void onMoveModelBtnClicked();
     void onRotateModelBtnClicked();
@@ -57,6 +62,8 @@ private slots:
 
 private:
     size_t getSelectedModelId() const;
+    // const char *getModelFilename(typeChess type_chess);
+    void updateModelsTable();
 
     void rotateCamera(Axis axis);
 

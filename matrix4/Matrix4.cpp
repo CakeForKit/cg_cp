@@ -1,12 +1,12 @@
 #include "Matrix4.h"
 
 std::ostream& Matrix4::print(std::ostream &os) const noexcept {
-    std::cout << "Mat4:\n";
+    os << "Mat4:\n";
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            std::cout << mat[i][j] << " ";
+            os << mat[i][j] << " ";
         }
-        std::cout << "\n";
+        os << "\n";
     }
     return os;
 }

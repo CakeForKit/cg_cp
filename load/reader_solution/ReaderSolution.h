@@ -16,7 +16,7 @@ private:
     mapCreators map;
 
 public:
-    bool registrate(idReaderCreator id, std::shared_ptr<BaseReaderCreator> creator);
+    bool registrateMaterial(idReaderCreator id, std::shared_ptr<BaseReaderCreator> creator);
     bool checkId(idReaderCreator id) const noexcept;
 
     std::shared_ptr<BaseReaderCreator> create(idReaderCreator id);

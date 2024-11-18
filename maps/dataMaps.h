@@ -1,17 +1,32 @@
 #pragma once
 
 #include <iostream>
-#include <map>
 #include <QComboBox>
 
-enum class typeChess {
-    PAWN,
-    ROOK
-};
+#include "MaterialSolution.h"
+#include "Model.h"
 
-std::map<typeChess, std::string> chessMap {
-    {typeChess::PAWN, "/home/kathrine/cg_cp/data/pawn.txt"},
-    {typeChess::ROOK, "/home/kathrine/cg_cp/data/rook.txt"}
-};
 
-void fillModelsComboBox(QComboBox *cb);
+class DataMaps 
+{
+private:
+    // struct chess_t {
+    //     const char *text;
+    //     const char *filename;
+    // };
+    std::map<typeChess, const char *> chessMap;
+
+    std::map<idPairMaterial, const char *> pairMaterialsMap;
+    std::map<indPair, const char *> pairColorsMap;
+
+public:
+    DataMaps();
+    void fillModelsComboBox(QComboBox *cb);
+    void fill_iPosComboBox(QComboBox *cb);
+    void fill_jPosComboBox(QComboBox *cb);
+    void fill_MaterialsComboBox(QComboBox *cb);
+    void fill_ColorsComboBox(QComboBox *cb);
+
+    const char *getFilename(typeChess index);
+
+};

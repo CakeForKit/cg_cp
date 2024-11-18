@@ -1,6 +1,6 @@
 #include "DirectorSolution.h"
 
-bool DirectorSolution::registrate(idDirectorCreator id, std::shared_ptr<BaseDirectorCreator> creator) {
+bool DirectorSolution::registrateMaterial(idDirectorCreator id, std::shared_ptr<BaseDirectorCreator> creator) {
     return map.insert(mapCreators::value_type(id, creator)).second;
 }
 

@@ -59,6 +59,10 @@ Point3 Chessboard::getCenter() noexcept {
     return Point3(0, 0, 0);
 }
 
+Color Chessboard::getColor() const {
+    return base->getColor();
+}
+
 Point3 Chessboard::getPosCell(size_t i, size_t j) const {
     if (i >= 8 || j >= 8) {
         time_t curTime = time(NULL);

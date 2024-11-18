@@ -3,11 +3,11 @@
 
 LoadManager::LoadManager() {
     bool rv;
-    rv = readerSolution.registrate(idReaderCreator::TRIANGLES, std::make_shared<TrianglesModelReaderCreator_t>());
+    rv = readerSolution.registrateMaterial(idReaderCreator::TRIANGLES, std::make_shared<TrianglesModelReaderCreator_t>());
     assert(rv);
-    rv = directorSolution.registrate(idDirectorCreator::TRIANGLES, std::make_shared<TrianglesModelDirectorCreator_t>());
+    rv = directorSolution.registrateMaterial(idDirectorCreator::TRIANGLES, std::make_shared<TrianglesModelDirectorCreator_t>());
     assert(rv);
-    rv = directorSolution.registrate(idDirectorCreator::CHESSBOARD, std::make_shared<ChessboardDirectorCreator_t>());
+    rv = directorSolution.registrateMaterial(idDirectorCreator::CHESSBOARD, std::make_shared<ChessboardDirectorCreator_t>());
     assert(rv);
 }
 

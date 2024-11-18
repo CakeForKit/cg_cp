@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Scene.h"
+#include <QTableWidget>
+#include <QStringList>
+#include <QTableWidgetItem>
+#include <QObject>
 
 class SceneManager
 {
@@ -22,5 +26,8 @@ public:
     std::shared_ptr<Camera> getActiveCamera();
 
     void setChessboard(std::shared_ptr<Chessboard> model) noexcept;
-    Point3 getPosCell(size_t i, size_t j) const;
+    Point3 changeModelPos(size_t idModel, size_t i, size_t j);
+    // Point3 getPosCell(size_t i, size_t j) const;
+
+    void writeDataToTable(QTableWidget *tab) const noexcept;
 };
