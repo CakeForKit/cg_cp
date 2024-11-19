@@ -111,7 +111,8 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
         Vector3 L;          // век направленный на ист света из точки пересечения
         intersection_t tmpIntersect;
         Vector3 diff, spec;
-        double dist_to_camera = distanceToCamera(intersect.point);
+        // double dist_to_camera = distanceToCamera(intersect.point);
+        double ddist;
         for (Scene::iteratorLight it = scene->beginLight(); it != scene->endLight(); ++it) {
             if ((*it)->getType() == typeLight::POINT) {
                 // Диффузное отражение: kd * Il * (n*L)
@@ -155,13 +156,20 @@ Intensity StandardRayTracing::castRay(Ray &ray, const size_t depth, bool printin
                         std::cout << "spec = " << spec << "\n\n";
                     }
 
-                    
-                    color += (diff + spec) * (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS);  
+                    // ddist = dist_to_camera / light_dist_to_camera + EPS;
+                    ddist = (posLight - intersect.point).length() / (posLight.length() + EPS);
+                    if (ddist > 1.0)
+                        ddist = 1;
+                    else if (ddist < 0.4)
+                        ddist = 0.4;
+                    // std::cout << "ddist = " << ddist << "\n";
+                    // std::cout << intersect.distance << " / " << (posLight - intersect.point).length() << " ddist = " << ddist << "\n";
+                    color += (diff + spec) * (*it)->getIntensity() / ddist;  
 
                     if (printing) {
                         std::cout << "diff + spec: \n";
-                        std::cout << "I_l = " << (*it)->getIntensity() << ", dist_to_camera = " << dist_to_camera << "\n";
-                        std::cout << "+color = " << (diff + spec) * (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS) << "\n\n";
+                        // std::cout << "I_l = " << (*it)->getIntensity() << ", dist_to_camera = " << dist_to_camera << "\n";
+                        // std::cout << "+color = " << (diff + spec) * (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS) << "\n\n";
                     }
                 }
 

@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     dataMaps.fill_MaterialsComboBox(ui.MaterialsPairsComboBox);
     dataMaps.fill_ColorsComboBox(ui.ColorsComboBox);
 
-    ui.TableWidget->horizontalHeader()->setStretchLastSection(true);
+    // ui.TableWidget->horizontalHeader()->setStretchLastSection(true);
     ui.TableWidget->resizeColumnsToContents();
 
     onChangeMaterialBtnClicked();

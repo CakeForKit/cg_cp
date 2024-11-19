@@ -7,7 +7,7 @@
 
 const size_t VIEWPORT_HEIGHT = 600;
 const size_t FOCAL_LENGHT = 500;
-const double light_dist_to_camera = FOCAL_LENGHT * 0.9;
+// const double light_dist_to_camera = FOCAL_LENGHT * 0.9;
 // (*it)->getIntensity() / (dist_to_camera / light_dist_to_camera + EPS)
 
 class Camera
