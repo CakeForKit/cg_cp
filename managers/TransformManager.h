@@ -11,6 +11,6 @@ public:
     void moveModel(PtrModel model, double dx, double dy, double dz);
     void rotateModel(PtrModel model, float angle);
 
-    // void moveCamera(std::shared_ptr<Camera> camera, double dx, double dy, double dz)
+    void moveCamera(std::shared_ptr<Camera> camera, double length);
     void rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis);
 };

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>478</width>
-    <height>565</height>
+    <height>554</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>350</width>
+        <width>400</width>
         <height>16777215</height>
        </size>
       </property>
@@ -45,7 +45,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="CreateTab_2">
           <attribute name="title">
@@ -82,7 +82,7 @@
               <item>
                <widget class="QLabel" name="label_20">
                 <property name="text">
-                 <string>Загрузка модели</string>
+                 <string>Загрузка фигуры</string>
                 </property>
                </widget>
               </item>
@@ -203,6 +203,21 @@
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_19">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_14">
                 <item>
@@ -213,7 +228,29 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="ModelsComboBox_4"/>
+                 <widget class="QLabel" name="label_35">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>30</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>id=</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="AllModelsComboBox"/>
                 </item>
                </layout>
               </item>
@@ -235,30 +272,23 @@
                  </item>
                  <item>
                   <layout class="QGridLayout" name="gridLayout_3">
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="label_24">
-                     <property name="text">
-                      <string>С позиции</string>
-                     </property>
-                    </widget>
+                   <item row="0" column="2">
+                    <widget class="QComboBox" name="MoveTo_jPosComboBox"/>
                    </item>
-                   <item row="1" column="0">
+                   <item row="0" column="1">
+                    <widget class="QComboBox" name="MoveTo_iPosComboBox"/>
+                   </item>
+                   <item row="0" column="0">
                     <widget class="QLabel" name="label_25">
                      <property name="text">
                       <string>На позицию</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1">
-                    <widget class="QLineEdit" name="lineEdit_3"/>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="lineEdit_4"/>
-                   </item>
                   </layout>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_10">
+                  <widget class="QPushButton" name="MoveModelBtn">
                    <property name="text">
                     <string>Переместить</string>
                    </property>
@@ -293,7 +323,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QDoubleSpinBox" name="angle_dsp_5">
+                    <widget class="QDoubleSpinBox" name="AngleModelDSP">
                      <property name="font">
                       <font>
                        <pointsize>12</pointsize>
@@ -322,9 +352,35 @@
                   </layout>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_11">
+                  <widget class="QPushButton" name="RotateModelBtn">
                    <property name="text">
                     <string>Вращать</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="MaterialFrame_3">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QLabel" name="label_34">
+                   <property name="text">
+                    <string>Удаление</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="DelModelBtn">
+                   <property name="text">
+                    <string>Удалить</string>
                    </property>
                   </widget>
                  </item>
@@ -350,6 +406,21 @@
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_22">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QFrame" name="frame_11">
                 <property name="frameShape">
@@ -389,7 +460,7 @@
                       <number>1</number>
                      </property>
                      <property name="minimum">
-                      <double>-10000.000000000000000</double>
+                      <double>1.000000000000000</double>
                      </property>
                      <property name="maximum">
                       <double>10000.000000000000000</double>
@@ -398,7 +469,7 @@
                       <double>10.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>-30.000000000000000</double>
+                      <double>30.000000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -469,7 +540,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="angle_dsp_7">
+                    <widget class="QSpinBox" name="MoveCameraDSP">
                      <property name="font">
                       <font>
                        <pointsize>12</pointsize>
@@ -478,19 +549,31 @@
                      <property name="frame">
                       <bool>true</bool>
                      </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>10</number>
+                     </property>
+                     <property name="value">
+                      <number>20</number>
+                     </property>
                     </widget>
                    </item>
                   </layout>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_16">
+                  <widget class="QPushButton" name="ZoomCameraBtn">
                    <property name="text">
                     <string>Приблизить</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_17">
+                  <widget class="QPushButton" name="MoveAwayCameraBtn">
                    <property name="text">
                     <string>Отдалить</string>
                    </property>
@@ -533,10 +616,22 @@
        </item>
        <item>
         <widget class="QTableWidget" name="TableWidget">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
          <property name="horizontalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
          <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
           <bool>false</bool>
          </attribute>
         </widget>

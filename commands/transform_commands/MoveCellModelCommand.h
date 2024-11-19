@@ -1,5 +1,4 @@
 #pragma once
-
 #include "TransformCommand.h"
 
 class MoveCellModelCommand : public TransformCommand

@@ -27,7 +27,7 @@ void DataMaps::fillModelsComboBox(QComboBox *cb) {
 void DataMaps::fill_iPosComboBox(QComboBox *cb) {
     for (int i = 1; i <= 8; ++i) {
         char c[2];
-        c[0] = static_cast<char>(48 + i);
+        c[0] = static_cast<char>(96 + i);
         c[1] = 0;
         cb->insertItem(i, &(c[0]));
     }
@@ -36,7 +36,7 @@ void DataMaps::fill_iPosComboBox(QComboBox *cb) {
 void DataMaps::fill_jPosComboBox(QComboBox *cb) {
     for (int i = 1; i <= 8; ++i) {
         char c[2];
-        c[0] = static_cast<char>(96 + i);
+        c[0] = static_cast<char>(48 + i);
         c[1] = 0;
         cb->insertItem(i, &(c[0]));
     }

@@ -95,6 +95,8 @@ set(SRCS
     commands/BaseCommand.cpp
     commands/camera_commands/RotateCameraCommand.h
     commands/camera_commands/RotateCameraCommand.cpp
+    commands/camera_commands/MoveCameraCommand.h
+    commands/camera_commands/MoveCameraCommand.cpp
     commands/draw_commands/BaseDrawCommand.h
     commands/draw_commands/BaseDrawCommand.cpp 
     commands/draw_commands/QtDrawCommand.h
@@ -115,6 +117,8 @@ set(SRCS
     commands/transform_commands/TransformCommand.cpp
     commands/transform_commands/MoveModelCommand.h
     commands/transform_commands/MoveModelCommand.cpp
+    commands/transform_commands/RemoveModelCommand.h
+    commands/transform_commands/RemoveModelCommand.cpp
     commands/transform_commands/RotateModelCommand.h
     commands/transform_commands/RotateModelCommand.cpp
     commands/time_commands/DrawTimeCommand.h

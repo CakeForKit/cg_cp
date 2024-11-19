@@ -9,14 +9,15 @@ protected:
     size_t stepOfRevolving;
     indPair indPairMaterial;
     typeChess type;
+    size_t pi, pj;
 
 public:
     TrianglesModelLoadCommand() = delete;
-    // TrianglesModelLoadCommand(const char *_filename, size_t _stepOfRevolving, idMaterial _id_material); // TODO delete
     TrianglesModelLoadCommand(const char *_filename, 
                                 size_t _stepOfRevolving, 
                                 indPair _indPairMaterial,
-                                typeChess _type);
+                                typeChess _type,
+                                size_t _i, size_t _j);
 
     virtual void execute();
 };

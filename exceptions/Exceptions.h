@@ -7,14 +7,14 @@
 
 #pragma region Gui
 
-class NoSelectedModelException: public GuiException
-{
-public:
-    NoSelectedModelException(const char *time, const char *filename,
-                  const size_t line, const char *class_name,
-                  const char *method_name, const char *info = "You need to choose a model") noexcept:
-                  GuiException(time, filename, line, class_name, method_name, info){};
-};
+// class NoSelectedModelException: public GuiException
+// {
+// public:
+//     NoSelectedModelException(const char *time, const char *filename,
+//                   const size_t line, const char *class_name,
+//                   const char *method_name, const char *info = "You need to choose a model") noexcept:
+//                   GuiException(time, filename, line, class_name, method_name, info){};
+// };
 
 #pragma region end
 

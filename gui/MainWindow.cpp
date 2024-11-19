@@ -9,10 +9,16 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     connect(ui.loadModelBtn, &QPushButton::clicked, this, &MainWindow::onLoadModelBtnClicked);
     connect(ui.ChangeMaterialBtn, &QPushButton::clicked, this, &MainWindow::onChangeMaterialBtnClicked);
     connect(ui.drawBtn, &QPushButton::clicked, this, &MainWindow::onDrawBtnClicked);
-    // connect(ui.moveModelBtn, &QPushButton::clicked, this, &MainWindow::onMoveModelBtnClicked);
-    // connect(ui.rotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
-    // connect(ui.rotateOXCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOXCameraBtnClicked);
-    // connect(ui.rotateOYCameraBtn, &QPushButton::clicked, this, &MainWindow::onRotateOYCameraBtnClicked);
+    connect(ui.MoveModelBtn, &QPushButton::clicked, this, &MainWindow::onMoveModelBtnClicked);
+    connect(ui.RotateModelBtn, &QPushButton::clicked, this, &MainWindow::onRotateModelBtnClicked);
+    connect(ui.DelModelBtn, &QPushButton::clicked, this, &MainWindow::onDelModelBtnClicked);
+    connect(ui.UpCameraBtn, &QPushButton::clicked, this, &MainWindow::onUpCameraBtnClicked);
+    connect(ui.DownCameraBtn, &QPushButton::clicked, this, &MainWindow::onDownCameraBtnClicked);
+    connect(ui.RightCameraBtn, &QPushButton::clicked, this, &MainWindow::onRightCameraBtnClicked);
+    connect(ui.LeftCameraBtn, &QPushButton::clicked, this, &MainWindow::onLeftCameraBtnClicked);
+    connect(ui.ZoomCameraBtn, &QPushButton::clicked, this, &MainWindow::onZoomCameraBtnClicked);
+    connect(ui.MoveAwayCameraBtn, &QPushButton::clicked, this, &MainWindow::onMoveAwayCameraBtnClicked);
+    connect(ui.TableWidget, &QTableWidget::cellActivated, this, &MainWindow::tableCellActivated);
 
     // загрузка шахматной доски
     char fnB[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
@@ -30,47 +36,72 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     // загрузка позиций
     dataMaps.fill_iPosComboBox(ui.iPosComboBox);
     dataMaps.fill_jPosComboBox(ui.jPosComboBox);
+    dataMaps.fill_iPosComboBox(ui.MoveTo_iPosComboBox);
+    dataMaps.fill_jPosComboBox(ui.MoveTo_jPosComboBox);
     // загрузка данный о наборах материалов
     dataMaps.fill_MaterialsComboBox(ui.MaterialsPairsComboBox);
     dataMaps.fill_ColorsComboBox(ui.ColorsComboBox);
 
+    ui.TableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui.TableWidget->resizeColumnsToContents();
+
     onChangeMaterialBtnClicked();
     updateModelsTable();
+
+    RotateCameraCommand command(-30, Axis::OX);
+    facade.execute(command);
 }
 
 void MainWindow::updateModelsTable() {
     FillModelsTableCommand cmd(ui.TableWidget);
     facade.execute(cmd);
+    ui.TableWidget->resizeColumnsToContents();
+
+    ui.AllModelsComboBox->clear();
+    int cntRows = ui.TableWidget->rowCount();
+    char id[2];
+    id[1] = 0;
+    for (int i = 0; i < cntRows; ++i) {
+        id[0] = static_cast<char>(49 + i);
+        ui.AllModelsComboBox->insertItem(i + 1, id);
+    }
+}
+
+// void MainWindow::updateAllModelsComboBox(int index) {
+//     std::cout << "updateAllModelsComboBox " << index << "\n\n\n";
+// }
+
+void MainWindow::tableCellActivated(int row, int column) {
+    (void) column;
+    ui.AllModelsComboBox->setCurrentIndex(row);
+    // std::cout << "tableCellActivated " << ui.TableWidget->currentRow() << "\n\n\n";
 }
 
 void MainWindow::onLoadModelBtnClicked() {
     std::cout << "onLoadModelBtnClicked: ------------" <<std::endl;
 
-    typeChess type = static_cast<typeChess>(ui.ModelsComboBox->currentIndex());
-    const char *filename = dataMaps.getFilename(type);
-    indPair p = static_cast<indPair>(ui.ColorsComboBox->currentIndex());
-    TrianglesModelLoadCommand load_command1(filename, STEP_OF_REVOLVING, p, type);
-    facade.execute(load_command1);
+    try {
+        size_t i, j;
+        i = static_cast<size_t>(ui.iPosComboBox->currentIndex());
+        j = static_cast<size_t>(ui.jPosComboBox->currentIndex());
 
-    size_t i, j;
-    i = static_cast<size_t>(ui.iPosComboBox->currentIndex());
-    j = static_cast<size_t>(ui.jPosComboBox->currentIndex());
-    MoveCellModelCommand move_cmd(0, i, j);
-    facade.execute(move_cmd);
+        typeChess type = static_cast<typeChess>(ui.ModelsComboBox->currentIndex());
+        const char *filename = dataMaps.getFilename(type);
+        indPair p = static_cast<indPair>(ui.ColorsComboBox->currentIndex());
+        TrianglesModelLoadCommand load_command1(filename, STEP_OF_REVOLVING, p, type, i, j);
+        facade.execute(load_command1);
 
-    updateModelsTable();
+        
+        // idModel = static_cast<size_t>(ui.TableWidget->rowCount());
+        // MoveCellModelCommand move_cmd(idModel, i, j);
+        // facade.execute(move_cmd);
 
-    // char filename2[] = "/home/kathrine/cg_cp/data/rook.txt";
-    // TrianglesModelLoadCommand load_command2(&(filename2[0]), STEP_OF_REVOLVING, idMaterial::MATTE_WHITE);
-    // facade.execute(load_command2);
-    // MoveCellModelCommand move_cmd2(1, 4, 3);
-    // facade.execute(move_cmd2);
-    
-
-    // char filename[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
-    // TrianglesModelLoadCommand load_command(&(filename[0]), STEP_OF_REVOLVING, idMaterial::GLOSSY_WHITE);
-    // facade.execute(load_command);    
-
+        updateModelsTable();
+    } catch (BaseException &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
+        std::cout << ex.what() << "\n";
+        return;
+    }
     // size_t stepOfRevolving = 6;
     // std::vector<MoveModelCommand> moveCmds;
     // moveCmds.push_back(MoveModelCommand(0, 0, 0, 0));
@@ -110,98 +141,138 @@ void MainWindow::onDrawBtnClicked() {
     std::cout << "end onDrawBtnClicked: --------" <<std::endl;
 }
 
-size_t MainWindow::getSelectedModelId() const {
-    int id = 0; // TODO get id from info table
-
-    if (id == -1) {
-        time_t curTime = time(NULL);
-        throw NoSelectedModelException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
-    }
-    return static_cast<size_t>(id);
-}
-
 void MainWindow::onMoveModelBtnClicked() {
     std::cout << "MoveModelBtnClicked: ------------" <<std::endl;
 
     try {
-        size_t id = getSelectedModelId();
-
-        // double dx = ui.dx_dsp->value();
-        // double dy = ui.dy_dsp->value();
-        // double dz = ui.dz_dsp->value();
-
-        MoveModelCommand command(id, 10, 10, 10);
+        size_t id, pi, pj;
+        id = static_cast<size_t>(ui.AllModelsComboBox->currentIndex());
+        pi = static_cast<size_t>(ui.MoveTo_iPosComboBox->currentIndex());
+        pj = static_cast<size_t>(ui.MoveTo_jPosComboBox->currentIndex());
+        std::cout << "onMoveModelBtnClicked: " << pi << " " << pj << "\n";
+        MoveCellModelCommand command(id, pi, pj);
         facade.execute(command);
-    } catch (NoSelectedModelException &ex) {
-        QMessageBox::critical(nullptr, "Ошибка", "Нужно выбрать модель.");
-        return;
     } catch (BaseException &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
         std::cout << ex.what() << "\n";
-        exit(EXIT_FAILURE);
+        return;
     }
 
     updateModelsTable();
     std::cout << "end MoveModelBtnClicked ---------" <<std::endl;
-
-    onDrawBtnClicked();
 }
 
 void MainWindow::onRotateModelBtnClicked() {
     std::cout << "RotateModelBtnClicked: ------------" <<std::endl;
 
     try {
-        size_t id = getSelectedModelId();
-
-        float angle_grad = static_cast<float>(30);
-
+        size_t id = static_cast<size_t>(ui.AllModelsComboBox->currentIndex());
+        float angle_grad = static_cast<float>(ui.AngleModelDSP->value());
         RotateModelCommand command(id, angle_grad);
         facade.execute(command);
-    } catch (NoSelectedModelException &ex) {
-        QMessageBox::critical(nullptr, "Ошибка", "Нужно выбрать модель.");
-        return;
+
+        updateModelsTable();
+
     } catch (BaseException &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
         std::cout << ex.what() << "\n";
-        exit(EXIT_FAILURE);
+        return;
     }
-
-    updateModelsTable();
     std::cout << "end RotateModelBtnClicked ---------" <<std::endl;
-
-    onDrawBtnClicked();
 }
 
-void MainWindow::rotateCamera(Axis axis) {
+void MainWindow::onDelModelBtnClicked() {
+    std::cout << "onDelModelBtnClicked: ------------" <<std::endl;
     try {
-        float angle_grad = static_cast<float>(30);
+        size_t id = static_cast<size_t>(ui.AllModelsComboBox->currentIndex());
 
+        RemoveModelCommand command(id);
+        facade.execute(command);
+        
+        updateModelsTable();
+
+    } catch (BaseException &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
+        std::cout << ex.what() << "\n";
+        return;
+    }
+    std::cout << "end DelModelBtnClicked: ------------" <<std::endl;
+}
+
+#pragma region Camera
+void MainWindow::rotateCamera(Axis axis, int sign) {
+    try {
+        float angle_grad = static_cast<float>(ui.AngleCameraDSB->value());
+        if (sign < 0)
+            angle_grad *= -1;
+        std::cout << "rotateCamera: angle = " << angle_grad << "\n";
         RotateCameraCommand command(angle_grad, axis);
         facade.execute(command);
     } catch (BaseException &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
         std::cout << ex.what() << "\n";
-        exit(EXIT_FAILURE);
+        return;
     }
 }
 
-void MainWindow::onRotateOXCameraBtnClicked() {
-    std::cout << "onRotateOXCameraBtnClicked: ------------" <<std::endl;
-    rotateCamera(Axis::OX);
-    std::cout << "end onRotateOXCameraBtnClicked ---------" <<std::endl;
-
-    onDrawBtnClicked();
+void MainWindow::onUpCameraBtnClicked() {
+    std::cout << "onUpCameraBtnClicked: ------------" <<std::endl;
+    rotateCamera(Axis::OX, -1);
+    std::cout << "end onUpCameraBtnClicked ---------" <<std::endl;
 }
 
-void MainWindow::onRotateOYCameraBtnClicked() {
-    std::cout << "onRotateOYCameraBtnClicked: ------------" <<std::endl;
-    rotateCamera(Axis::OY);
-    std::cout << "end onRotateOYCameraBtnClicked ---------" <<std::endl;
-
-    onDrawBtnClicked();
+void MainWindow::onDownCameraBtnClicked() {
+    std::cout << "onDownCameraBtnClicked: ------------" <<std::endl;
+    rotateCamera(Axis::OX, 1);
+    std::cout << "end onDownCameraBtnClicked ---------" <<std::endl;
 }
+
+void MainWindow::onRightCameraBtnClicked() {
+    std::cout << "onRightCameraBtnClicked: ------------" <<std::endl;
+    rotateCamera(Axis::OY, 1);
+    std::cout << "end onRightCameraBtnClicked ---------" <<std::endl;
+}
+
+void MainWindow::onLeftCameraBtnClicked() {
+    std::cout << "onLeftCameraBtnClicked: ------------" <<std::endl;
+    rotateCamera(Axis::OY, -1);
+    std::cout << "end onLeftCameraBtnClicked ---------" <<std::endl;
+}
+
+void MainWindow::moveCamera(int sign) {
+    try {
+        double length = ui.MoveCameraDSP->value();
+        if (sign < 0)
+            length *= -1;
+
+        MoveCameraCommand command(length);
+        facade.execute(command);
+    } catch (BaseException &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
+        std::cout << ex.what() << "\n";
+        return;
+    }
+}
+
+void MainWindow::onZoomCameraBtnClicked() {
+    std::cout << "onZoomCameraBtnClicked: ------------" <<std::endl;
+    moveCamera(1);
+    std::cout << "end onZoomCameraBtnClicked ---------" <<std::endl;
+}
+
+void MainWindow::onMoveAwayCameraBtnClicked() {
+    std::cout << "onMoveAwayCameraBtnClicked: ------------" <<std::endl;
+    moveCamera(-1);
+    std::cout << "end onMoveAwayCameraBtnClicked ---------" <<std::endl;
+}
+
+#pragma region end
 
 void MainWindow::measureRenderTime() {
     char filename[] = "/home/kathrine/cg_cp/data/pawn.txt";
     char datafilename[] = "../data_time/dataTime.txt";
 
+    size_t pi = 0, pj = 0;
     size_t stepOfRevolving = 6;
     std::vector<MoveModelCommand> moveCmds;
     moveCmds.push_back(MoveModelCommand(0, 0, 0, 0));
@@ -210,7 +281,7 @@ void MainWindow::measureRenderTime() {
     moveCmds.push_back(MoveModelCommand(3, 0, 50, 0));
     moveCmds.push_back(MoveModelCommand(4, 0, -50, 0));
     for (size_t i = 0; i < 5; ++i) {
-        TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, indPair::WHITE, typeChess::PAWN);
+        TrianglesModelLoadCommand load_command(&(filename[0]), stepOfRevolving, indPair::WHITE, typeChess::PAWN, pi, pj++);
         facade.execute(load_command);
         facade.execute(moveCmds[i]);
         std::cout << "CountAllFaces = " << facade.getCountFacesOnScene() << "\n";

@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QMouseEvent>
+#include <QComboBox>
 #include "ui_mainWindow.h"
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
@@ -17,6 +18,8 @@
 #include "DrawTimeCommand.h"
 #include "SetActiveMaterialCommand.h"
 #include "FillModelsTableCommand.h"
+#include "RemoveModelCommand.h"
+#include "MoveCameraCommand.h"
 #include "dataMaps.h"
 
 class MyQGraphicsView : public QGraphicsView
@@ -57,15 +60,22 @@ private slots:
     void onDrawBtnClicked();
     void onMoveModelBtnClicked();
     void onRotateModelBtnClicked();
-    void onRotateOXCameraBtnClicked();
-    void onRotateOYCameraBtnClicked();
+    void onDelModelBtnClicked();
+    void onUpCameraBtnClicked();
+    void onDownCameraBtnClicked();
+    void onRightCameraBtnClicked();
+    void onLeftCameraBtnClicked();
+    void onZoomCameraBtnClicked();
+    void onMoveAwayCameraBtnClicked();
 
 private:
-    size_t getSelectedModelId() const;
     // const char *getModelFilename(typeChess type_chess);
     void updateModelsTable();
+    // void updateAllModelsComboBox(int index);
+    void tableCellActivated(int row, int column);
 
-    void rotateCamera(Axis axis);
+    void rotateCamera(Axis axis, int sign);
+    void moveCamera(int sign);
 
 public:
     void measureRenderTime();

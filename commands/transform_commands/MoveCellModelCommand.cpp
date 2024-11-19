@@ -7,4 +7,5 @@ void MoveCellModelCommand::execute() {
     PtrModel model = sceneManager->getModel(idModel);
     Point3 diff = sceneManager->changeModelPos(idModel, i, j);
     transformManager->moveModel(model, diff.x(), diff.y(), diff.z());
+    // std::cout << "MoveCellModelCommand:\nfrom: " << i << " " << j << "\nto " << diff << "\n";
 }

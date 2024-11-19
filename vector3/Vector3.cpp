@@ -95,6 +95,12 @@ Vector3 Vector3::vectorProduct(const Vector3 &v) const noexcept {
     return res;
 }
 
+Vector3 Vector3::cut(double length) noexcept {
+    Vector3 tmp(*this);
+    tmp = tmp * (1 - length / tmp.length());
+    return tmp;
+}
+
 Vector3 Vector3::reflect(Vector3 &norm) const {
     if (!norm.isNormalized())
         norm.normalize();

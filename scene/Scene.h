@@ -22,6 +22,7 @@ protected:
 public:
     Scene();
 
+    void addModel(std::shared_ptr<Model> model, size_t i, size_t j);
     void addModel(std::shared_ptr<Model> model);
     void removeModel(size_t ind);
     void deleteAllModels() noexcept;
@@ -42,7 +43,8 @@ public:
     // return Point3(dx, dy, dz)
     Point3 changeModelPos(size_t idModel, size_t i, size_t j);
     Point3 getPosCell(size_t i, size_t j) const;
-    bool getPosModel(size_t idModel, size_t &i, size_t &j);
+    bool getPosModel(size_t idModel, size_t &i, size_t &j) const noexcept;
+    bool checkPosModel(size_t i, size_t j) const noexcept;
 
     bool intersection(const Ray &ray, intersection_t &intersect) const;
 

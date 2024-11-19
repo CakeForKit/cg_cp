@@ -4,7 +4,6 @@
 class RotateModelCommand : public TransformCommand
 {
 protected:
-    size_t idModel;
     float angle_grad;
 
 public:

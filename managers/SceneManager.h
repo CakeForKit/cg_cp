@@ -1,10 +1,6 @@
 #pragma once
 
 #include "Scene.h"
-#include <QTableWidget>
-#include <QStringList>
-#include <QTableWidgetItem>
-#include <QObject>
 
 class SceneManager
 {
@@ -16,10 +12,13 @@ public:
 
     std::shared_ptr<Scene> getScene() noexcept;
     size_t getCountAllFaces() const noexcept;
+    size_t countModels() const noexcept;
 
-    void addModel(std::shared_ptr<Model> model) noexcept;
+    void addModel(std::shared_ptr<Model> model, size_t i, size_t j);
+    void addModel(std::shared_ptr<Model> model);
     void removeModel(size_t ind);
     std::shared_ptr<Model> getModel(size_t ind);
+    bool getPosModel(size_t idModel, size_t &i, size_t &j) const noexcept;
 
     void addCamera() noexcept;
     void removeCamera(size_t ind);
@@ -29,5 +28,4 @@ public:
     Point3 changeModelPos(size_t idModel, size_t i, size_t j);
     // Point3 getPosCell(size_t i, size_t j) const;
 
-    void writeDataToTable(QTableWidget *tab) const noexcept;
 };

@@ -12,24 +12,24 @@ MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
                                                                             5));
     materialSolution.registrateMaterial(idMaterial::GLOSSY_WHITE, 
                                 std::make_shared<Material>( Intensity(0.05, 0.05, 0.05),    // ka
-                                                            Intensity(0.85, 0.85, 0.85),       // kd
-                                                            Intensity(0.15, 0.15, 0.15),       // ks
-                                                            5)); 
+                                                            Intensity(0.5, 0.5, 0.5),       // kd
+                                                            Intensity(0.4, 0.4, 0.4),       // ks
+                                                            1)); 
     materialSolution.registrateMaterial(idMaterial::MATTE_WHITE, 
-                                std::make_shared<Material>( Intensity(0.15, 0.15, 0.15),    // ka
-                                                            Intensity(0.75, 0.75, 0.75),       // kd
-                                                            Intensity(0, 0, 0),       // ks
+                                std::make_shared<Material>( Intensity(0.1, 0.1, 0.1),    // ka
+                                                            Intensity(0.85, 0.85, 0.85),       // kd
+                                                            Intensity(0.05, 0.05, 0.05),       // ks
                                                             1));                                                             
     materialSolution.registrateMaterial(idMaterial::GLOSSY_BLACK, 
                                 std::make_shared<Material>( Intensity(0, 0, 0),   // ka
-                                                            Intensity(0.25, 0.25, 0.25),   // kd
-                                                            Intensity(0.1, 0.1, 0.1),   // ks
+                                                            Intensity(0, 0, 0),   // kd
+                                                            Intensity(0.2, 0.2, 0.2),   // ks
                                                             5));    
     materialSolution.registrateMaterial(idMaterial::MATTE_BLACK, 
                                 std::make_shared<Material>( Intensity(0, 0, 0),   // ka
-                                                            Intensity(0.3, 0.3, 0.3),   // kd
+                                                            Intensity(0.1, 0.1, 0.1),   // kd
                                                             Intensity(0, 0, 0),   // ks
-                                                            1));                                   
+                                                            5));                                     
     materialSolution.registrateMaterial(idMaterial::WOOD, 
                                 std::make_shared<Material>( Intensity(0.066, 0.048, 0.034),   // ka
                                                             Intensity(0.66, 0.48, 0.34),   // (0.66, 0.48, 0.34) // kd

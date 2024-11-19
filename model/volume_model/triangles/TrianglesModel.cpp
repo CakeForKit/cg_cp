@@ -141,6 +141,7 @@ void TrianglesModel::transform(const std::shared_ptr<TransformAction> action) {
     for (psPoint3 elem : vertices) {
         action->transform(elem);
     }
+    center = action->transform(center);
 }
 
 size_t TrianglesModel::getCountFaces() const noexcept {

@@ -1,6 +1,7 @@
 #pragma once
 #include "TransformCommand.h"
 
+// TODO Delete
 class MoveModelCommand : public TransformCommand
 {
 protected:

@@ -13,11 +13,18 @@ void TransformManager::rotateModel(PtrModel model, float angle) {
     model->transform(action);
 }
 
+void TransformManager::moveCamera(std::shared_ptr<Camera> camera, double length) {
+    Vector3 pos, newPos;
+    pos = camera->getCameraPos();
+    newPos = pos.cut(length) - pos;
+    std::shared_ptr<TransformAction> action = std::make_shared<MoveAction>(newPos.x(), newPos.y(), newPos.z());
+    camera->transform(action);
+}
+
 void TransformManager::rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis) {
-    // Vector3 axisVec = camera->getAxis(axis);
     std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
                                                                             camera->getCameraPos(), 
                                                                             axis);
     camera->transform(action);
-    std::cout << "TransformManager::rotateCamera\n" << *camera << "\n"; 
+    // std::cout << "TransformManager::rotateCamera\n" << *camera << "\n"; 
 }
