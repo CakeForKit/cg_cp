@@ -85,6 +85,11 @@ void Scene::removeModel(size_t ind) {
         time_t curTime = time(NULL);
         throw IndexException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
+    int id = static_cast<int>(ind);
+    for (size_t i = 0;i < 8; ++i) 
+        for (size_t j = 0; j < 8; ++j)
+            if (posModels[i][j] == id)
+                posModels[i][j] = -1;
     models.erase(models.begin() + static_cast<long int>(ind));
 }
 

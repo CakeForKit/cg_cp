@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 
 project(coursework_chess LANGUAGES CXX)   # название проекта
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS --coverage)
 
 set(CMAKE_AUTOMOC ON)
 # автоматическая генерация ui_mainWindow.h в "./build/app.exe_autogen/include/ui_mainWindow.h"
@@ -109,6 +110,8 @@ set(SRCS
     commands/load_commands/TrianglesChessboardLoadCommand.cpp
     commands/material_commands/SetActiveMaterialCommand.h
     commands/material_commands/SetActiveMaterialCommand.cpp
+    commands/material_commands/SetChessboardMaterialCommand.cpp
+    commands/material_commands/SetChessboardMaterialCommand.h
     commands/scene_commands/FillModelsTableCommand.h
     commands/scene_commands/FillModelsTableCommand.cpp
     commands/transform_commands/MoveCellModelCommand.cpp
@@ -247,31 +250,30 @@ set(TESTS
     tests/reflect_refract_tests.h
     tests/reflect_refract_tests.cpp
 
-    tests/std_ray_tracing_test.h
-    tests/std_ray_tracing_test.cpp
-)
+    # tests/std_ray_tracing_test.h
+    # tests/std_ray_tracing_test.cpp
+) 
 
-# # google tests
-# add_executable(tests.exe 
-#     tests/main.cpp
-#     tests/camera_tests.cpp
-
-#     "${SRCS}"
-#     )
-
-
- 
-
-add_executable(app.exe 
+add_executable(app.exe
     main.cpp
-    "${SRCS}"
-    "${TESTS}"
+    ${SRCS}
+    ${TESTS}
     )
+
+# add_executable(test.exe 
+#     ${TESTS} 
+#     ${SRCS}
+#     )
 
 # gtests
 # Qt5
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui Core)
-target_link_libraries(app.exe PRIVATE Qt6::Widgets Qt6::Gui Qt6::Core
-gtest gmock pthread)
+target_link_libraries(app.exe 
+    PRIVATE Qt6::Widgets Qt6::Gui Qt6::Core
+    gtest gmock pthread)
+
+# target_link_libraries(test.exe 
+#     PRIVATE Qt6::Widgets Qt6::Gui Qt6::Core
+#     gtest gmock pthread)
 
 # target_link_libraries(app.exe gtest gmock pthread)

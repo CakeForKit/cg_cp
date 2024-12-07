@@ -9,12 +9,20 @@
 
 enum class typeChess {
     PAWN,
-    ROOK
+    ROOK,
+    KNIGHT,
+    BISHOP,
+    QUEEN,
+    KING
 };
 
 static std::map<const typeChess, const char *> mapNamesChess = {
     {typeChess::PAWN, "Пешка"},
-    {typeChess::ROOK, "Ладья"}
+    {typeChess::ROOK, "Ладья"},
+    {typeChess::KNIGHT, "Конь"},
+    {typeChess::BISHOP, "Слон"},
+    {typeChess::QUEEN, "Ферзь"},
+    {typeChess::KING, "Король"}
 };
 
 class Model;

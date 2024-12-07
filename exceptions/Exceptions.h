@@ -131,6 +131,15 @@ public:
 
 #pragma region Camera
 
+class TooCloseCameraException: public CameraException
+{
+public:
+    TooCloseCameraException(const char *time, const char *filename,
+                  const size_t line, const char *class_name,
+                  const char *method_name, const char *info = "Camera too close") noexcept:
+                  CameraException(time, filename, line, class_name, method_name, info){};
+};
+
 class NotSetPixelsCameraException: public CameraException
 {
 public:

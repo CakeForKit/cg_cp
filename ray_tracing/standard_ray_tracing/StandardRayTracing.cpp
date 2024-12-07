@@ -9,13 +9,14 @@ void StandardRayTracing::render(size_t countThreads) {
     } else {
         renderParallel(countThreads + 1);
     }
+    // drawer->setScene();
 }
 
 // void castRayForParallel(threadData_t *data)
 void *castRayForParallel(void *prlData) {
     threadData_t *data = static_cast<threadData_t*>(prlData);
     data->intens = data->alg->castRay(data->ray);
-    return NULL;
+    pthread_exit(EXIT_SUCCESS);
 }
 
 void StandardRayTracing::renderParallel(size_t countThreads) {
@@ -66,8 +67,6 @@ void StandardRayTracing::renderParallel(size_t countThreads) {
     }
     free(threads);
     free(prlData);
-
-    drawer->setScene();
 }
 
 void StandardRayTracing::renderOneThread() {
@@ -86,7 +85,6 @@ void StandardRayTracing::renderOneThread() {
             drawer->setPixelColor(i, j, Color(intens));
         }
     }
-    drawer->setScene();
 }
 
 // TODO научится определять цвет фона из вне

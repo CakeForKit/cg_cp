@@ -7,12 +7,13 @@
 class DrawTimeCommand : public BaseCommand
 {
 protected:
-    QGraphicsView *graphicsView;
+    std::shared_ptr<QImage> img;
     char *filename;
 
 public:
     DrawTimeCommand() = delete;
-    DrawTimeCommand(QGraphicsView* gv, char *_filename);
+    // DrawTimeCommand(QGraphicsView* gv, char *_filename);
+    DrawTimeCommand(std::shared_ptr<QImage> qimg, char *_filename);
     
     virtual void execute();
 };

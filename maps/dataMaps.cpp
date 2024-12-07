@@ -3,12 +3,16 @@
 DataMaps::DataMaps() {
     chessMap = {
         {typeChess::PAWN, "/home/kathrine/cg_cp/data/pawn.txt"},
-        {typeChess::ROOK, "/home/kathrine/cg_cp/data/rook.txt"}
+        {typeChess::ROOK, "/home/kathrine/cg_cp/data/rook.txt"},
+        {typeChess::KNIGHT, "/home/kathrine/cg_cp/data/knight.txt"},
+        {typeChess::BISHOP, "/home/kathrine/cg_cp/data/bishop.txt"},
+        {typeChess::QUEEN, "/home/kathrine/cg_cp/data/queen.txt"},
+        {typeChess::KING, "/home/kathrine/cg_cp/data/king.txt"},
     };
     pairMaterialsMap = {
-        {idPairMaterial::GLOSSY, "Гланцевый черный-белый"},
-        {idPairMaterial::MATTE, "Матовый черный-белый"},
-        {idPairMaterial::TMP, "Голубой-красный"}
+        // {idPairMaterial::GLOSSY, "Гланцевый черный-белый"},
+        // {idPairMaterial::MATTE, "Матовый черный-белый"},
+        {idPairMaterial::BLUE_RED, "Голубой-красный"}
     };
     pairColorsMap = {
         {indPair::WHITE, "Игрок 1"},

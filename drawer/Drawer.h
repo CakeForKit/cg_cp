@@ -14,5 +14,5 @@ public:
 
     virtual void setPixelColor(int x, int y, const Color &color) = 0;
     virtual void setPixelColor(int x, int y, const Color &&color) = 0;
-    virtual void setScene() = 0;
+    // virtual void setScene() = 0;
 };

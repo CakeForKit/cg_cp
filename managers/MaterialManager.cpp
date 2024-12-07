@@ -11,23 +11,23 @@ MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
                                                                             Intensity(0, 0, 0),
                                                                             5));
     materialSolution.registrateMaterial(idMaterial::GLOSSY_WHITE, 
-                                std::make_shared<Material>( Intensity(0.05, 0.05, 0.05),    // ka
+                                std::make_shared<Material>( Intensity(0.0, 0.0, 0.0),    // ka
                                                             Intensity(0.5, 0.5, 0.5),       // kd
-                                                            Intensity(0.4, 0.4, 0.4),       // ks
-                                                            1)); 
-    materialSolution.registrateMaterial(idMaterial::MATTE_WHITE, 
-                                std::make_shared<Material>( Intensity(0.1, 0.1, 0.1),    // ka
-                                                            Intensity(0.85, 0.85, 0.85),       // kd
-                                                            Intensity(0.05, 0.05, 0.05),       // ks
-                                                            1));                                                             
+                                                            Intensity(0.5, 0.5, 0.5),       // ks
+                                                            5)); 
     materialSolution.registrateMaterial(idMaterial::GLOSSY_BLACK, 
                                 std::make_shared<Material>( Intensity(0, 0, 0),   // ka
                                                             Intensity(0, 0, 0),   // kd
-                                                            Intensity(0.2, 0.2, 0.2),   // ks
-                                                            5));    
+                                                            Intensity(0.5, 0.5, 0.5),   // ks
+                                                            5));                                                               
+    materialSolution.registrateMaterial(idMaterial::MATTE_WHITE, 
+                                std::make_shared<Material>( Intensity(0.1, 0.1, 0.1),    // ka
+                                                            Intensity(0.7, 0.7, 0.7),       // kd
+                                                            Intensity(0, 0, 0),       // ks
+                                                            5));                                                              
     materialSolution.registrateMaterial(idMaterial::MATTE_BLACK, 
                                 std::make_shared<Material>( Intensity(0, 0, 0),   // ka
-                                                            Intensity(0.1, 0.1, 0.1),   // kd
+                                                            Intensity(0.2, 0.2, 0.2),   // kd
                                                             Intensity(0, 0, 0),   // ks
                                                             5));                                     
     materialSolution.registrateMaterial(idMaterial::WOOD, 
@@ -39,12 +39,15 @@ MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
                                                             // Intensity(0.18, 0.003, 0),   // kd
                                                             // Intensity(0, 0, 0),   // ks
                                                             // 1)); 
-    materialSolution.registratePairMaterial(idPairMaterial::GLOSSY, idMaterial::GLOSSY_WHITE, idMaterial::GLOSSY_BLACK); 
-    materialSolution.registratePairMaterial(idPairMaterial::MATTE, idMaterial::MATTE_WHITE, idMaterial::MATTE_BLACK);  
-    materialSolution.registratePairMaterial(idPairMaterial::TMP, idMaterial::BLUE, idMaterial::RED);                                              
+    // materialSolution.registratePairMaterial(idPairMaterial::GLOSSY, idMaterial::GLOSSY_WHITE, idMaterial::GLOSSY_BLACK); 
+    // materialSolution.registratePairMaterial(idPairMaterial::MATTE, idMaterial::MATTE_WHITE, idMaterial::MATTE_BLACK);  
+    materialSolution.registratePairMaterial(idPairMaterial::BLUE_RED, idMaterial::BLUE, idMaterial::RED);                                              
 
-    activeMaterial_0 = std::make_shared<Material>(*getMaterial(idPairMaterial::GLOSSY, indPair::WHITE));            
-    activeMaterial_1 = std::make_shared<Material>(*getMaterial(idPairMaterial::GLOSSY, indPair::BLACK));                                                                                                                                                                
+    activeMaterial_0 = std::make_shared<Material>(*getMaterial(idPairMaterial::BLUE_RED, indPair::WHITE));            
+    activeMaterial_1 = std::make_shared<Material>(*getMaterial(idPairMaterial::BLUE_RED, indPair::BLACK));         
+
+    chessboardWhite = std::make_shared<Material>(*getMaterial(idMaterial::GLOSSY_WHITE));            
+    chessboardBlack = std::make_shared<Material>(*getMaterial(idMaterial::GLOSSY_BLACK));                                                                                                                                                          
 }
 
 std::shared_ptr<Material> MaterialManager::getMaterial(idMaterial id) {
@@ -72,4 +75,21 @@ std::shared_ptr<Material> MaterialManager::getActiveMaterial(indPair ind) {
         return activeMaterial_1;
 }
 
+void MaterialManager::setChessboardMaterial(idChessboardMaterial id) {
+    if (id == idChessboardMaterial::GLOSSY) {
+        *chessboardWhite = *getMaterial(idMaterial::GLOSSY_WHITE);
+        *chessboardBlack = *getMaterial(idMaterial::GLOSSY_BLACK);
+    } else {
+        *chessboardWhite = *getMaterial(idMaterial::MATTE_WHITE);
+        *chessboardBlack = *getMaterial(idMaterial::MATTE_BLACK);
+    }
+}
+
+std::shared_ptr<Material>  MaterialManager::getChessboardWhite() {
+    return chessboardWhite;
+}
+
+std::shared_ptr<Material>  MaterialManager::getChessboardBlack() {
+    return chessboardBlack;
+}
 

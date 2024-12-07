@@ -6,8 +6,7 @@
 class DataChessboardReader : public Reader
 {
 protected:
-    double r_chess;
-    double delta_r;
+    double cell_width;
     bool printing = 0, dataRead = false;
 
 public:

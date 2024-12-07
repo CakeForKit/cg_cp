@@ -1,7 +1,7 @@
 #include "Matrix4.h"
 
 std::ostream& Matrix4::print(std::ostream &os) const noexcept {
-    os << "Mat4:\n";
+    // os << "Mat4:\n";
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             os << mat[i][j] << " ";

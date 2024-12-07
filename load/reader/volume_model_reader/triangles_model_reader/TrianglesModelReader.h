@@ -17,6 +17,7 @@ protected:
 
     std::vector<psPoint3> vertices;
     std::vector<std::vector<psPoint3>> triangles;
+    // std::vector<psPoint3> rad_vertices;
     std::vector<std::vector<psPoint3>> revolvElems;
     Point3 center;
 

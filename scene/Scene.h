@@ -40,6 +40,8 @@ public:
     // std::shared_ptr<Light> getLight() noexcept;
 
     void setChessboard(std::shared_ptr<Chessboard> model) noexcept;
+    // void setChessboardMaterial(std::shared_ptr<Material> matWhite, std::shared_ptr<Material> matBlack);
+
     // return Point3(dx, dy, dz)
     Point3 changeModelPos(size_t idModel, size_t i, size_t j);
     Point3 getPosCell(size_t i, size_t j) const;

@@ -17,4 +17,8 @@ public:
     void addAction(std::shared_ptr<TransformAction> action);
 
     Matrix4 &getMatrix();
+
+    std::ostream& print(std::ostream &os) const noexcept;
 };
+
+std::ostream& operator<<(std::ostream &os, const TransformAction &ta);

@@ -33,7 +33,6 @@ void Camera::setCountPixelsViewport(size_t countPixWidth, size_t countPixHeight)
     _countPixHeight = countPixHeight;
 
     viewportWidth = viewportHeight * (static_cast<float>(countPixWidth) / static_cast<float>(countPixHeight));
-
     width_of_one_pixel = viewportWidth * right / static_cast<float>(countPixWidth); // ширина одного пикселя
     height_of_one_pixel = viewportHeight * up / static_cast<float>(countPixHeight); // высота одного пикселя 
     
@@ -110,7 +109,16 @@ Ray Camera::createRay(int ip, int jp) {
 }
 
 void Camera::transform(const std::shared_ptr<TransformAction> action) {
-    cameraPos = action->transform(cameraPos);
+    Vector3 newCameraPos = action->transform(cameraPos);
+    double nowLen = cameraPos.length();
+    double newLen = newCameraPos.length();
+    std::cout << "nowLen = " << nowLen << "\n";
+    std::cout << "newLen = " << newLen << "\n";
+    if (nowLen - newLen > EPS && nowLen - newLen > nowLen - 320) {
+        time_t curTime = time(NULL);
+        throw TooCloseCameraException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+    }
+    cameraPos = newCameraPos;
     dir = cameraPos - Vector3(0, 0, 0);
     dir.normalize();
     right = -dir.vectorProduct(Vector3(0, 1, 0));

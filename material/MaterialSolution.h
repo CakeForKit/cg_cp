@@ -20,14 +20,19 @@ enum class idMaterial {
 };
 
 enum class idPairMaterial {
-    GLOSSY,
-    MATTE,
-    TMP
+    // GLOSSY,
+    // MATTE,
+    BLUE_RED
 };
 
 enum class indPair {
     WHITE,
     BLACK
+};
+
+enum class idChessboardMaterial {
+    GLOSSY,
+    MATTE
 };
 
 class MaterialSolution

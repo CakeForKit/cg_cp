@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
-    <height>554</height>
+    <width>627</width>
+    <height>578</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="CreateTab_2">
           <attribute name="title">
@@ -160,17 +160,47 @@
             </widget>
            </item>
            <item>
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
-            </spacer>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QLabel" name="label_24">
+                <property name="text">
+                 <string>Материал шахматной доски</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <item>
+                 <widget class="QRadioButton" name="GlossyRadioBtn">
+                  <property name="text">
+                   <string>Глянцевый</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="MatteRadioBtn">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>Матовый</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -656,10 +686,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>478</width>
+     <width>627</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="exitMenu">
+    <property name="title">
+     <string>Выход</string>
+    </property>
+   </widget>
+   <addaction name="exitMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

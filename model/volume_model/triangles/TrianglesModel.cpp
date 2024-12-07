@@ -3,7 +3,7 @@
 std::ostream& TrianglesModel::print(std::ostream &os) const noexcept {
     os << "TrianglesModel: \n\tVertices: [ ";
     for (psPoint3 v: vertices) {
-        os << *v << " ";
+        os << *v << "\n";
     }
     os << "]\n\tTriangles: [ \n";
     for (psTriangle tr : triangles) {

@@ -7,7 +7,8 @@ void DataChessboardReader::readData() {
     assert(isOpen());
     file.seekg(0, std::ios::beg);   // переместить курсор на начало файла
 
-    std::cout << "DataChessboardReader::readData:\n";
+    if (printing)
+        std::cout << "DataChessboardReader::readData:\n";
     int count_data_read = 0;
     std::string type;
     while (!file.eof()) {
@@ -17,22 +18,23 @@ void DataChessboardReader::readData() {
                 std::cout << "end of file;\n";
             continue;
         }
-        if (type == "r_chess") {
-            file >> r_chess;
-            std::cout << "r_chess = " << r_chess << "\n";
+        if (type == "cell_width") {
+            file >> cell_width;
+            if (printing)
+                std::cout << "cell_width = " << cell_width << "\n";
             if (!file) {
                 time_t curTime = time(NULL);
                 throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
             }
             ++count_data_read;
-        } else if (type == "delta_r") {
-            file >> delta_r;
-            std::cout << "delta_r = " << delta_r << "\n";
-            if (!file) {
-                time_t curTime = time(NULL);
-                throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
-            }
-            ++count_data_read;
+        // } else if (type == "delta_r") {
+        //     file >> delta_r;
+        //     std::cout << "delta_r = " << delta_r << "\n";
+        //     if (!file) {
+        //         time_t curTime = time(NULL);
+        //         throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+        //     }
+        //     ++count_data_read;
         } else {
             if (printing)
                 std::cout << "symbol: |" << type << "|\n";
@@ -41,7 +43,7 @@ void DataChessboardReader::readData() {
         }
     }
 
-    if (count_data_read != 2) {
+    if (count_data_read != 1) {
         time_t curTime = time(NULL);
         throw DataNotFullReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
@@ -53,5 +55,5 @@ double DataChessboardReader::getCellWidth() {
         time_t curTime = time(NULL);
         throw DataNotReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
-    return (r_chess + delta_r) * 2;
+    return cell_width;
 }

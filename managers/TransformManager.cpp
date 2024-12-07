@@ -7,10 +7,24 @@ void TransformManager::moveModel(PtrModel model, double dx, double dy, double dz
 
 
 void TransformManager::rotateModel(PtrModel model, float angle) {
-    std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
-                                                                            model->getCenter(), 
-                                                                            Axis::OY);
-    model->transform(action);
+    Vector3 c = model->getCenter();
+    std::shared_ptr<TransformAction> to_center = std::make_shared<MoveAction>(-c.x(), -c.y(), -c.z());
+    model->transform(to_center);
+    std::cout << "to center:\n" << *to_center;
+
+    std::shared_ptr<TransformAction> rotate = std::make_shared<RotateAction>(angle, 
+                                                                                model->getCenter(), 
+                                                                                Axis::OY);
+    model->transform(rotate);
+    std::cout << "rotate:\n" << *rotate;     
+
+    std::shared_ptr<TransformAction> from_center = std::make_shared<MoveAction>(c.x(), c.y(), c.z());      
+    model->transform(from_center);
+    std::cout << "from center:\n" << *from_center;                                                
+    // std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
+    //                                                                         model->getCenter(), 
+    //                                                                         Axis::OY);
+    // model->transform(action);
 }
 
 void TransformManager::moveCamera(std::shared_ptr<Camera> camera, double length) {

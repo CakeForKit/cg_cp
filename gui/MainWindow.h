@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QComboBox>
+#include <QRadioButton>
 #include "ui_mainWindow.h"
 #include "FacadeScene.h"
 #include "QtDrawCommand.h"
@@ -20,7 +21,10 @@
 #include "FillModelsTableCommand.h"
 #include "RemoveModelCommand.h"
 #include "MoveCameraCommand.h"
+#include "SetChessboardMaterialCommand.h"
 #include "dataMaps.h"
+
+class MainWindow;
 
 class MyQGraphicsView : public QGraphicsView
 {
@@ -41,20 +45,43 @@ protected:
     }
 };
 
+struct ThrData {
+    FacadeScene* pfacade;
+    MainWindow* mwindow;
+    std::shared_ptr<QImage> img;
+};
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
-public:
-    explicit MainWindow(QWidget *parant = nullptr);
 
 private:
     Ui::MainWindow ui;
     MyQGraphicsView *graphicsView;
     FacadeScene facade;
     DataMaps dataMaps;
+    pthread_t* threadRender;
+    ThrData* dataThr;
+
+    enum StatusGui {
+        BUSY_RENDER,
+        FREE
+    };
+    StatusGui status = StatusGui::FREE;
+
+public:
+    explicit MainWindow(QWidget *parant = nullptr);
+    ~MainWindow();
+    void measureRenderTime();
+
+signals:
+    // void StartRender();
+    void EndRenderSignal(std::shared_ptr<QImage> img);
 
 private slots:
+    void InformationBusy();
+    void EndRenderSlot(std::shared_ptr<QImage> img);
+
     void onLoadModelBtnClicked();
     void onChangeMaterialBtnClicked();
     void onDrawBtnClicked();
@@ -67,6 +94,9 @@ private slots:
     void onLeftCameraBtnClicked();
     void onZoomCameraBtnClicked();
     void onMoveAwayCameraBtnClicked();
+    void toggledGlossyRadioBtn(bool checked);
+    void toggledMatteRadioBtn(bool checked);
+    void exitMenuTriggered();
 
 private:
     // const char *getModelFilename(typeChess type_chess);
@@ -76,8 +106,10 @@ private:
 
     void rotateCamera(Axis axis, int sign);
     void moveCamera(int sign);
-
-public:
-    void measureRenderTime();
+    void saveToFile();    
 
 };
+
+
+
+

@@ -21,6 +21,8 @@ void TrianglesModelLoadCommand::execute() {
     // std::shared_ptr<Material> material = materialManager->getMaterial(id_material);
     std::shared_ptr<Material> material = materialManager->getActiveMaterial(indPairMaterial);
     PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
+    std::cout << "TrianglesModelLoadCommand::execute\n";
+    std::cout << *model << "\n";
     model->setTypeChess(type);
     sceneManager->addModel(model, pi, pj);
 

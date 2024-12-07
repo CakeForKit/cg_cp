@@ -1,0 +1,237 @@
+        -:    0:Source:/home/kathrine/cg_cp/exceptions/Exceptions.h
+        -:    0:Graph:Camera.cpp.gcno
+        -:    0:Data:Camera.cpp.gcda
+        -:    0:Runs:2
+        -:    1:#pragma once
+        -:    2:#include "BaseException.h"
+        -:    3:
+        -:    4:// time_t curTime = time(NULL);
+        -:    5:// throw NormalizeDivZeroException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+        -:    6:
+        -:    7:
+        -:    8:#pragma region Gui
+        -:    9:
+        -:   10:// class NoSelectedModelException: public GuiException
+        -:   11:// {
+        -:   12:// public:
+        -:   13://     NoSelectedModelException(const char *time, const char *filename,
+        -:   14://                   const size_t line, const char *class_name,
+        -:   15://                   const char *method_name, const char *info = "You need to choose a model") noexcept:
+        -:   16://                   GuiException(time, filename, line, class_name, method_name, info){};
+        -:   17:// };
+        -:   18:
+        -:   19:#pragma region end
+        -:   20:
+        -:   21:
+        -:   22:#pragma region Build
+        -:   23:
+        -:   24:class NoFacesBuilderException: public BuilderException
+        -:   25:{
+        -:   26:public:
+        -:   27:    NoFacesBuilderException(const char *time, const char *filename,
+        -:   28:                  const size_t line, const char *class_name,
+        -:   29:                  const char *method_name, const char *info = "Can not build model with 0 faces") noexcept:
+        -:   30:                  BuilderException(time, filename, line, class_name, method_name, info){};
+        -:   31:};
+        -:   32:
+        -:   33:#pragma region end
+        -:   34:
+        -:   35:#pragma region Read
+        -:   36:class NoFileReadException: public ReadException
+        -:   37:{
+        -:   38:public:
+        -:   39:    NoFileReadException(const char *time, const char *filename,
+        -:   40:                  const size_t line, const char *class_name,
+        -:   41:                  const char *method_name, const char *info = "Error open file") noexcept:
+        -:   42:                  ReadException(time, filename, line, class_name, method_name, info){};
+        -:   43:};
+        -:   44:
+        -:   45:class SymbolReadException: public ReadException
+        -:   46:{
+        -:   47:public:
+        -:   48:    SymbolReadException(const char *time, const char *filename,
+        -:   49:                  const size_t line, const char *class_name,
+        -:   50:                  const char *method_name, const char *info = "Unexpected symbol read") noexcept:
+        -:   51:                  ReadException(time, filename, line, class_name, method_name, info){};
+        -:   52:};
+        -:   53:
+        -:   54:class FloatReadException: public ReadException
+        -:   55:{
+        -:   56:public:
+        -:   57:    FloatReadException(const char *time, const char *filename,
+        -:   58:                  const size_t line, const char *class_name,
+        -:   59:                  const char *method_name, const char *info = "Expected read float") noexcept:
+        -:   60:                  ReadException(time, filename, line, class_name, method_name, info){};
+        -:   61:};
+        -:   62:
+        -:   63:class EndReadException: public ReadException
+        -:   64:{
+        -:   65:public:
+        -:   66:    EndReadException(const char *time, const char *filename,
+        -:   67:                  const size_t line, const char *class_name,
+        -:   68:                  const char *method_name, const char *info = "Unexpected end of file") noexcept:
+        -:   69:                  ReadException(time, filename, line, class_name, method_name, info){};
+        -:   70:};
+        -:   71:
+        -:   72:class DataNotFullReadException: public ReadException
+        -:   73:{
+        -:   74:public:
+        -:   75:    DataNotFullReadException(const char *time, const char *filename,
+        -:   76:                  const size_t line, const char *class_name,
+        -:   77:                  const char *method_name, const char *info = "Can read not enough data") noexcept:
+        -:   78:                  ReadException(time, filename, line, class_name, method_name, info){};
+        -:   79:};
+        -:   80:
+        -:   81:class DataNotReadException: public ReadException
+        -:   82:{
+        -:   83:public:
+        -:   84:    DataNotReadException(const char *time, const char *filename,
+        -:   85:                  const size_t line, const char *class_name,
+        -:   86:                  const char *method_name, const char *info = "Data was not read") noexcept:
+        -:   87:                  ReadException(time, filename, line, class_name, method_name, info){};
+        -:   88:};
+        -:   89:
+        -:   90:#pragma region end
+        -:   91:
+        -:   92:#pragma region Scene
+        -:   93:
+        -:   94:class LastCameraSceneException: public SceneException
+        -:   95:{
+        -:   96:public:
+        -:   97:    LastCameraSceneException(const char *time, const char *filename,
+        -:   98:                  const size_t line, const char *class_name,
+        -:   99:                  const char *method_name, const char *info = "Can't delete the last camera") noexcept:
+        -:  100:                  SceneException(time, filename, line, class_name, method_name, info){};
+        -:  101:};
+        -:  102:
+        -:  103:class NoModelsSceneException: public SceneException
+        -:  104:{
+        -:  105:public:
+        -:  106:    NoModelsSceneException(const char *time, const char *filename,
+        -:  107:                  const size_t line, const char *class_name,
+        -:  108:                  const char *method_name, const char *info = "There are no models left on the scene") noexcept:
+        -:  109:                  SceneException(time, filename, line, class_name, method_name, info){};
+        -:  110:};
+        -:  111:
+        -:  112:class NoPlaceSceneException: public SceneException
+        -:  113:{
+        -:  114:public:
+        -:  115:    NoPlaceSceneException(const char *time, const char *filename,
+        -:  116:                  const size_t line, const char *class_name,
+        -:  117:                  const char *method_name, const char *info = "There are to many models on the scene") noexcept:
+        -:  118:                  SceneException(time, filename, line, class_name, method_name, info){};
+        -:  119:};
+        -:  120:
+        -:  121:class BusyPosSceneException: public SceneException
+        -:  122:{
+        -:  123:public:
+        -:  124:    BusyPosSceneException(const char *time, const char *filename,
+        -:  125:                  const size_t line, const char *class_name,
+        -:  126:                  const char *method_name, const char *info = "There is already a figure in this place") noexcept:
+        -:  127:                  SceneException(time, filename, line, class_name, method_name, info){};
+        -:  128:};
+        -:  129:
+        -:  130:#pragma region end
+        -:  131:
+        -:  132:#pragma region Camera
+        -:  133:
+        -:  134:class TooCloseCameraException: public CameraException
+        -:  135:{
+        -:  136:public:
+    #####:  137:    TooCloseCameraException(const char *time, const char *filename,
+        -:  138:                  const size_t line, const char *class_name,
+    #####:  139:                  const char *method_name, const char *info = "Camera too close") noexcept:
+    #####:  140:                  CameraException(time, filename, line, class_name, method_name, info){};
+        -:  141:};
+        -:  142:
+        -:  143:class NotSetPixelsCameraException: public CameraException
+        -:  144:{
+        -:  145:public:
+    #####:  146:    NotSetPixelsCameraException(const char *time, const char *filename,
+        -:  147:                  const size_t line, const char *class_name,
+    #####:  148:                  const char *method_name, const char *info = "Count pixels viewport not set") noexcept:
+    #####:  149:                  CameraException(time, filename, line, class_name, method_name, info){};
+        -:  150:};
+        -:  151:
+        -:  152:class CountPixelsCameraException: public CameraException
+        -:  153:{
+        -:  154:public:
+    #####:  155:    CountPixelsCameraException(const char *time, const char *filename,
+        -:  156:                  const size_t line, const char *class_name,
+    #####:  157:                  const char *method_name, const char *info = "Count pixels wight or height can not be 0") noexcept:
+    #####:  158:                  CameraException(time, filename, line, class_name, method_name, info){};
+        -:  159:};
+        -:  160:
+        -:  161:class FocalLengthCameraException: public CameraException
+        -:  162:{
+        -:  163:public:
+    #####:  164:    FocalLengthCameraException(const char *time, const char *filename,
+        -:  165:                  const size_t line, const char *class_name,
+    #####:  166:                  const char *method_name, const char *info = "Focal length can not be < 0") noexcept:
+    #####:  167:                  CameraException(time, filename, line, class_name, method_name, info){};
+        -:  168:};
+        -:  169:
+        -:  170:class ViewportHeightCameraException: public CameraException
+        -:  171:{
+        -:  172:public:
+    #####:  173:    ViewportHeightCameraException(const char *time, const char *filename,
+        -:  174:                  const size_t line, const char *class_name,
+    #####:  175:                  const char *method_name, const char *info = "Viewport height can not be < 0") noexcept:
+    #####:  176:                  CameraException(time, filename, line, class_name, method_name, info){};
+        -:  177:};
+        -:  178:
+        -:  179:#pragma region end
+        -:  180:
+        -:  181:
+        -:  182:#pragma region TrianglesModel
+        -:  183:
+        -:  184:// class PointExistsTrianglesModelException: public TrianglesModelException
+        -:  185:// {
+        -:  186:// public:
+        -:  187://     PointExistsTrianglesModelException(const char *time, const char *filename,
+        -:  188://                   const size_t line, const char *class_name,
+        -:  189://                   const char *method_name, const char *info = "Try to add existing point to triangleModel") noexcept:
+        -:  190://                   TrianglesModelException(time, filename, line, class_name, method_name, info){};
+        -:  191:// };
+        -:  192:
+        -:  193:// class TriangleExistsTrianglesModelException: public TrianglesModelException
+        -:  194:// {
+        -:  195:// public:
+        -:  196://     TriangleExistsTrianglesModelException(const char *time, const char *filename,
+        -:  197://                   const size_t line, const char *class_name,
+        -:  198://                   const char *method_name, const char *info = "Try to add existing triangle to triangleModel") noexcept:
+        -:  199://                   TrianglesModelException(time, filename, line, class_name, method_name, info){};
+        -:  200:// };
+        -:  201:
+        -:  202:class SizeFaceTrianglesModelException: public TrianglesModelException
+        -:  203:{
+        -:  204:public:
+        -:  205:    SizeFaceTrianglesModelException(const char *time, const char *filename,
+        -:  206:                  const size_t line, const char *class_name,
+        -:  207:                  const char *method_name, const char *info = "Number of vertices in a face is not 3") noexcept:
+        -:  208:                  TrianglesModelException(time, filename, line, class_name, method_name, info){};
+        -:  209:};
+        -:  210:
+        -:  211:#pragma region end
+        -:  212:
+        -:  213:#pragma region Triangle
+        -:  214:
+        -:  215:class SamePointsTriangleException: public TriangleException
+        -:  216:{
+        -:  217:public:
+        -:  218:    SamePointsTriangleException(const char *time, const char *filename,
+        -:  219:                  const size_t line, const char *class_name,
+        -:  220:                  const char *method_name, const char *info = "Try create Triangle from same points") noexcept:
+        -:  221:                  TriangleException(time, filename, line, class_name, method_name, info){};
+        -:  222:};
+        -:  223:
+        -:  224:class DegenerateTriangleException: public TriangleException
+        -:  225:{
+        -:  226:public:
+        -:  227:    DegenerateTriangleException(const char *time, const char *filename,
+        -:  228:                  const size_t line, const char *class_name,
+        -:  229:                  const char *method_name, const char *info = "Try create degenerate Triangle") noexcept:
+        -:  230:                  TriangleException(time, filename, line, class_name, method_name, info){};
+        -:  231:};
+        -:  232:
+        -:  233:#pragma region end
