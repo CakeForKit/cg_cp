@@ -10,6 +10,15 @@ enum class idMaterial {
     RED,
     BLUE,
 
+    CLASSIC_WHITE,
+    CLASSIC_BLACK,
+
+    ORANGE,
+    PURPLE,
+
+    PINK,
+    GREEN,
+
     GLOSSY_WHITE,
     MATTE_WHITE,
 
@@ -20,9 +29,10 @@ enum class idMaterial {
 };
 
 enum class idPairMaterial {
-    // GLOSSY,
-    // MATTE,
-    BLUE_RED
+    BLUE_RED,
+    CLASSIC,
+    ORANGE_PURPLE,
+    PINK_GREEN
 };
 
 enum class indPair {

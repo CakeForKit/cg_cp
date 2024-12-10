@@ -3,6 +3,12 @@
 #include "BaseCommand.h"
 #include "LoadManager.h"
 
+enum class typeScenes {
+    BEGIN,
+    ALLBYONE,
+    TEST
+};
+
 class BaseLoadCommand : public BaseCommand 
 {
 protected:

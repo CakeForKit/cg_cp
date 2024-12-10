@@ -23,7 +23,6 @@ public:
     Scene();
 
     void addModel(std::shared_ptr<Model> model, size_t i, size_t j);
-    void addModel(std::shared_ptr<Model> model);
     void removeModel(size_t ind);
     void deleteAllModels() noexcept;
     std::shared_ptr<Model> getModel(size_t ind);
@@ -52,6 +51,7 @@ public:
 
     size_t getCountAllFaces() const noexcept;
     std::ostream& print(std::ostream& os) const noexcept;
+    int show_chessboard = 1;
 };
 
 std::ostream& operator<<(std::ostream &os, const Scene &scene);

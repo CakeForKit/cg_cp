@@ -22,6 +22,10 @@
 #include "RemoveModelCommand.h"
 #include "MoveCameraCommand.h"
 #include "SetChessboardMaterialCommand.h"
+#include "BeginSceneLoadCommand.h"
+#include "AllByOneSceneLoadCommand.h"
+#include "TestSceneLoadCommand.h"
+#include "ClearSceneCommand.h"
 #include "dataMaps.h"
 
 class MainWindow;
@@ -96,6 +100,8 @@ private slots:
     void onMoveAwayCameraBtnClicked();
     void toggledGlossyRadioBtn(bool checked);
     void toggledMatteRadioBtn(bool checked);
+    void onloadSceneBtnClicked();
+    void onclearSceneBtnClicked();
     void exitMenuTriggered();
 
 private:

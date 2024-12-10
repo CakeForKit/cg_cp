@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     connect(ui.TableWidget, &QTableWidget::cellActivated, this, &MainWindow::tableCellActivated);
     connect(ui.GlossyRadioBtn, &QRadioButton::toggled, this, &MainWindow::toggledGlossyRadioBtn);
     connect(ui.MatteRadioBtn, &QRadioButton::toggled, this, &MainWindow::toggledMatteRadioBtn);
+    connect(ui.loadSceneBtn, &QPushButton::clicked, this, &MainWindow::onloadSceneBtnClicked);
+    connect(ui.clearSceneBtn, &QPushButton::clicked, this, &MainWindow::onclearSceneBtnClicked);
     connect(ui.exitMenu, &QMenu::aboutToShow, this, &MainWindow::exitMenuTriggered);
     connect(this, &MainWindow::EndRenderSignal, this, &MainWindow::EndRenderSlot);
 
@@ -46,6 +48,8 @@ MainWindow::MainWindow(QWidget *parant) : QMainWindow(parant), facade(FacadeScen
     // загрузка данный о наборах материалов
     dataMaps.fill_MaterialsComboBox(ui.MaterialsPairsComboBox);
     dataMaps.fill_ColorsComboBox(ui.ColorsComboBox);
+    // загрузка данных о сценах
+    dataMaps.fill_ScenesComboBox(ui.ScenesComboBox);
 
     // ui.TableWidget->horizontalHeader()->setStretchLastSection(true);
     ui.TableWidget->resizeColumnsToContents();
@@ -75,6 +79,7 @@ void MainWindow::InformationBusy() {
 
 #pragma region updateModelsTable
 void MainWindow::updateModelsTable() {
+    std::cout << "updateModelsTable---\n";
     FillModelsTableCommand cmd(ui.TableWidget);
     facade.execute(cmd);
     ui.TableWidget->resizeColumnsToContents();
@@ -105,8 +110,8 @@ void MainWindow::onLoadModelBtnClicked() {
 
     try {
         size_t i, j;
-        i = static_cast<size_t>(ui.iPosComboBox->currentIndex());
-        j = static_cast<size_t>(ui.jPosComboBox->currentIndex());
+        j = static_cast<size_t>(ui.iPosComboBox->currentIndex());
+        i = static_cast<size_t>(ui.jPosComboBox->currentIndex());
 
         typeChess type = static_cast<typeChess>(ui.ModelsComboBox->currentIndex());
         const char *filename = dataMaps.getFilename(type);
@@ -133,6 +138,54 @@ void MainWindow::onLoadModelBtnClicked() {
         return;
     }
     std::cout << "endonLoadModelBtnClicked: ---------" <<std::endl;
+}
+
+#pragma region Load Scene
+
+void MainWindow::onloadSceneBtnClicked() {
+    if (status == StatusGui::BUSY_RENDER) {
+        InformationBusy();
+        return;
+    }
+    typeScenes tScene = static_cast<typeScenes>(ui.ScenesComboBox->currentIndex());
+
+    try {
+        if (tScene == typeScenes::BEGIN) {
+            BeginSceneLoadCommand cmd(dataMaps, STEP_OF_REVOLVING);
+            facade.execute(cmd);
+        } else if (tScene == typeScenes::ALLBYONE) {
+            AllByOneSceneLoadCommand cmd(dataMaps, STEP_OF_REVOLVING);
+            facade.execute(cmd);
+        } else if (tScene == typeScenes::TEST) {
+            TestSceneLoadCommand cmd(STEP_OF_REVOLVING);
+            facade.execute(cmd);
+
+            return;
+        }
+        updateModelsTable();
+
+    } catch (std::exception &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
+        std::cout << ex.what() << "\n";
+        return;
+    }
+}
+
+void MainWindow::onclearSceneBtnClicked() {
+    if (status == StatusGui::BUSY_RENDER) {
+        InformationBusy();
+        return;
+    }
+    try {
+        ClearSceneCommand cmd;
+        facade.execute(cmd);
+
+        updateModelsTable();
+    } catch (std::exception &ex) {
+        QMessageBox::critical(nullptr, "ERROR", ex.what());
+        std::cout << ex.what() << "\n";
+        return;
+    }
 }
 
 #pragma region Change Material
@@ -183,6 +236,7 @@ void MainWindow::onDrawBtnClicked() {
     status = StatusGui::BUSY_RENDER;
     ui.MatteRadioBtn->setEnabled(false);
     ui.GlossyRadioBtn->setEnabled(false);
+    ui.drawBtn->setText("Идет отрисовка...");
 
     try {
         int img_width = graphicsView->viewport()->width();
@@ -214,6 +268,7 @@ void MainWindow::EndRenderSlot(std::shared_ptr<QImage> img) {
         status = StatusGui::FREE;
         ui.MatteRadioBtn->setEnabled(true);
         ui.GlossyRadioBtn->setEnabled(true);
+        ui.drawBtn->setText("Показать");
     } catch (BaseException &ex) {
         QMessageBox::critical(nullptr, "ERROR", ex.what());
         std::cout << ex.what() << "\n";
@@ -232,8 +287,8 @@ void MainWindow::onMoveModelBtnClicked() {
     try {
         size_t id, pi, pj;
         id = static_cast<size_t>(ui.AllModelsComboBox->currentIndex());
-        pi = static_cast<size_t>(ui.MoveTo_iPosComboBox->currentIndex());
-        pj = static_cast<size_t>(ui.MoveTo_jPosComboBox->currentIndex());
+        pj = static_cast<size_t>(ui.MoveTo_iPosComboBox->currentIndex());
+        pi = static_cast<size_t>(ui.MoveTo_jPosComboBox->currentIndex());
         std::cout << "onMoveModelBtnClicked: " << pi << " " << pj << "\n";
         MoveCellModelCommand command(id, pi, pj);
         facade.execute(command);
@@ -283,6 +338,7 @@ void MainWindow::onDelModelBtnClicked() {
         std::cout << "onDelModelBtnClicked: ------------" <<std::endl;
     
         size_t id = static_cast<size_t>(ui.AllModelsComboBox->currentIndex());
+        std::cout << "del ind = " << id << "\n";
 
         RemoveModelCommand command(id);
         facade.execute(command);

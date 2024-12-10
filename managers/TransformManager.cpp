@@ -27,12 +27,12 @@ void TransformManager::rotateModel(PtrModel model, float angle) {
     // model->transform(action);
 }
 
-void TransformManager::moveCamera(std::shared_ptr<Camera> camera, double length) {
+void TransformManager::moveCamera(std::shared_ptr<Camera> camera, double length, bool withChessboard) {
     Vector3 pos, newPos;
     pos = camera->getCameraPos();
     newPos = pos.cut(length) - pos;
     std::shared_ptr<TransformAction> action = std::make_shared<MoveAction>(newPos.x(), newPos.y(), newPos.z());
-    camera->transform(action);
+    camera->transform(action, withChessboard);
 }
 
 void TransformManager::rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis) {

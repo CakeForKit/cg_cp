@@ -26,29 +26,29 @@ void see_work_vector() {
 
 #include "Triangle.h"
 
-void see_work_triangle() {
-    std::shared_ptr<Point3> p1, p2, p3, p4;
-    p1 = std::make_shared<Point3>();
-    p2 = std::make_shared<Point3>(1, 1, 1);
-    p3 = std::make_shared<Point3>(1, 2, 3);
-    p4 = std::make_shared<Point3>(11, 0, 0);
+// void see_work_triangle() {
+//     std::shared_ptr<Point3> p1, p2, p3, p4;
+//     p1 = std::make_shared<Point3>();
+//     p2 = std::make_shared<Point3>(1, 1, 1);
+//     p3 = std::make_shared<Point3>(1, 2, 3);
+//     p4 = std::make_shared<Point3>(11, 0, 0);
 
-    Triangle tr1(p1, p2, p3);
-    std::cout << "tr1 = ";
-    tr1.print_debug_info();
-    p1->setX(11);                           // В этот момент может нарушиться целостность обьекта, Надо убрать возможность ихменять координаты точки снаружи
-    std::cout << "tr1 = ";
-    tr1.print_debug_info();
+//     Triangle tr1(p1, p2, p3);
+//     std::cout << "tr1 = ";
+//     tr1.print_debug_info();
+//     p1->setX(11);                           // В этот момент может нарушиться целостность обьекта, Надо убрать возможность ихменять координаты точки снаружи
+//     std::cout << "tr1 = ";
+//     tr1.print_debug_info();
 
-    Triangle tr2(tr1);
-    std::cout << "tr2 = ";
-    tr2.print_debug_info();
+//     Triangle tr2(tr1);
+//     std::cout << "tr2 = ";
+//     tr2.print_debug_info();
 
-    Triangle tr3(p2, p4, p3);
-    std::cout << "tr3 = ";
-    tr3.print_debug_info();
-    std::cout << "tr3 == tr1 - " << (tr1 == tr3) << std::endl;
-}
+//     Triangle tr3(p2, p4, p3);
+//     std::cout << "tr3 = ";
+//     tr3.print_debug_info();
+//     std::cout << "tr3 == tr1 - " << (tr1 == tr3) << std::endl;
+// }
 
 #include "TrianglesModel.h"
 

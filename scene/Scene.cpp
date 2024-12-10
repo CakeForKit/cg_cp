@@ -59,24 +59,11 @@ void Scene::addModel(std::shared_ptr<Model> model, size_t i, size_t j) {
     // }
 }
 
-void Scene::addModel(std::shared_ptr<Model> model) {
-    bool find_pos = false;
-    for (size_t i = 0; !find_pos && i < 8; ++i)
-        for (size_t j = 0; !find_pos && j < 8; ++j) {
-            if (posModels[i][j] < 0) {
-                posModels[i][j] = static_cast<int>(models.size() - 1);
-                find_pos = true;
-            }
-        }
-    if (!find_pos) {
-        time_t curTime = time(NULL);
-        throw NoPlaceSceneException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
-    }
-    models.push_back(model);
-}
-
 void Scene::removeModel(size_t ind) {
+    std::cout << "Scene::removeModel-----\n\n";
     size_t count_models = models.size();
+    std::cout << "count_models = " << count_models << "\n";
+    std::cout << "ind = " << ind << "\n";
     if (count_models == 0) {
         time_t curTime = time(NULL);
         throw NoModelsSceneException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
@@ -85,12 +72,19 @@ void Scene::removeModel(size_t ind) {
         time_t curTime = time(NULL);
         throw IndexException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }
+    std::cout << "count_models = " << count_models << "\n";
     int id = static_cast<int>(ind);
     for (size_t i = 0;i < 8; ++i) 
-        for (size_t j = 0; j < 8; ++j)
-            if (posModels[i][j] == id)
+        for (size_t j = 0; j < 8; ++j) {
+            if (posModels[i][j] > id)
+                posModels[i][j]--;
+            else if (posModels[i][j] == id)
                 posModels[i][j] = -1;
-    models.erase(models.begin() + static_cast<long int>(ind));
+        }
+            
+    std::cout << "before rm len = " << models.size() << "\n";
+    models.erase(models.begin() + id);
+    std::cout << "after rm len = " << models.size() << "\n";
 }
 
 std::shared_ptr<Model> Scene::getModel(size_t ind) {
@@ -169,21 +163,11 @@ Point3 Scene::changeModelPos(size_t idModel, size_t i, size_t j) {
                 posModels[i][j] = -1;
     PtrModel model = getModel(idModel);
     posModels[i][j] = id;
-
+    
     Point3 newposCell, oldposCell, diff;
     newposCell = getPosCell(i, j);
     oldposCell  = model->getCenter();
     diff = newposCell - oldposCell;
-
-    // std::cout << "changeModelPos: id = " << idModel << "\n";
-    // std::cout << "oldposCell = " << oldposCell << "\n";
-    // std::cout << "newposCell = " << newposCell << "\n";
-    // for (size_t i = 0;i < 8; ++i) {
-    //     for (size_t j = 0; j < 8; ++j) {
-    //         std::cout << posModels[i][j] << " ";
-    //     }
-    //     std::cout << "\n";
-    // }
 
     return diff;
 }
@@ -207,15 +191,11 @@ bool Scene::checkPosModel(size_t i, size_t j) const noexcept {
     return i < 8 && j < 8 && posModels[i][j] == -1;
 }
 
-// std::shared_ptr<Light> Scene::getLight() noexcept {
-//     return light;
-// }
-
 bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
     intersection_t closest_intersect, now_intersect;
     closest_intersect.distance = std::numeric_limits<double>::max();
 
-    if (chessborad_set)
+    if (chessborad_set && show_chessboard)
         chessboard->intersection(ray, closest_intersect);
     for (std::shared_ptr<Model> model : models) {
         if (model->intersection(ray, now_intersect) && now_intersect.distance < closest_intersect.distance) {
@@ -238,6 +218,9 @@ bool Scene::intersection(const Ray &ray, intersection_t &intersect) const {
 
 void Scene::deleteAllModels() noexcept {
     models.clear();
+    for (size_t i = 0; i < 8; ++i)
+        for (size_t j = 0; j < 8; ++j)
+            posModels[i][j] = -1;
 }
 
 size_t Scene::getCountAllFaces() const noexcept {

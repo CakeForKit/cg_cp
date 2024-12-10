@@ -10,13 +10,19 @@ DataMaps::DataMaps() {
         {typeChess::KING, "/home/kathrine/cg_cp/data/king.txt"},
     };
     pairMaterialsMap = {
-        // {idPairMaterial::GLOSSY, "Гланцевый черный-белый"},
-        // {idPairMaterial::MATTE, "Матовый черный-белый"},
-        {idPairMaterial::BLUE_RED, "Голубой-красный"}
+        {idPairMaterial::BLUE_RED, "Голубой-красный"},
+        {idPairMaterial::CLASSIC, "Классический"},
+        {idPairMaterial::ORANGE_PURPLE, "Оранжевый-фиолетовый"},
+        {idPairMaterial::PINK_GREEN, "Розовый-зеленый"},
     };
     pairColorsMap = {
         {indPair::WHITE, "Игрок 1"},
         {indPair::BLACK, "Игрок 2"}
+    };
+    sceneMap = {
+        {typeScenes::BEGIN, "Начальная расстановка"},
+        {typeScenes::ALLBYONE, "Все фигуры"}
+        , {typeScenes::TEST, "Тест"}
     };
 }
 
@@ -57,6 +63,13 @@ void DataMaps::fill_MaterialsComboBox(QComboBox *cb) {
 void DataMaps::fill_ColorsComboBox(QComboBox *cb) {
     for (indPair elem : {indPair::WHITE, indPair::BLACK})
         cb->insertItem(static_cast<int>(elem), QString(pairColorsMap[elem]));
+}
+
+void DataMaps::fill_ScenesComboBox(QComboBox *cb) {
+    for (std::map<typeScenes, const char *>::iterator it = sceneMap.begin(); it != sceneMap.end(); ++it) {
+        typeScenes elem = it->first;
+        cb->insertItem(static_cast<int>(elem), QString(sceneMap[elem]));
+    }
 }
 
 const char *DataMaps::getFilename(typeChess index) {

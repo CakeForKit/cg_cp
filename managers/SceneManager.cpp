@@ -6,6 +6,10 @@ std::shared_ptr<Scene> SceneManager::getScene() noexcept {
     return scene;
 }
 
+void SceneManager::clearScene() noexcept {
+    scene->deleteAllModels();
+}
+
 size_t SceneManager::getCountAllFaces() const noexcept {
     return scene->getCountAllFaces();
 }
@@ -16,10 +20,6 @@ size_t SceneManager::countModels() const noexcept {
 
 void SceneManager::addModel(std::shared_ptr<Model> model, size_t i, size_t j) {
     scene->addModel(model, i, j);
-}
-
-void SceneManager::addModel(std::shared_ptr<Model> model) {
-    scene->addModel(model);
 }
 
 void SceneManager::removeModel(size_t ind) {
@@ -34,13 +34,13 @@ bool SceneManager::getPosModel(size_t idModel, size_t &i, size_t &j) const noexc
     return scene->getPosModel(idModel, i, j);
 }
 
-void SceneManager::addCamera() noexcept {
-    scene->addCamera();
-}
+// void SceneManager::addCamera() noexcept {
+//     scene->addCamera();
+// }
 
-void SceneManager::removeCamera(size_t ind) {
-    scene->removeCamera(ind);
-}
+// void SceneManager::removeCamera(size_t ind) {
+//     scene->removeCamera(ind);
+// }
 
 std::shared_ptr<Camera> SceneManager::getActiveCamera() {
     return scene->getActiveCamera();

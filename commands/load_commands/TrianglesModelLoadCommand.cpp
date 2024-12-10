@@ -18,15 +18,16 @@ type(_type), pi(_i), pj(_j) {
 }
     
 void TrianglesModelLoadCommand::execute() {
-    // std::shared_ptr<Material> material = materialManager->getMaterial(id_material);
     std::shared_ptr<Material> material = materialManager->getActiveMaterial(indPairMaterial);
     PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
     std::cout << "TrianglesModelLoadCommand::execute\n";
-    std::cout << *model << "\n";
+    // std::cout << *model << "\n";
     model->setTypeChess(type);
     sceneManager->addModel(model, pi, pj);
-
+    
     size_t idModel = sceneManager->countModels() - 1;
     Point3 diff = sceneManager->changeModelPos(idModel, pi, pj);
+    std::cout << "------\n";
     transformManager->moveModel(model, diff.x(), diff.y(), diff.z());
+    std::cout << "TrianglesModelLoadCommand::end\n";
 }

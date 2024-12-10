@@ -108,13 +108,13 @@ Ray Camera::createRay(int ip, int jp) {
     return Ray(cameraPos, rayDirection);
 }
 
-void Camera::transform(const std::shared_ptr<TransformAction> action) {
+void Camera::transform(const std::shared_ptr<TransformAction> action, bool withChessboard) {
     Vector3 newCameraPos = action->transform(cameraPos);
     double nowLen = cameraPos.length();
     double newLen = newCameraPos.length();
-    std::cout << "nowLen = " << nowLen << "\n";
-    std::cout << "newLen = " << newLen << "\n";
-    if (nowLen - newLen > EPS && nowLen - newLen > nowLen - 320) {
+    // std::cout << "nowLen = " << nowLen << "\n";
+    // std::cout << "newLen = " << newLen << "\n";
+    if (withChessboard && nowLen - newLen > EPS && nowLen - newLen > nowLen - 320) {
         time_t curTime = time(NULL);
         throw TooCloseCameraException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
     }

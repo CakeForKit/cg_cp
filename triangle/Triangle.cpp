@@ -4,12 +4,12 @@ std::ostream& operator<<(std::ostream &os, const Triangle &tr) {
     return os << "(" << *(tr[0]) << "_" << *(tr[1]) << "_" << *(tr[2]) << ")";
 }
 
-void Triangle::print_debug_info() {
-    std::cout << *this << std::endl;
-    for (size_t i = 0; i < 3; ++i) {
-        std::cout << "use_count " << *points[i] << " = " << points[i].use_count() << std::endl;
-    }
-}
+// void Triangle::print_debug_info() {
+//     std::cout << *this << std::endl;
+//     for (size_t i = 0; i < 3; ++i) {
+//         std::cout << "use_count " << *points[i] << " = " << points[i].use_count() << std::endl;
+//     }
+// }
 
 Triangle::Triangle(Point3 &&p1, Point3 &&p2, Point3 &&p3) {
     if (p1 == p2 || p2 == p3 || p1 == p3) {

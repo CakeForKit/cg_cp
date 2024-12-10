@@ -38,9 +38,10 @@ void FillModelsTableCommand::execute() {
         pWidget->setLayout(pLayout);
         tab->setCellWidget(ii, 2, pWidget);
         
+        std::cout << "FillModelsTableCommand: see i = " << i << "\n";
         assert(sceneManager->getPosModel(i, pi, pj));
-        pos[0] = static_cast<char>(97 + pi);
-        pos[1] = static_cast<char>(49 + pj);
+        pos[0] = static_cast<char>(97 + pj);
+        pos[1] = static_cast<char>(49 + pi);
         
         tab->setItem(ii, 3, new QTableWidgetItem(pos));
     }

@@ -38,7 +38,7 @@ public:
     // (определяет что нормаль внутренняя за счет луча, он должен входить в плоскость)
     Vector3 getNormal(const Ray &ray) const noexcept;
 
-    void print_debug_info();
+    // void print_debug_info();
 
 };
 

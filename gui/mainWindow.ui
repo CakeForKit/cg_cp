@@ -6,48 +6,72 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>627</width>
-    <height>578</height>
+    <width>752</width>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
      <widget class="QWidget" name="widget_4" native="true">
       <property name="minimumSize">
        <size>
-        <width>350</width>
+        <width>410</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>400</width>
+        <width>450</width>
         <height>16777215</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(221, 216, 213);</string>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_15">
        <property name="spacing">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="sizeConstraint">
         <enum>QLayout::SetMinimumSize</enum>
        </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
-        <widget class="QTabWidget" name="tabWidget_2">
+        <widget class="QTabWidget" name="tabWidget">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="currentIndex">
-          <number>0</number>
+         <property name="styleSheet">
+          <string notr="true">selection-background-color: rgb(199, 188, 183);</string>
          </property>
-         <widget class="QWidget" name="CreateTab_2">
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <widget class="QWidget" name="CreateTab">
           <attribute name="title">
            <string>Создание</string>
           </attribute>
@@ -59,13 +83,13 @@
             <enum>QLayout::SetMinimumSize</enum>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>2</number>
            </property>
            <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>2</number>
            </property>
            <property name="bottomMargin">
             <number>0</number>
@@ -79,10 +103,43 @@
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_17">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
               <item>
                <widget class="QLabel" name="label_20">
+                <property name="sizeIncrement">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(199, 188, 183);</string>
+                </property>
                 <property name="text">
                  <string>Загрузка фигуры</string>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="margin">
+                 <number>1</number>
                 </property>
                </widget>
               </item>
@@ -139,10 +196,43 @@
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_18">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
               <item>
                <widget class="QLabel" name="label_21">
+                <property name="sizeIncrement">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(199, 188, 183);</string>
+                </property>
                 <property name="text">
                  <string>Изменение цветового набора</string>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="margin">
+                 <number>1</number>
                 </property>
                </widget>
               </item>
@@ -168,10 +258,43 @@
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
               <item>
                <widget class="QLabel" name="label_24">
+                <property name="sizeIncrement">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(199, 188, 183);</string>
+                </property>
                 <property name="text">
                  <string>Материал шахматной доски</string>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="margin">
+                 <number>1</number>
                 </property>
                </widget>
               </item>
@@ -204,7 +327,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="TransformTab_2">
+         <widget class="QWidget" name="TransformTab">
           <attribute name="title">
            <string>Перемещение</string>
           </attribute>
@@ -213,13 +336,13 @@
             <number>0</number>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>2</number>
            </property>
            <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>2</number>
            </property>
            <property name="bottomMargin">
             <number>0</number>
@@ -250,6 +373,21 @@
               </property>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_14">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>3</number>
+                </property>
                 <item>
                  <widget class="QLabel" name="label_22">
                   <property name="text">
@@ -293,10 +431,43 @@
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_20">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
-                  <widget class="QLabel" name="label_23">
+                  <widget class="QLabel" name="label_36">
+                   <property name="sizeIncrement">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(199, 188, 183);</string>
+                   </property>
                    <property name="text">
                     <string>Перемещение</string>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="margin">
+                    <number>1</number>
                    </property>
                   </widget>
                  </item>
@@ -336,10 +507,43 @@
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_21">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
-                  <widget class="QLabel" name="label_26">
+                  <widget class="QLabel" name="label_23">
+                   <property name="sizeIncrement">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(199, 188, 183);</string>
+                   </property>
                    <property name="text">
                     <string>Вращение</string>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="margin">
+                    <number>1</number>
                    </property>
                   </widget>
                  </item>
@@ -358,6 +562,9 @@
                       <font>
                        <pointsize>12</pointsize>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="frame">
                       <bool>true</bool>
@@ -400,6 +607,21 @@
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
                   <widget class="QLabel" name="label_34">
                    <property name="text">
@@ -417,16 +639,44 @@
                 </layout>
                </widget>
               </item>
+              <item>
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </widget>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_2">
+         <widget class="QWidget" name="CameraTab">
           <attribute name="title">
            <string>Камера</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_16">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>2</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>2</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QFrame" name="frame_10">
              <property name="frameShape">
@@ -460,10 +710,43 @@
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_23">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
-                  <widget class="QLabel" name="label_28">
+                  <widget class="QLabel" name="label_26">
+                   <property name="sizeIncrement">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(199, 188, 183);</string>
+                   </property>
                    <property name="text">
                     <string>Вращение</string>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="margin">
+                    <number>1</number>
                    </property>
                   </widget>
                  </item>
@@ -482,6 +765,9 @@
                       <font>
                        <pointsize>12</pointsize>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="frame">
                       <bool>true</bool>
@@ -516,6 +802,9 @@
                    </item>
                    <item>
                     <layout class="QVBoxLayout" name="verticalLayout_24">
+                     <property name="spacing">
+                      <number>5</number>
+                     </property>
                      <item>
                       <widget class="QPushButton" name="UpCameraBtn">
                        <property name="text">
@@ -553,10 +842,43 @@
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_25">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
-                  <widget class="QLabel" name="label_30">
+                  <widget class="QLabel" name="label_28">
+                   <property name="sizeIncrement">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(199, 188, 183);</string>
+                   </property>
                    <property name="text">
                     <string>Перемещение</string>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="margin">
+                    <number>1</number>
                    </property>
                   </widget>
                  </item>
@@ -575,6 +897,9 @@
                       <font>
                        <pointsize>12</pointsize>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="frame">
                       <bool>true</bool>
@@ -612,8 +937,144 @@
                 </layout>
                </widget>
               </item>
+              <item>
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="SceneTab">
+          <attribute name="title">
+           <string>Сцена</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>2</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>2</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="LoadFrame_3">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_26">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_38">
+                <property name="sizeIncrement">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(199, 188, 183);</string>
+                </property>
+                <property name="text">
+                 <string>Загрузка сцены</string>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="margin">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_37">
+                <property name="acceptDrops">
+                 <bool>false</bool>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>После загрузки новой сцены, данная сцена и фигуры на ней будут удалены без возможности восстановаления</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="ScenesComboBox"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="loadSceneBtn">
+                <property name="text">
+                 <string>Загрузить</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="clearSceneBtn">
+             <property name="text">
+              <string>Очистить сцену</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -623,6 +1084,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLabel" name="label_33">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
             <string>Цветовой набор:</string>
            </property>
@@ -630,6 +1094,9 @@
          </item>
          <item>
           <widget class="QLabel" name="PairMaterialLabel">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -639,6 +1106,9 @@
        </item>
        <item>
         <widget class="QLabel" name="label_32">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Фигуры на сцене</string>
          </property>
@@ -646,6 +1116,10 @@
        </item>
        <item>
         <widget class="QTableWidget" name="TableWidget">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+selection-background-color: rgb(199, 188, 183);</string>
+         </property>
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
@@ -686,7 +1160,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>627</width>
+     <width>752</width>
      <height>22</height>
     </rect>
    </property>

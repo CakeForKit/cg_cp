@@ -39,6 +39,7 @@ include_directories(
     commands/camera_commands
     commands/draw_commands
     commands/load_commands
+    commands/load_commands/scene
     commands/material_commands
     commands/scene_commands
     commands/transform_commands
@@ -108,12 +109,22 @@ set(SRCS
     commands/load_commands/TrianglesModelLoadCommand.cpp
     commands/load_commands/TrianglesChessboardLoadCommand.h
     commands/load_commands/TrianglesChessboardLoadCommand.cpp
+    commands/load_commands/scene/AllByOneSceneLoadCommand.h
+    commands/load_commands/scene/AllByOneSceneLoadCommand.cpp 
+    commands/load_commands/scene/BaseSceneLoadCommand.h
+    commands/load_commands/scene/BaseSceneLoadCommand.cpp
+    commands/load_commands/scene/BeginSceneLoadCommand.h
+    commands/load_commands/scene/BeginSceneLoadCommand.cpp
+    commands/load_commands/scene/TestSceneLoadCommand.h
+    commands/load_commands/scene/TestSceneLoadCommand.cpp
     commands/material_commands/SetActiveMaterialCommand.h
     commands/material_commands/SetActiveMaterialCommand.cpp
     commands/material_commands/SetChessboardMaterialCommand.cpp
     commands/material_commands/SetChessboardMaterialCommand.h
     commands/scene_commands/FillModelsTableCommand.h
     commands/scene_commands/FillModelsTableCommand.cpp
+    commands/scene_commands/ClearSceneCommand.h
+    commands/scene_commands/ClearSceneCommand.cpp
     commands/transform_commands/MoveCellModelCommand.cpp
     commands/transform_commands/MoveCellModelCommand.h
     commands/transform_commands/TransformCommand.h
@@ -250,8 +261,8 @@ set(TESTS
     tests/reflect_refract_tests.h
     tests/reflect_refract_tests.cpp
 
-    # tests/std_ray_tracing_test.h
-    # tests/std_ray_tracing_test.cpp
+    tests/std_ray_tracing_test.h
+    tests/std_ray_tracing_test.cpp
 ) 
 
 add_executable(app.exe
