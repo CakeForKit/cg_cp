@@ -1,4 +1,0 @@
-/home/kathrine/cg_cp/build/CMakeFiles/app.exe.dir
-/home/kathrine/cg_cp/build/CMakeFiles/edit_cache.dir
-/home/kathrine/cg_cp/build/CMakeFiles/rebuild_cache.dir
-/home/kathrine/cg_cp/build/CMakeFiles/app.exe_autogen.dir

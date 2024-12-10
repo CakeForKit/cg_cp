@@ -22,7 +22,7 @@ DataMaps::DataMaps() {
     sceneMap = {
         {typeScenes::BEGIN, "Начальная расстановка"},
         {typeScenes::ALLBYONE, "Все фигуры"}
-        , {typeScenes::TEST, "Тест"}
+        // , {typeScenes::TEST, "Тест"}
     };
 }
 
