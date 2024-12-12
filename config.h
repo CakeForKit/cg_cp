@@ -9,6 +9,6 @@
 // const size_t FOCAL_LENGHT = 300;
 // const double light_dist_to_camera = 250;
 
-const size_t STEP_OF_REVOLVING = 10; // STEP_OF_REVOLVING > 2
-const size_t MAX_DEPTH_RENDER = 3;
+const size_t STEP_OF_REVOLVING = 6;// 10; // STEP_OF_REVOLVING > 2
+const size_t MAX_DEPTH_RENDER = 2;
 const size_t COUNT_REPEAT_TIME_MEASURE = 5;
