@@ -12,6 +12,7 @@ protected:
     container_vertices vertices;    // множество уникальных вершин
     container_triangles triangles;   // множество уникальных стреугольников
     Point3 center;
+    double sphere_rad, y0;
 
 public:
     TrianglesModel();
@@ -21,6 +22,8 @@ public:
     virtual void addFace(std::initializer_list<psPoint3> &&lst) override;
     virtual void setCenter(Point3 &c) noexcept override;
     virtual void setCenter(Point3 &&c) noexcept override;
+    virtual void setSphereRad(double r) noexcept override;
+    virtual void setY0(double y0) noexcept override;
 
     virtual container_vertices getVertices() const noexcept override;
     container_triangles getTriangles() const noexcept;

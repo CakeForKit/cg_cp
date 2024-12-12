@@ -22,6 +22,8 @@ public:
     Ray& operator=(Ray &&r) noexcept;
 
     bool operator==(const Ray &r) const noexcept;
+
+    double dist2ToPoint(const Point3 &p) const noexcept;
 };
 
 std::ostream& operator<<(std::ostream &os, const Ray &ray);

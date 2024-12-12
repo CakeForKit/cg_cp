@@ -12,5 +12,5 @@ public:
     void rotateModel(PtrModel model, float angle);
 
     void moveCamera(std::shared_ptr<Camera> camera, double length, bool withChessboard = true);
-    void rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis);
+    void rotateCamera(std::shared_ptr<Camera> camera, float angle, Vector3 axis);
 };

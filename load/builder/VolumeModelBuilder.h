@@ -20,7 +20,7 @@ public:
     void readData();
     void buildFaces();
     void buildCenter();
-    // void buildMaterial();
+    void buildSphere();
 
     bool isBuilt() const noexcept;
 

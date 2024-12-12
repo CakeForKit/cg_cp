@@ -35,7 +35,7 @@ void TransformManager::moveCamera(std::shared_ptr<Camera> camera, double length,
     camera->transform(action, withChessboard);
 }
 
-void TransformManager::rotateCamera(std::shared_ptr<Camera> camera, float angle, Axis axis) {
+void TransformManager::rotateCamera(std::shared_ptr<Camera> camera, float angle, Vector3 axis) {
     std::shared_ptr<TransformAction> action = std::make_shared<RotateAction>(angle, 
                                                                             camera->getCameraPos(), 
                                                                             axis);

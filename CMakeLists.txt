@@ -263,6 +263,9 @@ set(TESTS
 
     tests/std_ray_tracing_test.h
     tests/std_ray_tracing_test.cpp
+
+    tests/ray_tests.h
+    tests/ray_tests.cpp
 ) 
 
 add_executable(app.exe

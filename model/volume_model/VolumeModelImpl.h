@@ -20,6 +20,8 @@ public:
     virtual void addFace(std::initializer_list<psPoint3> &&lst) = 0;
     virtual void setCenter(Point3 &c) noexcept = 0;
     virtual void setCenter(Point3 &&c) noexcept = 0;
+    virtual void setSphereRad(double r) noexcept = 0;
+    virtual void setY0(double y0) noexcept = 0;
     
     virtual container_vertices getVertices() const noexcept = 0;
     virtual Point3 getCenter() const noexcept = 0;

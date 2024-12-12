@@ -6,6 +6,7 @@ cd CMakeFiles/app.exe.dir
 gcov main.cpp.gcno
 lcov --capture --directory . --output-file gtest_coverage.info
 lcov --remove gtest_coverage.info '/usr/include/*' 'cg_cp/build/*' -o gtest_coverage.info # !!
+lcov --remove gtest_coverage.info '/usr/include/*' 'cg_cp/build/app.exe_autogen/*' -o gtest_coverage.info # !!
 genhtml gtest_coverage.info --output-directory CODE_COVERAGE
 cd CODE_COVERAGE\
 

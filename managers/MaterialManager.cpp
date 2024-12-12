@@ -2,14 +2,16 @@
 
 MaterialManager::MaterialManager() : materialSolution(MaterialSolution()) {
 
-    materialSolution.registrateMaterial(idMaterial::RED, std::make_shared<Material>(Intensity(0.2, 0, 0),   // ka
-                                                                            Intensity(0.6, 0, 0),   // kd
-                                                                            Intensity(0.1, 0, 0),   // ks
-                                                                            50));                   // n
-    materialSolution.registrateMaterial(idMaterial::BLUE, std::make_shared<Material>(Intensity(0.157, 0.3, 0.34), 
-                                                                            Intensity(0.213, 0.5, 0.56), 
-                                                                            Intensity(0, 0, 0),
-                                                                            5));
+    materialSolution.registrateMaterial(idMaterial::RED, 
+                                    std::make_shared<Material>( Intensity(0.10, 0.00, 0.00),    // ka
+                                                                Intensity(0.79, 0.00, 0.00),       // kd
+                                                                Intensity(0.05, 0.00, 0.00),       // ks
+                                                                5)); 
+    materialSolution.registrateMaterial(idMaterial::BLUE, 
+                                    std::make_shared<Material>( Intensity(0.04, 0.08, 0.09),    // ka
+                                                                Intensity(0.29, 0.63, 0.71),       // kd
+                                                                Intensity(0.02, 0.04, 0.05),       // ks
+                                                                5)); 
     materialSolution.registrateMaterial(idMaterial::CLASSIC_WHITE, 
                                     std::make_shared<Material>( Intensity(0.10, 0.09, 0.07),    // ka
                                                                 Intensity(0.79, 0.71, 0.57),       // kd

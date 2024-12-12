@@ -105,6 +105,14 @@ void TrianglesModel::setCenter(Point3 &&c) noexcept {
     center = c;
 }
 
+void TrianglesModel::setSphereRad(double r) noexcept {
+    sphere_rad = r;
+}
+
+void TrianglesModel::setY0(double _y0) noexcept {
+    y0 = _y0;
+}
+
 container_vertices TrianglesModel::getVertices() const noexcept {
     return vertices;
 }
@@ -118,9 +126,16 @@ Point3 TrianglesModel::getCenter() const noexcept {
 }
 
 bool TrianglesModel::intersection(const Ray &ray, intersection_t &intersect) const {
+    Point3 centerSphere = center;
+    centerSphere.setY(centerSphere.y() + y0);
+    double dist = ray.dist2ToPoint(centerSphere);
+    // std::cout << "count dist\n";
+    // std::cout << ray << "\n" << centerSphere << "\n" << "dist = " << dist << "\n";
+    if (dist > sphere_rad * sphere_rad)
+        return false;
+
     double t_value, min_t_value = std::numeric_limits<double>::max();
     psTriangle trIntersect;
-
     for (psTriangle tr : triangles) {
         if (tr->intersection(ray, t_value) && t_value < min_t_value) {
             min_t_value = t_value;

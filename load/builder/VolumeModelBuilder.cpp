@@ -17,7 +17,7 @@ void VolumeModelBuilder::readData() {
 }
 
 void VolumeModelBuilder::buildFaces() {
-    if (!(part == 1 || part == 2))
+    if (!(part == 1 || part == 2 || part == 3))
         return;
 
     std::vector<std::vector<psPoint3>> faces = reader->getFaces();
@@ -34,7 +34,7 @@ void VolumeModelBuilder::buildFaces() {
 }
 
 void VolumeModelBuilder::buildCenter() {
-    if (!(part == 1 || part == 2))
+    if (!(part == 1 || part == 2 || part == 3))
         return;
         
     model->setCenter(reader->getCenter());
@@ -42,8 +42,18 @@ void VolumeModelBuilder::buildCenter() {
     ++part;
 }
 
+void VolumeModelBuilder::buildSphere() {
+    if (!(part == 1 || part == 2 || part == 3))
+        return;
+
+    model->setSphereRad(reader->getSphereRad());
+    model->setY0(reader->getY0());
+
+    ++part;
+}
+
 bool VolumeModelBuilder::isBuilt() const noexcept {
-    return part == 3;
+    return part == 4;
 }
 
 std::shared_ptr<Model> VolumeModelBuilder::getModel() {

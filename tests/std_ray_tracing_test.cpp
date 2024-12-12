@@ -28,8 +28,8 @@ public:
     std::shared_ptr<RayTracing> rayTracing;
 protected:
     void SetUp() override {
-        int img_width = 201;
-        int img_height = 512;
+        int img_width = 362;
+        int img_height = 424;
 
         std::shared_ptr<DrawManager> drawManager = std::make_shared<DrawManager>();
         std::shared_ptr<SceneManager> sceneManager = std::make_shared<SceneManager>();
@@ -40,24 +40,38 @@ protected:
         idDirectorCreator id_director = idDirectorCreator::TRIANGLES;
         size_t stepOfRevolving = 10;
         {
-            const char *filename = "/home/kathrine/cg_cp/tests/data_for_tests/test_model_4.txt";
-            std::shared_ptr<Material> material = materialManager->getMaterial(idMaterial::GLOSSY_WHITE);
-            PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
-            sceneManager->addModel(model, 3, 4);
+            char fnBlackCells[] = "/home/kathrine/cg_cp/data/chessboard/black_cells_chessboard.txt";
+            char fnWhiteCells[] = "/home/kathrine/cg_cp/data/chessboard/white_cells_chessboard.txt";
+            char fnBase[] = "/home/kathrine/cg_cp/data/chessboard/base_chessboard.txt";
+            char fnDataCells[] = "/home/kathrine/cg_cp/data/chessboard/positions_cells.txt";
+            std::shared_ptr<Material> matBlackCells = materialManager->getChessboardBlack();
+            std::shared_ptr<Material> matWhiteCells = materialManager->getChessboardWhite();
+            std::shared_ptr<Material> matBase = materialManager->getMaterial(idMaterial::WOOD);
+            std::shared_ptr<Model> model = loadManager->loadChessboardFromFile(id_reader, id_director, 
+                                                                fnBlackCells, matBlackCells,
+                                                                fnWhiteCells, matWhiteCells, 
+                                                                fnBase, matBase,
+                                                                fnDataCells);
+            std::shared_ptr<Chessboard> chessboard = std::dynamic_pointer_cast<Chessboard>(model);
+            sceneManager->setChessboard(chessboard);
         }
+        sceneManager->clearScene();
         {
-            const char *filename = "/home/kathrine/cg_cp/tests/data_for_tests/pawn.txt";
+            const char *filename = "/home/kathrine/cg_cp/data/pawn.txt";
             std::shared_ptr<Material> material = materialManager->getMaterial(idMaterial::RED);
             PtrModel model = loadManager->loadModelFromFile(id_reader, id_director, filename, stepOfRevolving, material);
             sceneManager->addModel(model, 4, 4);
+            Point3 diff = sceneManager->changeModelPos(0, 4, 0);
+            transformManager->moveModel(model, diff.x(), diff.y(), diff.z());
         }
         
         std::shared_ptr<QImage> img = std::make_shared<QImage>(img_width, img_height, QImage::Format_RGB32);
         std::shared_ptr<Drawer> drawer = std::make_shared<QtDrawer>(img);
         std::shared_ptr<Scene> scene = sceneManager->getScene();
-        scene->show_chessboard = 0;
+        // scene->show_chessboard = 0;
         camera = scene->getActiveCamera();
-        transformManager->moveCamera(camera, 400, false);
+        transformManager->rotateCamera(camera, -30, camera->getAxis(Axis::OX));
+        transformManager->moveCamera(camera, 200);
         size_t pixelsWidth = static_cast<size_t>(drawer->getImgWidth());
         size_t pixelsHeight = static_cast<size_t>(drawer->getImgHeight());
         camera->setCountPixelsViewport(pixelsWidth, pixelsHeight);

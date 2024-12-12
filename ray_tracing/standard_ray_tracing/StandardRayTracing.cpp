@@ -54,7 +54,7 @@ void StandardRayTracing::renderParallel(size_t countThreads) {
         }
         if (ifor % count_cout == 0) {
             now_time = time(NULL);
-            std::cout << icout << "/20 time=" << now_time - st_time << "\n";
+            std::cout << icout << "/20 time=" << now_time - st_time << " sec \n";
             icout += 1;
         }
     }

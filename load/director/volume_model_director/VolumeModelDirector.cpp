@@ -16,4 +16,5 @@ void VolumeModelDirector::create() {
     builder->readData();
     builder->buildFaces();
     builder->buildCenter();
+    builder->buildSphere();
 }

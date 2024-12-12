@@ -43,3 +43,18 @@ Ray& Ray::operator=(Ray &&r) noexcept {
 bool Ray::operator==(const Ray &r) const noexcept {
     return r.getDirection() == dir && r.getOrigin() == orig;
 }
+
+double Ray::dist2ToPoint(const Point3 &p) const noexcept {
+    double tmin = -(dir.x() * (orig.x() - p.x()) + 
+                    dir.y() * (orig.y() - p.y()) + 
+                    dir.z() * (orig.z() - p.z())) / 
+                    (dir.x() * dir.x() + 
+                    dir.y() * dir.y() + 
+                    dir.z() * dir.z());
+    double xpart, ypart, zpart;
+    xpart = (orig.x() + dir.x() * tmin - p.x());
+    ypart = (orig.y() + dir.y() * tmin - p.y());
+    zpart = (orig.z() + dir.z() * tmin - p.z());
+    double dist2 = xpart * xpart + ypart * ypart + zpart * zpart;
+    return dist2;
+}

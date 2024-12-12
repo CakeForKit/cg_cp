@@ -152,6 +152,7 @@ void Scene::setChessboard(std::shared_ptr<Chessboard> model) noexcept {
 
 Point3 Scene::changeModelPos(size_t idModel, size_t i, size_t j) {
     int id = static_cast<int>(idModel);
+    assert(models.size() > idModel);
     
     if (posModels[i][j] >= 0 && posModels[i][j] != id) {
         time_t curTime = time(NULL);

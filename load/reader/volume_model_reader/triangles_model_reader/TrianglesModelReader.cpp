@@ -189,6 +189,28 @@ void TrianglesModelReader::readData() {
             if (printing)
                 std::cout << "center = " << center << "\n";
 
+        } else if (type == "s") {
+            double rad;
+            file >> rad;
+            if (!file) {
+                time_t curTime = time(NULL);
+                throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+            }
+            sphere_rad = rad;
+            if (printing)
+                std::cout << "sphere_rad = " << sphere_rad << "\n";
+
+        } else if (type == "y") {
+            double tmp;
+            file >> tmp;
+            if (!file) {
+                time_t curTime = time(NULL);
+                throw FloatReadException(ctime(&curTime), __FILE__, __LINE__, typeid(*this).name(), __func__);
+            }
+            y0 = tmp;
+            if (printing)
+                std::cout << "y0 = " << y0 << "\n";
+
         } else if (type[0] == '#' || type == "\n" || type == "") {
             std::getline(file, type);
             if (printing)
@@ -210,4 +232,12 @@ std::vector<std::vector<psPoint3>> TrianglesModelReader::getFaces() {
 
 Point3 TrianglesModelReader::getCenter() {
     return center;
+}
+
+double TrianglesModelReader::getSphereRad() {
+    return sphere_rad;
+}
+
+double TrianglesModelReader::getY0() {
+    return y0;
 }

@@ -8,7 +8,7 @@ void DrawManager::drawScene(std::shared_ptr<Scene> scene, std::shared_ptr<Camera
     size_t pixelsWidth = static_cast<size_t>(drawer->getImgWidth());
     size_t pixelsHeight = static_cast<size_t>(drawer->getImgHeight());
     std::cout << "size: " << drawer->getImgWidth() << " " << drawer->getImgHeight() << "\n";
-    sleep(3);
+    // sleep(3);
 
     camera->setCountPixelsViewport(pixelsWidth, pixelsHeight);
     // Создаем класс-стратегию алгоритма трассировки лучей
